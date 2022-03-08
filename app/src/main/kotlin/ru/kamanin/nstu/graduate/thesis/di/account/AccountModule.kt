@@ -1,25 +1,24 @@
 package ru.kamanin.nstu.graduate.thesis.di.account
 
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import kotlinx.coroutines.CoroutineDispatcher
-import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.dispatcher.ioDispatcher
-import ru.kamanin.nstu.graduate.thesis.shared.account.data.api.AccountApi
-import ru.kamanin.nstu.graduate.thesis.shared.account.data.repository.AccountRepositoryImpl
-import ru.kamanin.nstu.graduate.thesis.shared.account.domain.repository.AccountRepository
+import ru.kamanin.nstu.graduate.thesis.shared.account.data.repository.LocalAccountRepositoryImpl
+import ru.kamanin.nstu.graduate.thesis.shared.account.data.repository.RemoteAccountRepositoryImpl
+import ru.kamanin.nstu.graduate.thesis.shared.account.domain.repository.LocalAccountRepository
+import ru.kamanin.nstu.graduate.thesis.shared.account.domain.repository.RemoteAccountRepository
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object AccountModule {
+interface AccountModule {
 
-	@Provides
+	@Binds
 	@Singleton
-	fun provideAccountRepository(
-		@ioDispatcher ioDispatcher: CoroutineDispatcher,
-		api: AccountApi
-	): AccountRepository =
-		AccountRepositoryImpl(ioDispatcher, api)
+	fun bindRemoteAccountRepository(impl: RemoteAccountRepositoryImpl): RemoteAccountRepository
+
+	@Binds
+	@Singleton
+	fun bindLocalAccountRepository(impl: LocalAccountRepositoryImpl): LocalAccountRepository
 }

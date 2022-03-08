@@ -22,6 +22,7 @@
 		android:maxHeight="@dimen/input_text_bottom_panel_height"
 		android:textColor="@color/grey_500"
 		android:textColorHint="@color/grey_400"
+		android:textCursorDrawable="@drawable/shape_cursor"
 		tools:hint="Сообщение…" />
 
 	<ImageView

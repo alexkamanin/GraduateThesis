@@ -11,8 +11,6 @@ internal object Configuration {
 	const val VERSION_CODE = 1
 	const val VERSION_NAME = "1.0.0"
 
-	const val JVM_TARGET = "11"
-
 	val excludes =
 		listOf("META-INF/*.kotlin_module")
 

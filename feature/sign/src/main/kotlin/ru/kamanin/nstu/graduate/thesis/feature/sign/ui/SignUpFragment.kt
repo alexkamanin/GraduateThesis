@@ -80,8 +80,8 @@ class SignUpFragment : Fragment(R.layout.fragment_sign), SignUpViewModel.EventLi
 		viewModel.password.bind(lifecycleScope, viewBinding.passwordText)
 		viewModel.repeatPassword.bind(lifecycleScope, viewBinding.repeatPasswordText)
 		viewModel.verificationCode.bind(lifecycleScope, viewBinding.verificationCodeText)
-		viewModel.state.subscribe(lifecycleScope, ::renderState)
-		viewModel.errorEvent.subscribe(lifecycleScope, ::handleError)
+		viewModel.state.subscribe(viewLifecycleOwner, ::renderState)
+		viewModel.errorEvent.subscribe(viewLifecycleOwner, ::handleError)
 		viewModel.eventDispatcher.bind(viewLifecycleOwner, this)
 	}
 

@@ -10,7 +10,7 @@ class ExamAdapter(private val onExamClick: (Exam) -> Unit) : RecyclerView.Adapte
 	var items: List<Exam> = emptyList()
 		set(value) {
 			field = value
-			diff.getDiffResult(value, detectMoves = false).dispatchUpdatesTo(this)
+			notifyDataSetChanged()
 		}
 
 	private val diff = DiffUtilCallback<Exam> { old, new -> old.id == new.id }

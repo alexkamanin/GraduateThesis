@@ -8,5 +8,6 @@ import javax.inject.Inject
 class SignInNavigationProviderImpl @Inject constructor() : SignInNavigationProvider {
 
 	override val toSignUp: NavCommand = NavCommand(R.id.action_singInFragment_to_singUpFragment)
+
 	override val toExamList: NavCommand = NavCommand(R.id.action_singInFragment_to_examListFragment)
 }

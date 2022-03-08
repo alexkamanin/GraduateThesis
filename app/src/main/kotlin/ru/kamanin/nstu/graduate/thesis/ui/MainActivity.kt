@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import dagger.hilt.android.AndroidEntryPoint
 import ru.kamanin.nstu.graduate.thesis.R
@@ -21,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_main)
 
-		viewModel.destination.subscribe(lifecycleScope, ::setupStartDestination)
+		viewModel.destination.subscribe(this, ::setupStartDestination)
 	}
 
 	private fun setDecorFits() {

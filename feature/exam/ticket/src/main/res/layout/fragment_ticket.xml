@@ -38,20 +38,26 @@
 			android:layout_height="wrap_content"
 			android:gravity="center"
 			android:paddingVertical="5dp"
-			android:text="@string/card_time_text"
 			android:textStyle="bold"
-			tools:text="Осталось: 01:30" />
+			tools:text="Осталось: 01:30:00" />
 
 	</com.google.android.material.card.MaterialCardView>
 
-	<androidx.recyclerview.widget.RecyclerView
-		android:id="@+id/taskList"
+	<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+		android:id="@+id/swipeRefresh"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:visibility="gone"
-		app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-		tools:listitem="@layout/item_task"
-		tools:visibility="visible" />
+		android:layout_height="match_parent">
+
+		<androidx.recyclerview.widget.RecyclerView
+			android:id="@+id/taskList"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:visibility="gone"
+			app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+			tools:listitem="@layout/item_task"
+			tools:visibility="visible" />
+
+	</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 	<ProgressBar
 		android:id="@+id/progressBar"

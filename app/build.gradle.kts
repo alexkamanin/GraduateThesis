@@ -24,6 +24,8 @@ dependencies {
 	implementation(libs.hilt.android)
 	kapt(libs.hilt.compiler)
 
+	implementation(libs.mockcept)
+
 	// ----- Feature -----
 	implementation(projects.feature.exam.list)
 	implementation(projects.feature.exam.ticket)
@@ -40,9 +42,4 @@ dependencies {
 	implementation(projects.shared.session)
 	implementation(projects.shared.account)
 	implementation(projects.shared.exam)
-
-	implementation("com.github.tony15407075:retrofit-mock-interceptor:1.0.1") {
-		exclude(module = "okhttp")
-		exclude(group = "androidx")
-	}
 }

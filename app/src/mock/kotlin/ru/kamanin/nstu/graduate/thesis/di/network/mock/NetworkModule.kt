@@ -1,19 +1,20 @@
 package ru.kamanin.nstu.graduate.thesis.di.network.mock
 
 import android.content.Context
-import com.example.retrofitmockinterceptor.MockInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import io.github.alexkamanin.mockcept.Mockcept
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import ru.kamanin.nstu.graduate.thesis.di.network.Authorized
 import ru.kamanin.nstu.graduate.thesis.di.network.NotAuthorized
-import ru.kamanin.nstu.graduate.thesis.di.network.mock.account.PostChangePasswordRequestMock
-import ru.kamanin.nstu.graduate.thesis.di.network.mock.exam.GetExamListRequestMock
-import ru.kamanin.nstu.graduate.thesis.di.network.mock.session.PostLoginRequestMock
+import ru.kamanin.nstu.graduate.thesis.di.network.mock.handlers.ChangePasswordHandler
+import ru.kamanin.nstu.graduate.thesis.di.network.mock.handlers.ExamHandler
+import ru.kamanin.nstu.graduate.thesis.di.network.mock.handlers.SessionHandler
+import ru.kamanin.nstu.graduate.thesis.di.network.mock.handlers.TicketFoundHandler
 import ru.kamanin.nstu.graduate.thesis.shared.session.data.interceptor.SessionInterceptor
 import javax.inject.Singleton
 
@@ -21,16 +22,17 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-	private val mockRequests = listOf(
-		PostLoginRequestMock(),
-		GetExamListRequestMock(),
-		PostChangePasswordRequestMock()
+	private val handlers = listOf(
+		SessionHandler,
+		ExamHandler,
+		ChangePasswordHandler,
+		TicketFoundHandler,
 	)
 
 	@Provides
 	@Singleton
-	fun provideMockInterceptor(@ApplicationContext context: Context): MockInterceptor =
-		MockInterceptor(context.resources, mockRequests)
+	fun provideMockcept(@ApplicationContext context: Context): Mockcept =
+		Mockcept(context, handlers)
 
 	@Provides
 	@Singleton
@@ -38,13 +40,13 @@ object NetworkModule {
 	fun provideAuthorizedOkHttpClient(
 		httpLoggingInterceptor: HttpLoggingInterceptor,
 		sessionInterceptor: SessionInterceptor,
-		mockInterceptor: MockInterceptor,
+		mockcept: Mockcept,
 	): OkHttpClient =
 		OkHttpClient
 			.Builder()
 			.addInterceptor(httpLoggingInterceptor)
 			.addInterceptor(sessionInterceptor)
-			.addInterceptor(mockInterceptor)
+			.addInterceptor(mockcept)
 			.build()
 
 	@Provides
@@ -52,11 +54,11 @@ object NetworkModule {
 	@NotAuthorized
 	fun provideNotAuthorizedOkHttpClient(
 		httpLoggingInterceptor: HttpLoggingInterceptor,
-		mockInterceptor: MockInterceptor,
+		mockcept: Mockcept,
 	): OkHttpClient =
 		OkHttpClient
 			.Builder()
 			.addInterceptor(httpLoggingInterceptor)
-			.addInterceptor(mockInterceptor)
+			.addInterceptor(mockcept)
 			.build()
 }

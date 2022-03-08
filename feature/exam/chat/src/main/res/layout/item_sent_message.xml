@@ -23,6 +23,7 @@
 			android:minWidth="@dimen/message_min_width"
 			android:paddingHorizontal="@dimen/margin_padding_3"
 			android:paddingTop="@dimen/margin_padding_3"
+			android:textIsSelectable="true"
 			android:textSize="16sp"
 			tools:text="Отправленное сообщение" />
 

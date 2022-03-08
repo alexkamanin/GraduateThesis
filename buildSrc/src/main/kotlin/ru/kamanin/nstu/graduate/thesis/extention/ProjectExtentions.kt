@@ -2,14 +2,14 @@ package ru.kamanin.nstu.graduate.thesis.extention
 
 import com.android.build.gradle.AppPlugin
 import com.android.build.gradle.LibraryPlugin
+import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import ru.kamanin.nstu.graduate.thesis.config.Configuration
 
 internal fun Project.setCompileOptions() {
 	tasks.withType<KotlinCompile> {
-		kotlinOptions.jvmTarget = Configuration.JVM_TARGET
+		kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
 	}
 }
 

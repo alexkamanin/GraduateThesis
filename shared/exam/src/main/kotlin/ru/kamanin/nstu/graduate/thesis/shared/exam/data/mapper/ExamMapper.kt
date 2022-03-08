@@ -7,7 +7,16 @@ fun ExamDto.toEntity() =
 	Exam(
 		id = id,
 		name = examPeriod.exam.examRule.discipline.name,
-		mark = semesterRating,
-		dateTime = examPeriod.start,
-		allowed = allowed
+		mark = semesterRating + examRating,
+		period = Exam.Period(id = id, start = examPeriod.start, end = examPeriod.end),
+		allowed = allowed,
+		teacher = examPeriod.exam.teacher.toEntity()
+	)
+
+fun ExamDto.ExamPeriod.Exam.Teacher.toEntity() =
+	Exam.Teacher(
+		id = id,
+		username = account.username,
+		name = account.name,
+		surname = account.surname
 	)

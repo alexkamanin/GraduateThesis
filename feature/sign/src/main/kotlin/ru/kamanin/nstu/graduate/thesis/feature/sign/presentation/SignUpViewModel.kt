@@ -4,20 +4,20 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
+import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.exception.launch
 import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.*
 import ru.kamanin.nstu.graduate.thesis.component.core.error.ErrorConverter
 import ru.kamanin.nstu.graduate.thesis.component.core.error.ErrorState
 import ru.kamanin.nstu.graduate.thesis.component.core.mvvm.lifecycle.EventDispatcher
 import ru.kamanin.nstu.graduate.thesis.component.core.validation.ValidationResult
+import ru.kamanin.nstu.graduate.thesis.feature.sign.domain.scenario.LoginScenario
 import ru.kamanin.nstu.graduate.thesis.feature.sign.domain.validation.EmailValidator
 import ru.kamanin.nstu.graduate.thesis.shared.account.domain.usecase.ChangePasswordUseCase
-import ru.kamanin.nstu.graduate.thesis.shared.session.domain.usecase.LoginUseCase
 import javax.inject.Inject
 
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
-	private val loginUseCase: LoginUseCase,
+	private val loginScenario: LoginScenario,
 	private val changePasswordUseCase: ChangePasswordUseCase,
 	private val errorConverter: ErrorConverter
 ) : ViewModel() {
@@ -84,20 +84,18 @@ class SignUpViewModel @Inject constructor(
 	private fun handleValidationSuccess() {
 		_state.value = _state.value.copy(registrationAvailable = false, registrationProcessAvailable = true)
 
-		viewModelScope.launch {
-			runCatching {
-				changePasswordUseCase(
-					username = email.value,
-					password = password.value,
-					verificationCode = verificationCode.value
-				)
-				loginUseCase(username = email.value, password = password.value)
-				eventDispatcher.dispatchEvent { navigateToExamsList() }
-			}.onFailure(::handleRegistrationError)
+		viewModelScope.launch(::handleError) {
+			changePasswordUseCase(
+				username = email.value,
+				password = password.value,
+				verificationCode = verificationCode.value
+			)
+			loginScenario(username = email.value, password = password.value)
+			eventDispatcher.dispatchEvent { navigateToExamsList() }
 		}
 	}
 
-	private fun handleRegistrationError(throwable: Throwable) {
+	private fun handleError(throwable: Throwable) {
 		_state.value = _state.value.copy(registrationAvailable = true, registrationProcessAvailable = false)
 
 		val error = errorConverter.convert(throwable)

@@ -83,8 +83,8 @@ class SignInFragment : Fragment(R.layout.fragment_sign), SignInViewModel.EventLi
 		viewModel.email.bind(lifecycleScope, viewBinding.emailText)
 		viewModel.password.bind(lifecycleScope, viewBinding.passwordText)
 		viewModel.eventDispatcher.bind(viewLifecycleOwner, this)
-		viewModel.errorEvent.subscribe(lifecycleScope, ::handleError)
-		viewModel.state.subscribe(lifecycleScope, ::renderState)
+		viewModel.errorEvent.subscribe(viewLifecycleOwner, ::handleError)
+		viewModel.state.subscribe(viewLifecycleOwner, ::renderState)
 	}
 
 	private fun renderState(state: SignInState) {

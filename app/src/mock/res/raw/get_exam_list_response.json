@@ -1,0 +1,209 @@
+[
+  {
+    "id": 10,
+    "semesterRating": 58,
+    "examRating": 0,
+    "allowed": false,
+    "examPeriod": {
+      "id": 42,
+      "start": 1647826200000,
+      "end": 1647831600000,
+      "exam": {
+        "id": 41,
+        "examRule": {
+          "id": 21,
+          "themes": [
+            {
+              "id": 7,
+              "name": "Связные списки",
+              "discipline": {
+                "id": 6,
+                "name": "Программирование"
+              }
+            }
+          ],
+          "discipline": {
+            "id": 6,
+            "name": "Программирование"
+          },
+          "questionCount": 20,
+          "exerciseCount": 2,
+          "duration": 90,
+          "minimalRating": 20
+        },
+        "teacher": {
+          "id": 10,
+          "account": {
+            "id": 9,
+            "username": "romanov@corp.nstu.ru",
+            "name": "Евгений",
+            "surname": "Романов",
+            "roles": [
+              "ROLE_TEACHER"
+            ]
+          }
+        },
+        "groups": [
+          {
+            "id": 3,
+            "name": "АВТ-815"
+          }
+        ]
+      }
+    },
+    "student": {
+      "id": 5,
+      "account": {
+        "id": 4,
+        "username": "student@stud.nstu.ru",
+        "name": "Name",
+        "surname": "Surname",
+        "roles": [
+          "ROLE_STUDENT"
+        ]
+      },
+      "group": {
+        "id": 3,
+        "name": "АВТ-815"
+      }
+    }
+  },
+  {
+    "id": 11,
+    "semesterRating": 40,
+    "examRating": 0,
+    "allowed": false,
+    "examPeriod": {
+      "id": 42,
+      "start": 1651287600000,
+      "end": 1651293000000,
+      "exam": {
+        "id": 41,
+        "examRule": {
+          "id": 21,
+          "themes": [
+            {
+              "id": 7,
+              "name": "Связные списки",
+              "discipline": {
+                "id": 6,
+                "name": "Языки программирования"
+              }
+            }
+          ],
+          "discipline": {
+            "id": 6,
+            "name": "Языки программирования"
+          },
+          "questionCount": 20,
+          "exerciseCount": 2,
+          "duration": 90,
+          "minimalRating": 20
+        },
+        "teacher": {
+          "id": 10,
+          "account": {
+            "id": 9,
+            "username": "romanov@corp.nstu.ru",
+            "name": "Евгений",
+            "surname": "Романов",
+            "roles": [
+              "ROLE_TEACHER"
+            ]
+          }
+        },
+        "groups": [
+          {
+            "id": 3,
+            "name": "АВТ-815"
+          }
+        ]
+      }
+    },
+    "student": {
+      "id": 5,
+      "account": {
+        "id": 4,
+        "username": "student@stud.nstu.ru",
+        "name": "Name",
+        "surname": "Surname",
+        "roles": [
+          "ROLE_STUDENT"
+        ]
+      },
+      "group": {
+        "id": 3,
+        "name": "АВТ-815"
+      }
+    }
+  },
+  {
+    "id": 12,
+    "semesterRating": 31,
+    "examRating": 0,
+    "allowed": false,
+    "examPeriod": {
+      "id": 42,
+      "start": 1651129200000,
+      "end": 1651134600000,
+      "exam": {
+        "id": 41,
+        "examRule": {
+          "id": 21,
+          "themes": [
+            {
+              "id": 7,
+              "name": "Связные списки",
+              "discipline": {
+                "id": 6,
+                "name": "УПП"
+              }
+            }
+          ],
+          "discipline": {
+            "id": 6,
+            "name": "УПП"
+          },
+          "questionCount": 20,
+          "exerciseCount": 2,
+          "duration": 90,
+          "minimalRating": 20
+        },
+        "teacher": {
+          "id": 10,
+          "account": {
+            "id": 9,
+            "username": "romanov@corp.nstu.ru",
+            "name": "Евгений",
+            "surname": "Романов",
+            "roles": [
+              "ROLE_TEACHER"
+            ]
+          }
+        },
+        "groups": [
+          {
+            "id": 3,
+            "name": "АВТ-815"
+          }
+        ]
+      }
+    },
+    "student": {
+      "id": 5,
+      "account": {
+        "id": 4,
+        "username": "student@stud.nstu.ru",
+        "name": "Name",
+        "surname": "Surname",
+        "roles": [
+          "ROLE_STUDENT"
+        ]
+      },
+      "group": {
+        "id": 3,
+        "name": "АВТ-815"
+      }
+    }
+  }
+]

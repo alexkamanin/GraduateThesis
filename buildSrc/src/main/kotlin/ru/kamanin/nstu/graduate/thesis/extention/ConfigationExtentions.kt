@@ -65,3 +65,9 @@ internal fun BaseExtension.setProductFlavor() {
 		}
 	}
 }
+
+internal fun BaseExtension.setLintOptions() {
+	lintOptions {
+		disable += "StringFormatInvalid"
+	}
+}

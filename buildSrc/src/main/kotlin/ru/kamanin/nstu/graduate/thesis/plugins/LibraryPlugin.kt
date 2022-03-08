@@ -16,6 +16,7 @@ object LibraryPlugin : Plugin<Project> {
 			setJavaVersion()
 			setExcludes()
 			setBuildFeatures()
+			setLintOptions()
 		}
 	}
 }

@@ -25,13 +25,23 @@
 			tools:text="Название дисциплины" />
 
 		<TextView
+			android:id="@+id/examTeacher"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:paddingBottom="5dp"
+			android:textSize="16sp"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/examName"
+			tools:text="Преподаватель: Романов Е." />
+
+		<TextView
 			android:id="@+id/examMark"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:textSize="16sp"
 			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@+id/examName"
+			app:layout_constraintTop_toBottomOf="@id/examTeacher"
 			tools:text="Баллы: 56" />
 
 		<TextView
@@ -40,8 +50,8 @@
 			android:layout_height="wrap_content"
 			android:layout_marginStart="@dimen/margin_padding_20"
 			android:textSize="16sp"
-			app:layout_constraintStart_toEndOf="@+id/examMark"
-			app:layout_constraintTop_toBottomOf="@+id/examName"
+			app:layout_constraintStart_toEndOf="@id/examMark"
+			app:layout_constraintTop_toBottomOf="@id/examTeacher"
 			tools:text="Начало: 26.02.22 10:00" />
 
 		<ImageView

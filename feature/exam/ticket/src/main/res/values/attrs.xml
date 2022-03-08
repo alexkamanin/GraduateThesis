@@ -4,4 +4,6 @@
 	<attr name="colorBackgroundRedTint" />
 	<attr name="colorBackgroundYellowTint" />
 	<attr name="colorBackgroundGreyTint" />
+	<attr name="colorBlueVariant" />
+	<attr name="colorSwipeIndicatorTint" />
 </resources>

@@ -10,6 +10,7 @@ import ru.kamanin.nstu.graduate.thesis.component.ui.colors.colorFromAttr
 import ru.kamanin.nstu.graduate.thesis.feature.exam.ticket.R
 import ru.kamanin.nstu.graduate.thesis.feature.exam.ticket.databinding.ItemTaskBinding
 import ru.kamanin.nstu.graduate.thesis.feature.exam.ticket.ui.model.TaskItem
+import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.TaskType
 
 class TaskViewHolder(private val parent: ViewGroup) : RecyclerView.ViewHolder(getView(parent)) {
 
@@ -31,7 +32,10 @@ class TaskViewHolder(private val parent: ViewGroup) : RecyclerView.ViewHolder(ge
 		}
 		viewBinding.statusBackground.setCardBackgroundColor(parent.context.colorFromAttr(background))
 		viewBinding.statusIcon.setImageDrawable(ContextCompat.getDrawable(parent.context, icon))
-		viewBinding.taskName.text = taskItem.name
+		viewBinding.taskName.text = when (taskItem.taskType) {
+			TaskType.QUESTION -> parent.resources.getString(R.string.question_title, taskItem.number)
+			TaskType.EXERCISE -> parent.resources.getString(R.string.exercise_title, taskItem.number)
+		}
 		viewBinding.root.setOnClickListener { taskClicked(taskItem) }
 	}
 }

@@ -47,7 +47,10 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
 	private fun initListeners() {
 		viewBinding.inputBottomPanel.sendButton.setOnClickListener { viewModel.send() }
 		viewBinding.toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
-		viewBinding.inputBottomPanel.shareButton.setOnClickListener { showShareBottomSheetDialog() }
+		viewBinding.inputBottomPanel.shareButton.setOnClickListener {
+			viewBinding.inputBottomPanel.messageEditText.clearFocus()
+			showShareBottomSheetDialog()
+		}
 		setShareBottomSheetResultListener(::handleShareResult)
 	}
 
@@ -61,7 +64,7 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
 
 	private fun initObservers() {
 		viewModel.message.bind(lifecycleScope, viewBinding.inputBottomPanel.messageEditText)
-		viewModel.state.subscribe(lifecycleScope, ::renderState)
+		viewModel.state.subscribe(viewLifecycleOwner, ::renderState)
 	}
 
 	private fun renderState(messageItems: ChatState) {

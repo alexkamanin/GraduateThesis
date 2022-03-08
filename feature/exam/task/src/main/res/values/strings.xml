@@ -1,13 +1,6 @@
 <resources>
 	<string name="toolbar_task_subtitle" />
 	<string name="card_time_text" />
-	<!-- Delete sample later -->
-	<string name="sample_description_text">
-		Учитель написал на доске некое натуральное число.
-		После этого первый ученик сказал: «Это число делится на 1».
-		Второй сказал: «Это число делится на 2», …, 50-й сказал: «Это число делится на 50».
-		И что интересно, только двое из них были неправы.
-		Более того, два неверных утверждения были сделаны подряд одно за другим.
-		Какое наименьшее число мог написать на доске учитель?
-	</string>
+	<string name="question_title" />
+	<string name="exercise_title" />
 </resources>

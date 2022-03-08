@@ -1,7 +1,7 @@
 [versions]
 
 kotlin_version = '1.6.10'
-gradle_version = '7.1.1'
+gradle_version = '7.1.3'
 hilt_version = '2.41'
 navigation_version = '2.4.1'
 coroutines_version = '1.6.0'
@@ -41,6 +41,8 @@ squareup-interceptor = { group = 'com.squareup.okhttp3', name = 'logging-interce
 squareup-moshi-converter = { group = 'com.squareup.retrofit2', name = 'converter-moshi', version.ref = 'retrofit_version' }
 squareup-moshi-kotlin = { group = 'com.squareup.moshi', name = 'moshi-kotlin', version.ref = 'moshi_version' }
 squareup-moshi-codegen = { group = 'com.squareup.moshi', name = 'moshi-kotlin-codegen', version.ref = 'moshi_version' }
+
+mockcept = { group = 'io.github.alexkamanin', name = 'mockcept', version = '1.0.4' }
 
 # { group = '', name = '', version.ref = '' }
 

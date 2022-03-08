@@ -14,8 +14,8 @@ data class ExamDto(
 	@JsonClass(generateAdapter = true)
 	data class ExamPeriod(
 		val id: Long,
-		val start: String,
-		val end: String,
+		val start: Long,
+		val end: Long,
 		val exam: Exam
 	) {
 
@@ -23,8 +23,23 @@ data class ExamDto(
 		data class Exam(
 			val id: Long,
 			val examRule: ExamRule,
+			val teacher: Teacher,
 			val groups: List<Group>
 		) {
+
+			@JsonClass(generateAdapter = true)
+			data class Teacher(
+				val id: Long,
+				val account: Account
+			)
+
+			@JsonClass(generateAdapter = true)
+			data class Account(
+				val id: Long,
+				val username: String,
+				val name: String,
+				val surname: String
+			)
 
 			@JsonClass(generateAdapter = true)
 			data class ExamRule(

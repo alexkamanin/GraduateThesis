@@ -157,7 +157,7 @@
 		android:layout_marginBottom="@dimen/margin_padding_20"
 		android:text="@string/button_sign_no_account_text"
 		android:textAllCaps="false"
-		android:textColor="@color/grey_500"
+		android:textColor="@color/grey_400"
 		android:visibility="invisible"
 		app:cornerRadius="@dimen/corner_radius_8"
 		tools:text="Нет аккаунта?"

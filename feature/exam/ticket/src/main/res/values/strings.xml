@@ -3,4 +3,10 @@
 	<string name="toolbar_ticket_title" />
 	<string name="toolbar_ticket_subtitle" />
 	<string name="card_time_text" />
+
+	<string name="error_title_exam_start_end" />
+	<string name="error_description_start_end" />
+
+	<string name="question_title" />
+	<string name="exercise_title" />
 </resources>

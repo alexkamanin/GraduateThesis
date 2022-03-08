@@ -4,19 +4,19 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
+import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.exception.launch
 import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.*
 import ru.kamanin.nstu.graduate.thesis.component.core.error.ErrorConverter
 import ru.kamanin.nstu.graduate.thesis.component.core.error.ErrorState
 import ru.kamanin.nstu.graduate.thesis.component.core.mvvm.lifecycle.EventDispatcher
 import ru.kamanin.nstu.graduate.thesis.component.core.validation.ValidationResult
+import ru.kamanin.nstu.graduate.thesis.feature.sign.domain.scenario.LoginScenario
 import ru.kamanin.nstu.graduate.thesis.feature.sign.domain.validation.EmailValidator
-import ru.kamanin.nstu.graduate.thesis.shared.session.domain.usecase.LoginUseCase
 import javax.inject.Inject
 
 @HiltViewModel
 class SignInViewModel @Inject constructor(
-	private val loginUseCase: LoginUseCase,
+	private val loginScenario: LoginScenario,
 	private val errorConverter: ErrorConverter
 ) : ViewModel() {
 
@@ -78,15 +78,13 @@ class SignInViewModel @Inject constructor(
 			signProcessAvailable = true
 		)
 
-		viewModelScope.launch {
-			runCatching {
-				loginUseCase(username = email.value, password = password.value)
-				eventDispatcher.dispatchEvent { navigateToExamsList() }
-			}.onFailure(::handleLoginError)
+		viewModelScope.launch(::handleError) {
+			loginScenario(username = email.value, password = password.value)
+			eventDispatcher.dispatchEvent { navigateToExamsList() }
 		}
 	}
 
-	private fun handleLoginError(throwable: Throwable) {
+	private fun handleError(throwable: Throwable) {
 		_state.value = _state.value.copy(
 			signAvailable = true,
 			registrationAvailable = true,

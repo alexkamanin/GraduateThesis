@@ -18,6 +18,7 @@ object ApplicationPlugin : Plugin<Project> {
 			setJavaVersion()
 			setExcludes()
 			setBuildFeatures()
+			setLintOptions()
 		}
 	}
 }

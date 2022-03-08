@@ -10,21 +10,29 @@ import androidx.fragment.app.Fragment
 import ru.kamanin.nstu.graduate.thesis.component.core.R
 import ru.kamanin.nstu.graduate.thesis.component.core.error.ErrorState
 
-fun Fragment.showErrorDialog(errorState: ErrorState) {
+fun Fragment.showErrorDialog(
+	errorState: ErrorState,
+	okay: (() -> Unit)? = null
+) {
 	val (title, description) = when (errorState) {
 		ErrorState.LostConnection     -> R.string.error_title_lost_connection to R.string.error_description_lost_connection
 		ErrorState.NotAuthorized      -> R.string.error_title_not_authorized to R.string.error_description_not_authorized
 		ErrorState.ServiceUnavailable -> R.string.error_title_service_unavailable to R.string.error_description_service_unavailable
 		else                          -> R.string.error_title_unknown to R.string.error_description_unknown
 	}
-	showInformationDialog(title, description)
+	showInformationDialog(title, description, okay)
 }
 
-fun Fragment.showInformationDialog(@StringRes titleId: Int, @StringRes descriptionId: Int) {
+fun Fragment.showInformationDialog(
+	@StringRes titleId: Int,
+	@StringRes descriptionId: Int,
+	okay: (() -> Unit)? = null
+) {
 	AlertDialog.Builder(requireContext())
 		.setTitle(titleId)
+		.setCancelable(false)
 		.setMessage(descriptionId)
-		.setPositiveButton(R.string.error_button_positive_text, null)
+		.setPositiveButton(R.string.error_button_positive_text) { _, _ -> okay?.invoke() }
 		.create()
 		.show()
 }

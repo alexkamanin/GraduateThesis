@@ -1,62 +1,104 @@
 package ru.kamanin.nstu.graduate.thesis.feature.exam.ticket.presentation
 
-import android.util.Log
+import android.os.Bundle
+import androidx.core.os.bundleOf
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.*
+import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.exception.launch
+import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.LiveState
+import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.MutableLiveState
+import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.asLiveState
+import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.invoke
+import ru.kamanin.nstu.graduate.thesis.component.core.error.ErrorConverter
+import ru.kamanin.nstu.graduate.thesis.component.core.error.ErrorState
 import ru.kamanin.nstu.graduate.thesis.component.core.mvvm.lifecycle.EventDispatcher
+import ru.kamanin.nstu.graduate.thesis.component.core.time.RemainingTime
+import ru.kamanin.nstu.graduate.thesis.component.core.time.TimeManager
+import ru.kamanin.nstu.graduate.thesis.component.core.time.getRemainingTime
 import ru.kamanin.nstu.graduate.thesis.feature.exam.ticket.ui.model.TaskItem
+import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.Exam
+import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.TaskType
+import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.repository.TicketRepository
 import javax.inject.Inject
 
 @HiltViewModel
-class TicketViewModel @Inject constructor() : ViewModel() {
+class TicketViewModel @Inject constructor(
+	savedStateHandle: SavedStateHandle,
+	private val repository: TicketRepository,
+	private val timeManager: TimeManager,
+	private val errorConverter: ErrorConverter
+) : ViewModel() {
 
-	private val _state = MutableStateFlow<TicketState>(TicketState.Loading)
+	private val examId: Long = requireNotNull(savedStateHandle["examId"])
+
+	private val period: Exam.Period = requireNotNull(savedStateHandle["period"])
+
+	private val _state = MutableStateFlow<TicketState>(TicketState.Initial)
 	val state: StateFlow<TicketState> get() = _state.asStateFlow()
 
 	val eventDispatcher = EventDispatcher<EventListener>()
+
+	private val _remainingTimeEvent = MutableSharedFlow<RemainingTime>(replay = 1)
+	val remainingTimeEvent: SharedFlow<RemainingTime> get() = _remainingTimeEvent
+
+	private val _errorEvent = MutableLiveState<ErrorState>()
+	val errorEvent: LiveState<ErrorState> get() = _errorEvent.asLiveState()
 
 	interface EventListener {
 
 		fun navigateToChat()
 
-		fun navigateToTask()
+		fun navigateToTask(args: Bundle)
 	}
 
 	init {
-		viewModelScope.launch {
-			delay(500)
+		_state.value = TicketState.Loading
 
-			_state.value = TicketState.Content(
-				taskItems = listOf(
-					TaskItem(0, "Вопрос 1", TaskItem.Status.CHECKING),
-					TaskItem(1, "Вопрос 2", TaskItem.Status.CHECKING),
-					TaskItem(2, "Вопрос 3", TaskItem.Status.REJECTED),
-					TaskItem(3, "Вопрос 4", TaskItem.Status.REJECTED),
-					TaskItem(4, "Вопрос 5", TaskItem.Status.REVISION),
-					TaskItem(5, "Вопрос 6", TaskItem.Status.CHECKING),
-					TaskItem(6, "Вопрос 7", TaskItem.Status.APPROVED),
-					TaskItem(7, "Вопрос 8", TaskItem.Status.CHECKING),
-					TaskItem(8, "Вопрос 9", TaskItem.Status.APPROVED),
-					TaskItem(9, "Вопрос 10", TaskItem.Status.APPROVED),
-					TaskItem(10, "Вопрос 11", TaskItem.Status.CHECKING),
-					TaskItem(12, "Вопрос 12", TaskItem.Status.APPROVED),
-					TaskItem(13, "Вопрос 13", TaskItem.Status.CHECKING),
-					TaskItem(15, "Вопрос 14", TaskItem.Status.CHECKING),
-					TaskItem(15, "Вопрос 15", TaskItem.Status.CHECKING),
-					TaskItem(16, "Вопрос 16", TaskItem.Status.CHECKING)
+		getRemainingTime(period.end, timeManager.currentTime)
+			.onEach(_remainingTimeEvent::emit)
+			.launchIn(viewModelScope)
+
+		viewModelScope.launch(::handleError) {
+			val answers = repository.getAnswers(examId)
+
+			val questionCount = answers.count { it.taskType == TaskType.QUESTION }
+			val exerciseCount = answers.count { it.taskType == TaskType.EXERCISE }
+
+			val taskItems = answers.mapIndexed { index, answer ->
+				TaskItem(
+					id = answer.id,
+					number = when (answer.taskType) {
+						TaskType.EXERCISE -> index % exerciseCount + 1
+						TaskType.QUESTION -> index % questionCount + 1
+					},
+					text = answer.description,
+					theme = answer.theme,
+					taskType = answer.taskType,
+					status = TaskItem.Status.CHECKING
 				)
-			)
+			}
+			_state.value = TicketState.Content(taskItems)
 		}
 	}
 
+	private fun handleError(throwable: Throwable) {
+		val error = errorConverter.convert(throwable)
+		_errorEvent(error)
+	}
+
 	fun selectTask(taskItem: TaskItem) {
-		Log.d("TEST_TECH", taskItem.toString())
-		eventDispatcher.dispatchEvent { navigateToTask() }
+		val args = bundleOf(
+			"text" to taskItem.text,
+			"theme" to taskItem.theme,
+			"period" to period
+		)
+		eventDispatcher.dispatchEvent { navigateToTask(args) }
+	}
+
+	fun openChat() {
+		eventDispatcher.dispatchEvent { navigateToChat() }
 	}
 }

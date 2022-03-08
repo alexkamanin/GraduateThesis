@@ -10,6 +10,7 @@ import ru.kamanin.nstu.graduate.thesis.di.network.Authorized
 import ru.kamanin.nstu.graduate.thesis.di.network.NotAuthorized
 import ru.kamanin.nstu.graduate.thesis.shared.account.data.api.AccountApi
 import ru.kamanin.nstu.graduate.thesis.shared.exam.data.api.ExamApi
+import ru.kamanin.nstu.graduate.thesis.shared.exam.data.api.TicketApi
 import ru.kamanin.nstu.graduate.thesis.shared.session.data.api.SessionApi
 import javax.inject.Singleton
 
@@ -30,5 +31,10 @@ object ApiModule {
 	@Provides
 	@Singleton
 	fun provideExamApi(@Authorized retrofit: Retrofit): ExamApi =
+		retrofit.create()
+
+	@Provides
+	@Singleton
+	fun provideTicketApi(@Authorized retrofit: Retrofit): TicketApi =
 		retrofit.create()
 }

@@ -17,9 +17,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import ru.kamanin.nstu.graduate.thesis.component.core.R
 import ru.kamanin.nstu.graduate.thesis.component.core.databinding.ShareBottomSheetBinding
 
-const val SHARE_BOTTOM_SHEET_DIALOG_TAG = "SHARE_BOTTOM_SHEET"
-const val SHARE_BOTTOM_SHEET_DIALOG_KEY = "SHARE_BOTTOM_SHEET_DIALOG"
-const val SHARE_BOTTOM_SHEET_DIALOG_RESULT = "RESULT"
+private const val SHARE_BOTTOM_SHEET_DIALOG_TAG = "SHARE_BOTTOM_SHEET"
+private const val SHARE_BOTTOM_SHEET_DIALOG_KEY = "SHARE_BOTTOM_SHEET_DIALOG"
+private const val SHARE_BOTTOM_SHEET_DIALOG_RESULT = "RESULT"
 
 fun Fragment.showShareBottomSheetDialog() {
 	ShareBottomSheetDialog().show(parentFragmentManager, SHARE_BOTTOM_SHEET_DIALOG_TAG)
@@ -32,7 +32,7 @@ fun Fragment.setShareBottomSheetResultListener(observer: (ShareResult) -> Unit) 
 	}
 }
 
-class ShareBottomSheetDialog : BottomSheetDialogFragment() {
+internal class ShareBottomSheetDialog : BottomSheetDialogFragment() {
 
 	private companion object {
 

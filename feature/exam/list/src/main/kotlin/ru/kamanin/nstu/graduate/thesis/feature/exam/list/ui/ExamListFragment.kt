@@ -2,11 +2,12 @@ package ru.kamanin.nstu.graduate.thesis.feature.exam.list.ui
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
 import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.subscribe
 import ru.kamanin.nstu.graduate.thesis.component.navigation.navigate
@@ -17,6 +18,7 @@ import ru.kamanin.nstu.graduate.thesis.feature.exam.list.databinding.FragmentExa
 import ru.kamanin.nstu.graduate.thesis.feature.exam.list.navigation.ExamListNavigationProvider
 import ru.kamanin.nstu.graduate.thesis.feature.exam.list.presentation.ExamListState
 import ru.kamanin.nstu.graduate.thesis.feature.exam.list.presentation.ExamListViewModel
+import ru.kamanin.nstu.graduate.thesis.feature.exam.list.presentation.model.ExamFilter
 import ru.kamanin.nstu.graduate.thesis.feature.exam.list.ui.adapter.ExamAdapter
 import javax.inject.Inject
 
@@ -62,16 +64,32 @@ class ExamListFragment : Fragment(R.layout.fragment_exam_list), ExamListViewMode
 			viewModel.logout()
 			true
 		}
+		viewBinding.filter.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+
+			override fun onTabSelected(tab: TabLayout.Tab) {
+				when (tab.position) {
+					0    -> viewModel.selectFilter(ExamFilter.ACTIVE)
+					1    -> viewModel.selectFilter(ExamFilter.INACTIVE)
+					else -> throw IllegalStateException("Incorrect exam filter tab position ${tab.position}")
+				}
+			}
+
+			override fun onTabUnselected(tab: TabLayout.Tab) = Unit
+
+			override fun onTabReselected(tab: TabLayout.Tab) = Unit
+		})
 	}
 
 	private fun initObservers() {
-		viewModel.state.subscribe(lifecycleScope, ::renderState)
+		viewModel.state.subscribe(viewLifecycleOwner, ::renderState)
 		viewModel.eventDispatcher.bind(viewLifecycleOwner, this)
-		viewModel.swipeRefreshEvent.subscribe(lifecycleScope, viewBinding.swipeRefresh::setRefreshing)
+		viewModel.errorEvent.subscribe(viewLifecycleOwner, ::showError)
+		viewModel.swipeRefreshEvent.subscribe(viewLifecycleOwner, viewBinding.swipeRefresh::setRefreshing)
 	}
 
 	private fun renderState(state: ExamListState) {
 		when (state) {
+			ExamListState.Initial,
 			ExamListState.Loading    -> renderLoadingState()
 			ExamListState.NoContent  -> renderNoContentState()
 			is ExamListState.Content -> renderContentState(state)
@@ -91,18 +109,29 @@ class ExamListFragment : Fragment(R.layout.fragment_exam_list), ExamListViewMode
 	}
 
 	private fun renderContentState(state: ExamListState.Content) {
-		adapter?.items = state.examItems
+		adapter?.items = state.exams
+
 		viewBinding.progressBar.isVisible = false
 		viewBinding.examList.isVisible = true
 		viewBinding.hintExamEmpty.isVisible = false
+
+		val tabPosition = when (state.filter) {
+			ExamFilter.ACTIVE   -> 0
+			ExamFilter.INACTIVE -> 1
+		}
+		viewBinding.filter.getTabAt(tabPosition)?.select()
+	}
+
+	private fun showError(throwable: Throwable) {
+		Toast.makeText(requireContext(), throwable.message ?: throwable.toString(), Toast.LENGTH_LONG).show()
 	}
 
 	override fun navigateToSignIn() {
-		navigate(navigationProvider.toSignIn)
+		navigate(navigationProvider.toSignIn())
 	}
 
-	override fun navigateToTicket() {
-		navigate(navigationProvider.toTicket)
+	override fun navigateToTicket(args: Bundle) {
+		navigate(navigationProvider.toTicket(args))
 	}
 
 	override fun onDestroyView() {

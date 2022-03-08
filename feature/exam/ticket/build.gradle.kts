@@ -12,6 +12,7 @@ dependencies {
 	implementation(libs.android.material)
 	implementation(libs.android.constraintlayout)
 	implementation(libs.android.navigation.fragment)
+	implementation(libs.android.swipe.refresh)
 
 	implementation(libs.viewbinding)
 
@@ -21,4 +22,6 @@ dependencies {
 	implementation(projects.component.ui)
 	implementation(projects.component.core)
 	implementation(projects.component.navigation)
+
+	implementation(projects.shared.exam)
 }
