@@ -1,0 +1,34 @@
+<resources>
+	<!-- Base application theme. -->
+	<style name="Theme.GraduateThesis" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+		<!-- Primary brand color. -->
+		<item name="colorPrimary">@color/blue_600</item>
+		<item name="colorPrimaryVariant">@color/purple_700</item>
+		<item name="colorOnPrimary">@color/white</item>
+		<!-- Secondary brand color. -->
+		<item name="colorSecondary">@color/teal_200</item>
+		<item name="colorSecondaryVariant">@color/teal_700</item>
+		<item name="colorOnSecondary">@color/black</item>
+		<!-- Status bar color. -->
+		<item name="android:statusBarColor">?attr/colorSurface</item>
+		<item name="android:windowLightStatusBar">true</item>
+		<!-- Customize your theme here. -->
+		<item name="colorIconTint">@color/grey_500</item>
+		<item name="colorButtonTint">@color/button_background_color_light</item>
+		<item name="colorProgressBarTint">@color/blue_600</item>
+		<item name="colorSwipeIndicatorTint">@color/grey_400</item>
+
+		<item name="colorGreyVariant">@color/grey_50</item>
+		<item name="colorBlueVariant">@color/blue_200</item>
+
+		<item name="colorBackgroundGreenTint">@color/green_300</item>
+		<item name="colorBackgroundRedTint">@color/red_300</item>
+		<item name="colorBackgroundYellowTint">@color/yellow_300</item>
+		<item name="colorBackgroundGreyTint">@color/grey_300</item>
+
+		<item name="colorBackgroundStateTint">@color/blue_200</item>
+
+		<item name="bottomSheetDialogTheme">@style/BottomSheetDialogTheme</item>
+	</style>
+
+</resources>

@@ -1,0 +1,6 @@
+<resources>
+	<string name="item_chat_text" />
+	<string name="toolbar_ticket_title" />
+	<string name="toolbar_ticket_subtitle" />
+	<string name="card_time_text" />
+</resources>

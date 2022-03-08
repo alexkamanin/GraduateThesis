@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="@color/grey_300"
+	android:orientation="horizontal">
+
+	<com.google.android.material.textfield.TextInputEditText
+		android:id="@+id/messageEditText"
+		android:layout_width="@dimen/margin_padding_undefined"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_vertical"
+		android:layout_marginVertical="@dimen/margin_padding_10"
+		android:layout_marginStart="@dimen/margin_padding_20"
+		android:layout_marginEnd="@dimen/margin_padding_10"
+		android:layout_weight="1"
+		android:background="@android:color/transparent"
+		android:hint="@string/hint_input_text"
+		android:imeOptions="actionSend"
+		android:inputType="textCapSentences|textMultiLine"
+		android:maxHeight="@dimen/input_text_bottom_panel_height"
+		android:textColor="@color/grey_500"
+		android:textColorHint="@color/grey_400"
+		tools:hint="Сообщение…" />
+
+	<ImageView
+		android:id="@+id/shareButton"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="bottom"
+		android:layout_margin="@dimen/margin_padding_10"
+		android:contentDescription="@null"
+		android:src="@drawable/ic_share" />
+
+	<ImageView
+		android:id="@+id/sendButton"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="bottom"
+		android:layout_margin="@dimen/margin_padding_10"
+		android:contentDescription="@null"
+		android:src="@drawable/ic_send" />
+
+</LinearLayout>

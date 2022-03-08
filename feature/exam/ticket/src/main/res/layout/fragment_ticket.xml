@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+
+	<com.google.android.material.appbar.MaterialToolbar
+		android:id="@+id/toolbar"
+		style="@style/MaterialToolbarStyle"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:visibility="gone"
+		app:menu="@menu/menu_ticket"
+		app:navigationIcon="@drawable/ic_arrow_back"
+		app:subtitle="@string/toolbar_ticket_subtitle"
+		app:title="@string/toolbar_ticket_title"
+		tools:subtitle="Экзамены"
+		tools:title="Билет"
+		tools:visibility="visible" />
+
+	<com.google.android.material.card.MaterialCardView
+		android:id="@+id/timeContainer"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="@dimen/margin_padding_16"
+		android:layout_marginVertical="@dimen/margin_padding_10"
+		android:visibility="gone"
+		app:cardBackgroundColor="?attr/colorBlueVariant"
+		app:cardCornerRadius="@dimen/corner_radius_4"
+		app:cardElevation="@dimen/elevation_0"
+		tools:visibility="visible">
+
+		<TextView
+			android:id="@+id/timeText"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:paddingVertical="5dp"
+			android:text="@string/card_time_text"
+			android:textStyle="bold"
+			tools:text="Осталось: 01:30" />
+
+	</com.google.android.material.card.MaterialCardView>
+
+	<androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/taskList"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:visibility="gone"
+		app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+		tools:listitem="@layout/item_task"
+		tools:visibility="visible" />
+
+	<ProgressBar
+		android:id="@+id/progressBar"
+		android:layout_width="@dimen/progress_bar_large"
+		android:layout_height="@dimen/progress_bar_large"
+		android:layout_gravity="center"
+		android:layout_weight="1"
+		android:indeterminateTint="?attr/colorProgressBarTint"
+		android:visibility="gone" />
+
+</LinearLayout>

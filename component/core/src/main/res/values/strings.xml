@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="error_button_negative_text" />
+	<string name="error_button_positive_text" />
+
+	<string name="error_title_lost_connection" />
+	<string name="error_description_lost_connection" />
+
+	<string name="error_title_not_authorized" />
+	<string name="error_description_not_authorized" />
+
+	<string name="error_title_service_unavailable" />
+	<string name="error_description_service_unavailable" />
+
+	<string name="error_title_unknown" />
+	<string name="error_description_unknown" />
+
+	<string name="permission_camera_title" />
+	<string name="permission_camera_description" />
+	<string name="permission_content_title" />
+	<string name="permission_content_description" />
+
+	<string name="share_bottom_sheet_title" />
+	<string name="share_bottom_sheet_camera" />
+	<string name="share_bottom_sheet_gallery" />
+	<string name="share_bottom_sheet_document" />
+</resources>

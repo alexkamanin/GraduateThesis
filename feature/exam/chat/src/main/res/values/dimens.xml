@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<!-- Margin & Padding -->
+	<dimen name="margin_padding_2">2dp</dimen>
+	<dimen name="margin_padding_3">3dp</dimen>
+	<dimen name="margin_padding_5">5dp</dimen>
+	<dimen name="message_min_width">40dp</dimen>
+</resources>

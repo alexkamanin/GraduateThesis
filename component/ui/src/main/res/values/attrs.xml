@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<attr name="colorIconTint" />
+	<attr name="colorButtonTint" />
+	<attr name="colorProgressBarTint" />
+	<attr name="colorSwipeIndicatorTint" />
+
+	<attr name="colorGreyVariant" />
+	<attr name="colorBlueVariant" />
+
+	<attr name="colorBackgroundGreenTint" />
+	<attr name="colorBackgroundRedTint" />
+	<attr name="colorBackgroundYellowTint" />
+	<attr name="colorBackgroundGreyTint" />
+
+	<attr name="colorBackgroundStateTint" />
+</resources>

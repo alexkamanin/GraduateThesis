@@ -1,27 +1,9 @@
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-	id("com.android.application")
-	id("org.jetbrains.kotlin.android")
-}
-
-android {
-	compileSdk = 31
-
-	defaultConfig {
-		applicationId = "ru.kamanin.nstu.graduate.thesis"
-		minSdk = 24
-		targetSdk = 31
-		versionCode = 1
-		versionName = "1.0.0"
-
-		testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-	}
-	compileOptions {
-		sourceCompatibility = JavaVersion.VERSION_11
-		targetCompatibility = JavaVersion.VERSION_11
-	}
-	kotlinOptions {
-		jvmTarget = "11"
-	}
+	id(libs.plugins.android.application.get().pluginId)
+	id(libs.plugins.kotlin.android.get().pluginId)
+	id(libs.plugins.hilt.android.get().pluginId)
+	id(libs.plugins.kotlin.kapt.get().pluginId)
 }
 
 dependencies {
@@ -29,4 +11,38 @@ dependencies {
 	implementation(libs.android.appcompat)
 	implementation(libs.android.material)
 	implementation(libs.android.constraintlayout)
+
+	implementation(libs.android.navigation.fragment)
+	implementation(libs.android.navigation.ui)
+
+	implementation(libs.squareup.interceptor)
+	implementation(libs.squareup.moshi.converter)
+	implementation(libs.squareup.retrofit)
+	implementation(libs.squareup.moshi.kotlin)
+	kapt(libs.squareup.moshi.codegen)
+
+	implementation(libs.hilt.android)
+	kapt(libs.hilt.compiler)
+
+	// ----- Feature -----
+	implementation(projects.feature.exam.list)
+	implementation(projects.feature.exam.ticket)
+	implementation(projects.feature.exam.chat)
+	implementation(projects.feature.exam.task)
+	implementation(projects.feature.sign)
+
+	// ---- Component ----
+	implementation(projects.component.navigation)
+	implementation(projects.component.core)
+	implementation(projects.component.ui)
+
+	// ----- Shared ------
+	implementation(projects.shared.session)
+	implementation(projects.shared.account)
+	implementation(projects.shared.exam)
+
+	implementation("com.github.tony15407075:retrofit-mock-interceptor:1.0.1") {
+		exclude(module = "okhttp")
+		exclude(group = "androidx")
+	}
 }

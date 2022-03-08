@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="@drawable/shape_top_radius"
+	android:orientation="vertical"
+	android:paddingVertical="@dimen/margin_padding_10">
+
+	<View
+		android:layout_width="28dp"
+		android:layout_height="3dp"
+		android:layout_gravity="center"
+		android:background="?attr/colorIconTint" />
+
+	<TextView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="30dp"
+		android:paddingVertical="@dimen/margin_padding_10"
+		android:text="@string/share_bottom_sheet_title"
+		android:textColor="?attr/colorIconTint"
+		android:textSize="24sp"
+		android:textStyle="bold"
+		tools:text="Поделиться…" />
+
+	<LinearLayout
+		android:id="@+id/pickCamera"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?android:attr/selectableItemBackground"
+		android:clickable="true"
+		android:focusable="true"
+		android:orientation="horizontal"
+		android:paddingHorizontal="30dp"
+		android:paddingVertical="@dimen/margin_padding_10">
+
+		<ImageView
+			android:layout_width="28dp"
+			android:layout_height="28dp"
+			android:layout_gravity="center_vertical"
+			android:src="@drawable/ic_camera" />
+
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginStart="@dimen/margin_padding_10"
+			android:text="@string/share_bottom_sheet_camera"
+			android:textColor="?attr/colorIconTint"
+			android:textSize="16sp"
+			tools:text="Фотографией с камеры" />
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/pickGallery"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?android:attr/selectableItemBackground"
+		android:clickable="true"
+		android:focusable="true"
+		android:orientation="horizontal"
+		android:paddingHorizontal="30dp"
+		android:paddingVertical="@dimen/margin_padding_10">
+
+		<ImageView
+			android:layout_width="28dp"
+			android:layout_height="28dp"
+			android:layout_gravity="center_vertical"
+			android:src="@drawable/ic_gallery" />
+
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginStart="@dimen/margin_padding_10"
+			android:text="@string/share_bottom_sheet_gallery"
+			android:textColor="?attr/colorIconTint"
+			android:textSize="16sp"
+			tools:text="Изображением из галереи" />
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:id="@+id/pickDocument"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="?android:attr/selectableItemBackground"
+		android:clickable="true"
+		android:focusable="true"
+		android:orientation="horizontal"
+		android:paddingHorizontal="30dp"
+		android:paddingVertical="@dimen/margin_padding_10">
+
+		<ImageView
+			android:layout_width="28dp"
+			android:layout_height="28dp"
+			android:layout_gravity="center_vertical"
+			android:src="@drawable/ic_document" />
+
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginStart="@dimen/margin_padding_10"
+			android:text="@string/share_bottom_sheet_document"
+			android:textColor="?attr/colorIconTint"
+			android:textSize="16sp"
+			tools:text="Документом" />
+
+	</LinearLayout>
+
+</LinearLayout>

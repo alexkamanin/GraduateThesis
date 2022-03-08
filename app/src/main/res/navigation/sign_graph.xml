@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/sign_graph"
+	app:startDestination="@id/sing_in_fragment">
+
+	<fragment
+		android:id="@+id/sing_up_fragment"
+		android:name="ru.kamanin.nstu.graduate.thesis.feature.sign.ui.SignUpFragment"
+		android:label="SingUpFragment"
+		tools:layout="@layout/fragment_sign">
+		<action
+			android:id="@+id/action_singUpFragment_to_examListFragment"
+			app:destination="@id/main_graph"
+			app:enterAnim="@anim/slide_in_right"
+			app:exitAnim="@anim/slide_out_left"
+			app:popEnterAnim="@anim/slide_in_left"
+			app:popExitAnim="@anim/slide_out_right"
+			app:popUpTo="@id/sing_in_fragment"
+			app:popUpToInclusive="true" />
+	</fragment>
+
+	<fragment
+		android:id="@+id/sing_in_fragment"
+		android:name="ru.kamanin.nstu.graduate.thesis.feature.sign.ui.SignInFragment"
+		android:label="fragment_sing_in"
+		tools:layout="@layout/fragment_sign">
+		<action
+			android:id="@+id/action_singInFragment_to_singUpFragment"
+			app:destination="@id/sing_up_fragment"
+			app:enterAnim="@anim/slide_in_right"
+			app:exitAnim="@anim/slide_out_left"
+			app:popEnterAnim="@anim/slide_in_left"
+			app:popExitAnim="@anim/slide_out_right" />
+		<action
+			android:id="@+id/action_singInFragment_to_examListFragment"
+			app:destination="@id/main_graph"
+			app:enterAnim="@anim/slide_in_right"
+			app:exitAnim="@anim/slide_out_left"
+			app:popEnterAnim="@anim/slide_in_left"
+			app:popExitAnim="@anim/slide_out_right"
+			app:popUpTo="@id/sing_in_fragment"
+			app:popUpToInclusive="true" />
+	</fragment>
+
+</navigation>

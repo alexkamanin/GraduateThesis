@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_marginStart="@dimen/margin_padding_10"
+	android:paddingVertical="@dimen/margin_padding_2">
+
+	<LinearLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="start"
+		android:layout_marginVertical="@dimen/margin_padding_2"
+		android:background="@drawable/background_received_message"
+		android:orientation="vertical"
+		android:paddingHorizontal="@dimen/margin_padding_5">
+
+		<TextView
+			android:id="@+id/messageText"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:maxEms="12"
+			android:minWidth="@dimen/message_min_width"
+			android:paddingHorizontal="@dimen/margin_padding_3"
+			android:paddingTop="@dimen/margin_padding_3"
+			android:textSize="16sp"
+			tools:text="Полученное сообщение" />
+
+		<TextView
+			android:id="@+id/messageTime"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="end"
+			android:paddingEnd="@dimen/margin_padding_3"
+			android:paddingBottom="@dimen/margin_padding_2"
+			android:textSize="10sp"
+			tools:text="10:30" />
+
+	</LinearLayout>
+
+</FrameLayout>

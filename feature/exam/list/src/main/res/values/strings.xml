@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="toolbar_exam_list_title" />
+	<string name="item_logout_text" />
+	<string name="tab_exam_list_active" />
+	<string name="tab_exam_list_inactive" />
+	<string name="hint_exam_list_empty" />
+	<string name="hint_exam_mark" />
+	<string name="hint_exam_date_time" />
+</resources>
