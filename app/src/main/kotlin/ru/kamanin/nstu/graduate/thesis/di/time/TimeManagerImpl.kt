@@ -17,7 +17,7 @@ class TimeManagerImpl @Inject constructor() : TimeManager {
 	private companion object {
 
 		const val LIVE = "live"
-		const val MOCK = "mock"
+		const val MOCK = "develop"
 
 		const val MOCK_TIME = 1651288200000
 	}

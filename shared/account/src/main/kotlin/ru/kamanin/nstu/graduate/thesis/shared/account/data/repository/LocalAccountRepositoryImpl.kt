@@ -37,8 +37,8 @@ class LocalAccountRepositoryImpl @Inject constructor(
 
 	override suspend fun get(): Account =
 		withContext(ioDispatcher) {
-			val username = accountPreferences.getString(ACCOUNT_USERNAME, null) ?: throw Exception("Account username not found")
-			val password = accountPreferences.getString(ACCOUNT_PASSWORD, null) ?: throw Exception("Account password not found")
+			val username = accountPreferences.getString(ACCOUNT_USERNAME, null) ?: throw IllegalStateException("Account username not found")
+			val password = accountPreferences.getString(ACCOUNT_PASSWORD, null) ?: throw IllegalStateException("Account password not found")
 
 			Account(username, password)
 		}

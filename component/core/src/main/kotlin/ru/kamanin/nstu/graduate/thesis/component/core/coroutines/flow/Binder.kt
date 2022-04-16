@@ -2,12 +2,13 @@ package ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow
 
 import android.widget.EditText
 import androidx.core.widget.doAfterTextChanged
-import androidx.lifecycle.LifecycleCoroutineScope
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.*
 
-fun MutableStateFlow<String>.bind(coroutineScope: LifecycleCoroutineScope, editText: EditText) {
-	editText.textOfFlow().onEach { this.emit(it) }.launchIn(coroutineScope)
+fun MutableStateFlow<String>.bind(owner: LifecycleOwner, editText: EditText) {
+	editText.textOfFlow().onEach(::emit).launchIn(owner.lifecycleScope)
 }
 
 private fun EditText.textOfFlow(): Flow<String> = callbackFlow {

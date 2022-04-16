@@ -5,6 +5,6 @@ import ru.kamanin.nstu.graduate.thesis.shared.exam.data.dto.ExamDto
 
 interface ExamApi {
 
-	@GET("/student/ticket")
+	@GET("/student/tickets")
 	suspend fun get(): List<ExamDto>
 }

@@ -8,10 +8,10 @@ import androidx.core.view.isVisible
 import androidx.core.view.marginBottom
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.WithFragmentBindings
 import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.bind
 import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.subscribe
 import ru.kamanin.nstu.graduate.thesis.component.core.error.ErrorState
@@ -26,6 +26,7 @@ import ru.kamanin.nstu.graduate.thesis.feature.sign.presentation.SignUpViewModel
 import javax.inject.Inject
 
 @AndroidEntryPoint
+@WithFragmentBindings
 class SignUpFragment : Fragment(R.layout.fragment_sign), SignUpViewModel.EventListener {
 
 	private val viewBinding: FragmentSignBinding by viewBinding()
@@ -76,10 +77,10 @@ class SignUpFragment : Fragment(R.layout.fragment_sign), SignUpViewModel.EventLi
 	}
 
 	private fun initObservers() {
-		viewModel.email.bind(lifecycleScope, viewBinding.emailText)
-		viewModel.password.bind(lifecycleScope, viewBinding.passwordText)
-		viewModel.repeatPassword.bind(lifecycleScope, viewBinding.repeatPasswordText)
-		viewModel.verificationCode.bind(lifecycleScope, viewBinding.verificationCodeText)
+		viewModel.email.bind(viewLifecycleOwner, viewBinding.emailText)
+		viewModel.password.bind(viewLifecycleOwner, viewBinding.passwordText)
+		viewModel.repeatPassword.bind(viewLifecycleOwner, viewBinding.repeatPasswordText)
+		viewModel.verificationCode.bind(viewLifecycleOwner, viewBinding.verificationCodeText)
 		viewModel.state.subscribe(viewLifecycleOwner, ::renderState)
 		viewModel.errorEvent.subscribe(viewLifecycleOwner, ::handleError)
 		viewModel.eventDispatcher.bind(viewLifecycleOwner, this)

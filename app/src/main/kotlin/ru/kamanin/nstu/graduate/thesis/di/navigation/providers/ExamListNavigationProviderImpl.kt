@@ -8,10 +8,10 @@ import javax.inject.Inject
 
 class ExamListNavigationProviderImpl @Inject constructor() : ExamListNavigationProvider {
 
-	override fun toSignIn(): NavCommand = NavCommand(R.id.action_examListFragment_to_singInFragment)
+	override fun toSignIn(): NavCommand = NavCommand(R.id.from_exam_list_to_sign_in)
 
 	override fun toTicket(args: Bundle): NavCommand = NavCommand(
-		action = R.id.action_examListFragment_to_ticketFragment,
+		action = R.id.from_exam_list_to_ticket,
 		args = args
 	)
 }

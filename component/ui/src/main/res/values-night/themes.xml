@@ -18,6 +18,9 @@
 		<!-- Bottom sheet -->
 		<item name="bottomSheetDialogTheme">@style/BottomSheetDialogTheme</item>
 
+		<!-- Alert dialog -->
+		<item name="materialAlertDialogTheme">@style/MaterialAlertDialog.Rounded</item>
+
 		<!-- Other -->
 		<item name="colorIconTint">@color/grey_100</item>
 		<item name="colorButtonTint">@color/button_background_color</item>

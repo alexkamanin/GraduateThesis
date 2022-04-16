@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.WithFragmentBindings
 import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.bind
 import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.subscribe
 import ru.kamanin.nstu.graduate.thesis.component.core.fragment.dialog.ShareResult
@@ -23,6 +23,7 @@ import ru.kamanin.nstu.graduate.thesis.feature.exam.chat.presentation.ChatViewMo
 import ru.kamanin.nstu.graduate.thesis.feature.exam.chat.ui.adapter.MessageAdapter
 
 @AndroidEntryPoint
+@WithFragmentBindings
 class ChatFragment : Fragment(R.layout.fragment_chat) {
 
 	private val viewBinding: FragmentChatBinding by viewBinding()
@@ -63,7 +64,7 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
 	}
 
 	private fun initObservers() {
-		viewModel.message.bind(lifecycleScope, viewBinding.inputBottomPanel.messageEditText)
+		viewModel.message.bind(viewLifecycleOwner, viewBinding.inputBottomPanel.messageEditText)
 		viewModel.state.subscribe(viewLifecycleOwner, ::renderState)
 	}
 

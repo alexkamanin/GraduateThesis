@@ -14,6 +14,7 @@
 
 	<!-- Grey -->
 	<color name="grey_50">#FFF4F4F4</color>
+	<color name="grey_70">#FFFEFEFE</color>
 	<color name="grey_100">#FFC8C9CB</color>
 	<color name="grey_300">#FFC1C1C1</color>
 	<color name="grey_350">#FF959393</color>
@@ -30,6 +31,7 @@
 
 	<!-- Red -->
 	<color name="red_300">#FFFFB2B2</color>
+	<color name="red_500">#FFE24C4B</color>
 
 	<color name="red_300_alpha_60">#99FFB2B2</color>
 

@@ -22,4 +22,8 @@ dependencies {
 	implementation(projects.component.ui)
 	implementation(projects.component.core)
 	implementation(projects.component.navigation)
+
+	implementation(projects.shared.artefact)
+
+	implementation(libs.squareup.retrofit)
 }

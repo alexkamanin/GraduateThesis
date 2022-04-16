@@ -9,11 +9,12 @@ dependencies {
 	implementation(libs.bundles.kotlin.coroutines)
 
 	implementation(libs.hilt.android)
-	kapt(libs.hilt.compiler)
-
-	implementation(projects.component.core)
 
 	implementation(libs.squareup.retrofit)
 	implementation(libs.squareup.moshi.kotlin)
 	kapt(libs.squareup.moshi.codegen)
+
+	implementation(projects.component.core)
+
+	implementation(projects.shared.account)
 }

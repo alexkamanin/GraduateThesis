@@ -6,6 +6,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.create
+import ru.kamanin.nstu.graduate.thesis.artefact.data.api.ArtefactApi
 import ru.kamanin.nstu.graduate.thesis.di.network.Authorized
 import ru.kamanin.nstu.graduate.thesis.di.network.NotAuthorized
 import ru.kamanin.nstu.graduate.thesis.shared.account.data.api.AccountApi
@@ -36,5 +37,10 @@ object ApiModule {
 	@Provides
 	@Singleton
 	fun provideTicketApi(@Authorized retrofit: Retrofit): TicketApi =
+		retrofit.create()
+
+	@Provides
+	@Singleton
+	fun provideArtefactApi(@Authorized retrofit: Retrofit): ArtefactApi =
 		retrofit.create()
 }

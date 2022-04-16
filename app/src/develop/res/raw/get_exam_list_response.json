@@ -1,0 +1,86 @@
+[
+  {
+    "id": 10,
+    "disciplineName": "Программирование",
+    "semesterRating": 58,
+    "examRating": 0,
+    "allowed": false,
+    "examPeriod": {
+      "id": 883,
+      "start": 1647826200000,
+      "end": 1647831600000,
+      "examId": 882,
+      "state": "PROGRESS"
+    },
+    "teacher": {
+      "id": 1,
+      "account": {
+        "id": 1,
+        "username": "romanov@corp.nstu.ru",
+        "name": "Евгений",
+        "surname": "Романов",
+        "roles": [
+          "ROLE_TEACHER"
+        ]
+      }
+    },
+    "maxQuestionRating": 2,
+    "maxExerciseRating": 20
+  },
+  {
+    "id": 11,
+    "disciplineName": "Языки программирования",
+    "semesterRating": 40,
+    "examRating": 0,
+    "allowed": false,
+    "examPeriod": {
+      "id": 42,
+      "start": 1651287600000,
+      "end": 1651293000000,
+      "examId": 883,
+      "state": "PROGRESS"
+    },
+    "teacher": {
+      "id": 1,
+      "account": {
+        "id": 1,
+        "username": "romanov@corp.nstu.ru",
+        "name": "Евгений",
+        "surname": "Романов",
+        "roles": [
+          "ROLE_TEACHER"
+        ]
+      }
+    },
+    "maxQuestionRating": 2,
+    "maxExerciseRating": 20
+  },
+  {
+    "id": 12,
+    "disciplineName": "УПП",
+    "semesterRating": 31,
+    "examRating": 0,
+    "allowed": false,
+    "examPeriod": {
+      "id": 42,
+      "start": 1651129200000,
+      "end": 1651134600000,
+      "examId": 884,
+      "state": "PROGRESS"
+    },
+    "teacher": {
+      "id": 1,
+      "account": {
+        "id": 1,
+        "username": "romanov@corp.nstu.ru",
+        "name": "Евгений",
+        "surname": "Романов",
+        "roles": [
+          "ROLE_TEACHER"
+        ]
+      }
+    },
+    "maxQuestionRating": 2,
+    "maxExerciseRating": 20
+  }
+]

@@ -16,8 +16,8 @@
 		android:layout_height="wrap_content"
 		android:paddingVertical="12dp"
 		android:paddingStart="@dimen/margin_padding_20"
-		android:text="Вопрос 1"
-		android:textSize="16sp" />
+		android:textSize="16sp"
+		tools:text="Вопрос 1" />
 
 	<com.google.android.material.card.MaterialCardView
 		android:id="@+id/statusBackground"
@@ -39,22 +39,24 @@
 			android:paddingVertical="3dp">
 
 			<TextView
-				android:layout_width="wrap_content"
+				android:id="@+id/rating"
+				android:layout_width="50dp"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center_vertical"
-				android:paddingStart="@dimen/margin_padding_16"
-				android:paddingEnd="@dimen/margin_padding_10"
-				android:text="-/2"
-				android:textSize="16sp"
-				android:textStyle="bold" />
+				android:gravity="center"
+				android:paddingStart="4dp"
+				android:textSize="15sp"
+				android:textStyle="bold"
+				tools:text="10/20" />
 
 			<ImageView
 				android:id="@+id/statusIcon"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center_vertical"
+				android:contentDescription="@null"
 				android:paddingEnd="3dp"
-				tools:src="@drawable/ic_checking" />
+				tools:src="@drawable/ic_new" />
 
 		</LinearLayout>
 

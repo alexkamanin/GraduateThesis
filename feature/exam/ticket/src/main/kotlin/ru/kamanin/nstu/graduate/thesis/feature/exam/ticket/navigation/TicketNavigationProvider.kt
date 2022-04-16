@@ -8,4 +8,6 @@ interface TicketNavigationProvider {
 	fun toChat(): NavCommand
 
 	fun toTask(args: Bundle): NavCommand
+
+	fun toSign(): NavCommand
 }

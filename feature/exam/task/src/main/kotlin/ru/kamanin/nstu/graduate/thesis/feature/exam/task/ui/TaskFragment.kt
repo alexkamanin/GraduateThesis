@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.WithFragmentBindings
 import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.subscribe
 import ru.kamanin.nstu.graduate.thesis.component.core.fragment.dialog.ShareResult
 import ru.kamanin.nstu.graduate.thesis.component.core.fragment.dialog.setShareBottomSheetResultListener
@@ -18,8 +19,10 @@ import ru.kamanin.nstu.graduate.thesis.component.ui.insets.setupKeyboardInsets
 import ru.kamanin.nstu.graduate.thesis.feature.exam.task.R
 import ru.kamanin.nstu.graduate.thesis.feature.exam.task.databinding.FragmentTaskBinding
 import ru.kamanin.nstu.graduate.thesis.feature.exam.task.presentation.TaskViewModel
+import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.TaskType
 
 @AndroidEntryPoint
+@WithFragmentBindings
 class TaskFragment : Fragment(R.layout.fragment_task) {
 
 	private val viewBinding: FragmentTaskBinding by viewBinding()
@@ -32,9 +35,13 @@ class TaskFragment : Fragment(R.layout.fragment_task) {
 		initListeners()
 
 		viewModel.remainingTimeEvent.subscribe(viewLifecycleOwner, ::showRemainingTime)
-		viewBinding.taskText.text = viewModel.text
-		viewBinding.textTheme.text = viewModel.theme
-		viewBinding.toolbar.title = getString(R.string.question_title, 12)
+		viewBinding.taskText.text = viewModel.text.description
+		viewBinding.textTheme.text = viewModel.text.theme
+		val titleRes = when (viewModel.text.taskType) {
+			TaskType.QUESTION -> R.string.question_title
+			TaskType.EXERCISE -> R.string.exercise_title
+		}
+		viewBinding.toolbar.title = getString(titleRes, viewModel.text.number)
 	}
 
 	private fun showRemainingTime(time: RemainingTime) {

@@ -7,5 +7,5 @@ import javax.inject.Inject
 
 class SignUpNavigationProviderImpl @Inject constructor() : SignUpNavigationProvider {
 
-	override val toExamList: NavCommand = NavCommand(R.id.action_singUpFragment_to_examListFragment)
+	override val toExamList: NavCommand = NavCommand(R.id.from_sign_up_to_exam_list)
 }

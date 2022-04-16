@@ -42,7 +42,7 @@ class LocalSessionRepositoryImpl @Inject constructor(
 	override fun get(): Session =
 		sessionPreferences.getString(SESSION_VALUE, null)
 			?.let(sessionAdapter::fromJson)
-			?: throw Exception("Session is not found")
+			?: throw IllegalStateException("Session is not found")
 
 	override suspend fun clear() {
 		withContext(ioDispatcher) {

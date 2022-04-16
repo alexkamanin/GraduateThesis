@@ -14,19 +14,22 @@ import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.LiveState
 import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.MutableLiveState
 import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.asLiveState
 import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.invoke
+import ru.kamanin.nstu.graduate.thesis.component.core.error.ErrorConverter
+import ru.kamanin.nstu.graduate.thesis.component.core.error.ErrorState
 import ru.kamanin.nstu.graduate.thesis.component.core.mvvm.lifecycle.EventDispatcher
 import ru.kamanin.nstu.graduate.thesis.component.core.time.TimeManager
-import ru.kamanin.nstu.graduate.thesis.feature.exam.list.domain.scenario.LogoutScenario
 import ru.kamanin.nstu.graduate.thesis.feature.exam.list.presentation.model.ExamFilter
 import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.Exam
 import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.usecase.GetExamListUseCase
+import ru.kamanin.nstu.graduate.thesis.shared.session.domain.scenario.LogoutScenario
 import javax.inject.Inject
 
 @HiltViewModel
 class ExamListViewModel @Inject constructor(
 	private val getExamListUseCase: GetExamListUseCase,
 	private val logoutScenario: LogoutScenario,
-	private val timeManager: TimeManager
+	private val timeManager: TimeManager,
+	private val errorConverter: ErrorConverter
 ) : ViewModel() {
 
 	private var selectedFilter = ExamFilter.ACTIVE
@@ -36,9 +39,6 @@ class ExamListViewModel @Inject constructor(
 
 	private val _swipeRefreshEvent = MutableLiveState<Boolean>()
 	val swipeRefreshEvent: LiveState<Boolean> get() = _swipeRefreshEvent.asLiveState()
-
-	private val _errorEvent = MutableLiveState<Throwable>()
-	val errorEvent: LiveState<Throwable> get() = _errorEvent.asLiveState()
 
 	val eventDispatcher = EventDispatcher<EventListener>()
 
@@ -67,8 +67,14 @@ class ExamListViewModel @Inject constructor(
 
 	private fun handleError(throwable: Throwable) {
 		_swipeRefreshEvent.invoke(false)
-		//TODO подумать как обрабатывать ошибки
-		_errorEvent.invoke(throwable)
+
+		errorConverter.convert(throwable).let { errorState ->
+			if (errorState == ErrorState.NotAuthorized) {
+				logout()
+			} else {
+				_state.value = ExamListState.Error(errorState)
+			}
+		}
 	}
 
 	fun selectFilter(filter: ExamFilter) {
@@ -98,7 +104,7 @@ class ExamListViewModel @Inject constructor(
 
 			ExamFilter.ACTIVE   -> {
 				examList
-					.filter { it.period.end >= timeManager.currentTime } //TODO подумать об отображении когда экзамен только что закончился
+					.filter { it.period.end >= timeManager.currentTime }
 					.sortedBy { it.period.start }
 			}
 
@@ -114,7 +120,8 @@ class ExamListViewModel @Inject constructor(
 		eventDispatcher.dispatchEvent {
 			val args = bundleOf(
 				"examId" to exam.id,
-				"period" to exam.period
+				"period" to exam.period,
+				"regulationRating" to exam.regulationRating
 			)
 			navigateToTicket(args)
 		}

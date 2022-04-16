@@ -2,45 +2,45 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
-	android:id="@+id/sign_graph"
-	app:startDestination="@id/sing_in_fragment">
+	android:id="@+id/signGraph"
+	app:startDestination="@id/singInFragment">
 
 	<fragment
-		android:id="@+id/sing_up_fragment"
+		android:id="@+id/singUpFragment"
 		android:name="ru.kamanin.nstu.graduate.thesis.feature.sign.ui.SignUpFragment"
 		android:label="SingUpFragment"
 		tools:layout="@layout/fragment_sign">
 		<action
-			android:id="@+id/action_singUpFragment_to_examListFragment"
-			app:destination="@id/main_graph"
+			android:id="@+id/from_sign_up_to_exam_list"
+			app:destination="@id/mainGraph"
 			app:enterAnim="@anim/slide_in_right"
 			app:exitAnim="@anim/slide_out_left"
 			app:popEnterAnim="@anim/slide_in_left"
 			app:popExitAnim="@anim/slide_out_right"
-			app:popUpTo="@id/sing_in_fragment"
+			app:popUpTo="@id/singInFragment"
 			app:popUpToInclusive="true" />
 	</fragment>
 
 	<fragment
-		android:id="@+id/sing_in_fragment"
+		android:id="@+id/singInFragment"
 		android:name="ru.kamanin.nstu.graduate.thesis.feature.sign.ui.SignInFragment"
 		android:label="fragment_sing_in"
 		tools:layout="@layout/fragment_sign">
 		<action
-			android:id="@+id/action_singInFragment_to_singUpFragment"
-			app:destination="@id/sing_up_fragment"
+			android:id="@+id/from_sign_in_to_sign_up"
+			app:destination="@id/singUpFragment"
 			app:enterAnim="@anim/slide_in_right"
 			app:exitAnim="@anim/slide_out_left"
 			app:popEnterAnim="@anim/slide_in_left"
 			app:popExitAnim="@anim/slide_out_right" />
 		<action
-			android:id="@+id/action_singInFragment_to_examListFragment"
-			app:destination="@id/main_graph"
+			android:id="@+id/from_sign_in_to_exam_list"
+			app:destination="@id/mainGraph"
 			app:enterAnim="@anim/slide_in_right"
 			app:exitAnim="@anim/slide_out_left"
 			app:popEnterAnim="@anim/slide_in_left"
 			app:popExitAnim="@anim/slide_out_right"
-			app:popUpTo="@id/sing_in_fragment"
+			app:popUpTo="@id/singInFragment"
 			app:popUpToInclusive="true" />
 	</fragment>
 

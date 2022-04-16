@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
-	android:id="@+id/main_graph"
+	android:id="@+id/mainGraph"
 	app:startDestination="@id/examListFragment">
 
 	<fragment
@@ -11,16 +11,14 @@
 		android:label="ExamListFragment"
 		tools:layout="@layout/fragment_exam_list">
 		<action
-			android:id="@+id/action_examListFragment_to_singInFragment"
-			app:destination="@id/sign_graph"
+			android:id="@+id/from_exam_list_to_sign_in"
+			app:destination="@id/signGraph"
 			app:enterAnim="@anim/slide_in_left"
 			app:exitAnim="@anim/slide_out_right"
-			app:popEnterAnim="@anim/slide_in_right"
-			app:popExitAnim="@anim/slide_out_left"
 			app:popUpTo="@id/examListFragment"
 			app:popUpToInclusive="true" />
 		<action
-			android:id="@+id/action_examListFragment_to_ticketFragment"
+			android:id="@+id/from_exam_list_to_ticket"
 			app:destination="@id/ticketFragment"
 			app:enterAnim="@anim/slide_in_right"
 			app:exitAnim="@anim/slide_out_left"
@@ -34,14 +32,21 @@
 		android:label="TicketFragment"
 		tools:layout="@layout/fragment_ticket">
 		<action
-			android:id="@+id/action_ticketFragment_to_chatFragment"
+			android:id="@+id/from_ticket_to_sign_in"
+			app:destination="@id/signGraph"
+			app:enterAnim="@anim/slide_in_left"
+			app:exitAnim="@anim/slide_out_right"
+			app:popUpTo="@id/ticketFragment"
+			app:popUpToInclusive="true" />
+		<action
+			android:id="@+id/from_ticket_to_chat"
 			app:destination="@id/chatFragment"
 			app:enterAnim="@anim/slide_in_right"
 			app:exitAnim="@anim/slide_out_left"
 			app:popEnterAnim="@anim/slide_in_left"
 			app:popExitAnim="@anim/slide_out_right" />
 		<action
-			android:id="@+id/action_ticketFragment_to_taskFragment"
+			android:id="@+id/from_ticket_to_task"
 			app:destination="@id/taskFragment"
 			app:enterAnim="@anim/slide_in_up"
 			app:popExitAnim="@anim/slide_out_down" />
@@ -52,6 +57,7 @@
 		android:name="ru.kamanin.nstu.graduate.thesis.feature.exam.chat.ui.ChatFragment"
 		android:label="ChatFragment"
 		tools:layout="@layout/fragment_chat" />
+
 	<fragment
 		android:id="@+id/taskFragment"
 		android:name="ru.kamanin.nstu.graduate.thesis.feature.exam.task.ui.TaskFragment"

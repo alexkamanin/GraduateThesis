@@ -1,10 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	android:id="@+id/rootGraph">
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/rootGraph"
+	app:startDestination="@id/navigationFragment">
 
 	<include app:graph="@navigation/main_graph" />
 
 	<include app:graph="@navigation/sign_graph" />
+
+	<fragment
+		android:id="@+id/navigationFragment"
+		android:name="ru.kamanin.nstu.graduate.thesis.navigation.ui.NavigationFragment"
+		android:label="NavigationFragment"
+		tools:layout="@layout/fragment_navigation">
+		<action
+			android:id="@+id/from_navigation_to_exam_list"
+			app:destination="@id/mainGraph"
+			app:popUpTo="@id/navigationFragment"
+			app:popUpToInclusive="true" />
+		<action
+			android:id="@+id/from_navigation_to_sign_in"
+			app:destination="@id/signGraph"
+			app:popUpTo="@id/navigationFragment"
+			app:popUpToInclusive="true" />
+	</fragment>
 
 </navigation>

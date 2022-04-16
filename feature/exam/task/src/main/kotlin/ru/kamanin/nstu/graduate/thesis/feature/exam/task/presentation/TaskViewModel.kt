@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.onEach
 import ru.kamanin.nstu.graduate.thesis.component.core.time.RemainingTime
 import ru.kamanin.nstu.graduate.thesis.component.core.time.TimeManager
 import ru.kamanin.nstu.graduate.thesis.component.core.time.getRemainingTime
+import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.Answer
 import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.Exam
 import javax.inject.Inject
 
@@ -20,8 +21,7 @@ class TaskViewModel @Inject constructor(
 	private val timeManager: TimeManager
 ) : ViewModel() {
 
-	val text: String = requireNotNull(savedStateHandle["text"])
-	val theme: String = requireNotNull(savedStateHandle["theme"])
+	val text: Answer = requireNotNull(savedStateHandle["answer"])
 
 	private val period: Exam.Period = requireNotNull(savedStateHandle["period"])
 

@@ -27,6 +27,7 @@ dependencies {
 	implementation(libs.mockcept)
 
 	// ----- Feature -----
+	implementation(projects.feature.navigation)
 	implementation(projects.feature.exam.list)
 	implementation(projects.feature.exam.ticket)
 	implementation(projects.feature.exam.chat)
@@ -39,6 +40,7 @@ dependencies {
 	implementation(projects.component.ui)
 
 	// ----- Shared ------
+	implementation(projects.shared.artefact)
 	implementation(projects.shared.session)
 	implementation(projects.shared.account)
 	implementation(projects.shared.exam)

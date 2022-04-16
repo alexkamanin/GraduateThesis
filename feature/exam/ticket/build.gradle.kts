@@ -24,4 +24,5 @@ dependencies {
 	implementation(projects.component.navigation)
 
 	implementation(projects.shared.exam)
+	implementation(projects.shared.session)
 }

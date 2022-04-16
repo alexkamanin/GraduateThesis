@@ -14,7 +14,6 @@ dependencyResolutionManagement {
 	repositories {
 		google()
 		mavenCentral()
-		maven(url = "https://jitpack.io")
 	}
 }
 
@@ -23,6 +22,7 @@ include(":app")
 // ----- Feature -----
 include(":feature:exam:list")
 include(":feature:exam:ticket")
+include(":feature:navigation")
 include(":feature:exam:chat")
 include(":feature:exam:task")
 include(":feature:sign")
@@ -34,3 +34,4 @@ include(":component:ui")
 include(":shared:session")
 include(":shared:exam")
 include(":shared:account")
+include(":shared:artefact")

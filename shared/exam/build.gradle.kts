@@ -13,7 +13,6 @@ dependencies {
 	kapt(libs.squareup.moshi.codegen)
 
 	implementation(libs.hilt.android)
-	kapt(libs.hilt.compiler)
 
 	implementation(projects.component.core)
 }

@@ -1,7 +1,11 @@
 <resources>
 	<string name="item_chat_text" />
+	<string name="item_rating_text" />
+	<string name="item_unknown_rating_text" />
+
 	<string name="toolbar_ticket_title" />
 	<string name="toolbar_ticket_subtitle" />
+
 	<string name="card_time_text" />
 
 	<string name="error_title_exam_start_end" />

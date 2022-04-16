@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.exception.launch
 import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.LiveState
 import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.MutableLiveState
@@ -18,81 +19,92 @@ import ru.kamanin.nstu.graduate.thesis.component.core.mvvm.lifecycle.EventDispat
 import ru.kamanin.nstu.graduate.thesis.component.core.time.RemainingTime
 import ru.kamanin.nstu.graduate.thesis.component.core.time.TimeManager
 import ru.kamanin.nstu.graduate.thesis.component.core.time.getRemainingTime
-import ru.kamanin.nstu.graduate.thesis.feature.exam.ticket.ui.model.TaskItem
+import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.Answer
 import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.Exam
-import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.TaskType
 import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.repository.TicketRepository
+import ru.kamanin.nstu.graduate.thesis.shared.session.domain.scenario.LogoutScenario
 import javax.inject.Inject
+
+//TODO заменить все названия Task на Answer
 
 @HiltViewModel
 class TicketViewModel @Inject constructor(
-	savedStateHandle: SavedStateHandle,
+	private val logoutScenario: LogoutScenario,
 	private val repository: TicketRepository,
 	private val timeManager: TimeManager,
-	private val errorConverter: ErrorConverter
+	private val errorConverter: ErrorConverter,
+	savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
 	private val examId: Long = requireNotNull(savedStateHandle["examId"])
-
 	private val period: Exam.Period = requireNotNull(savedStateHandle["period"])
+	private val regulationRating: Exam.RegulationRating = requireNotNull(savedStateHandle["regulationRating"])
 
 	private val _state = MutableStateFlow<TicketState>(TicketState.Initial)
 	val state: StateFlow<TicketState> get() = _state.asStateFlow()
 
-	val eventDispatcher = EventDispatcher<EventListener>()
-
 	private val _remainingTimeEvent = MutableSharedFlow<RemainingTime>(replay = 1)
 	val remainingTimeEvent: SharedFlow<RemainingTime> get() = _remainingTimeEvent
 
-	private val _errorEvent = MutableLiveState<ErrorState>()
-	val errorEvent: LiveState<ErrorState> get() = _errorEvent.asLiveState()
+	private val _swipeRefreshEvent = MutableLiveState<Boolean>()
+	val swipeRefreshEvent: LiveState<Boolean> get() = _swipeRefreshEvent.asLiveState()
+
+	val eventDispatcher = EventDispatcher<EventListener>()
 
 	interface EventListener {
 
 		fun navigateToChat()
 
 		fun navigateToTask(args: Bundle)
+
+		fun navigateToSignIn()
 	}
 
-	init {
-		_state.value = TicketState.Loading
+	fun refresh() {
+		loadTasks()
+	}
+
+	private fun loadTasks() {
+		//TODO подумать об обновлении при возврате с чата
 
 		getRemainingTime(period.end, timeManager.currentTime)
 			.onEach(_remainingTimeEvent::emit)
 			.launchIn(viewModelScope)
 
 		viewModelScope.launch(::handleError) {
-			val answers = repository.getAnswers(examId)
-
-			val questionCount = answers.count { it.taskType == TaskType.QUESTION }
-			val exerciseCount = answers.count { it.taskType == TaskType.EXERCISE }
-
-			val taskItems = answers.mapIndexed { index, answer ->
-				TaskItem(
-					id = answer.id,
-					number = when (answer.taskType) {
-						TaskType.EXERCISE -> index % exerciseCount + 1
-						TaskType.QUESTION -> index % questionCount + 1
-					},
-					text = answer.description,
-					theme = answer.theme,
-					taskType = answer.taskType,
-					status = TaskItem.Status.CHECKING
-				)
-			}
-			_state.value = TicketState.Content(taskItems)
+			val answers = repository.getAnswers(examId, regulationRating)
+			_swipeRefreshEvent.invoke(false)
+			_state.value = TicketState.Content(answers)
 		}
 	}
 
-	private fun handleError(throwable: Throwable) {
-		val error = errorConverter.convert(throwable)
-		_errorEvent(error)
+	init {
+		_state.value = TicketState.Loading
+		loadTasks()
 	}
 
-	fun selectTask(taskItem: TaskItem) {
+	private fun handleError(throwable: Throwable) {
+		_swipeRefreshEvent.invoke(false)
+
+		errorConverter.convert(throwable).let { errorState ->
+			when (errorState) {
+				ErrorState.NotAuthorized -> logout()
+
+				else                     -> _state.value = TicketState.Error(errorState)
+			}
+		}
+	}
+
+	private fun logout() {
+		viewModelScope.launch {
+			logoutScenario()
+			eventDispatcher.dispatchEvent { navigateToSignIn() }
+		}
+	}
+
+	fun selectTask(answer: Answer) {
 		val args = bundleOf(
-			"text" to taskItem.text,
-			"theme" to taskItem.theme,
+			"answer" to answer,
 			"period" to period
 		)
 		eventDispatcher.dispatchEvent { navigateToTask(args) }

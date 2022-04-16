@@ -4,15 +4,25 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
+import ru.kamanin.nstu.graduate.thesis.artefact.domain.usecase.DownloadArtefactUseCase
+import ru.kamanin.nstu.graduate.thesis.artefact.domain.usecase.GetArtefactUseCase
+import ru.kamanin.nstu.graduate.thesis.artefact.domain.usecase.UploadArtefactUseCase
+import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.exception.launch
 import ru.kamanin.nstu.graduate.thesis.feature.exam.chat.domain.entity.Message
 import javax.inject.Inject
 
 @HiltViewModel
-class ChatViewModel @Inject constructor() : ViewModel() {
+class ChatViewModel @Inject constructor(
+	private val uploadArtefactUseCase: UploadArtefactUseCase,
+	private val downloadArtefactUseCase: DownloadArtefactUseCase,
+	private var getArtefactUseCase: GetArtefactUseCase
+) : ViewModel() {
 
 	private companion object {
 
@@ -29,6 +39,11 @@ class ChatViewModel @Inject constructor() : ViewModel() {
 	private var i = 13L
 
 	init {
+		viewModelScope.launch {
+			downloadArtefactUseCase(5142)
+
+			getArtefactUseCase(5142)
+		}
 		messageList.addAll(
 			listOf(
 				Message.ReceivedMessage(5, "Поправил", "11:05"),
@@ -49,7 +64,13 @@ class ChatViewModel @Inject constructor() : ViewModel() {
 	}
 
 	fun shareContent(uri: Uri) {
-		Log.d("TEST_TECH", uri.toString())
+		viewModelScope.launch(::handleArtefactLoadError) {
+			val artefact = uploadArtefactUseCase(uri)
+		}
+	}
+
+	private fun handleArtefactLoadError(throwable: Throwable) {
+		Log.e("TEST_TECH", throwable.stackTraceToString())
 	}
 
 	fun shareImage(bitmap: Bitmap) {

@@ -55,9 +55,9 @@ internal fun BaseExtension.setProductFlavor() {
 	flavorDimensions("server")
 
 	productFlavors {
-		create(Configuration.ProductFlavors.MOCK) {
+		create(Configuration.ProductFlavors.DEVELOP) {
 			dimension = "server"
-			buildStringField(Configuration.BACKEND_ENDPOINT_FIELD to Configuration.BACKEND_MOCK_URL)
+			buildStringField(Configuration.BACKEND_ENDPOINT_FIELD to Configuration.BACKEND_DEVELOP_URL)
 		}
 		create(Configuration.ProductFlavors.LIVE) {
 			dimension = "server"

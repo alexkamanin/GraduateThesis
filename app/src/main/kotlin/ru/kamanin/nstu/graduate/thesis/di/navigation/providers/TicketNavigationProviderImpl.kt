@@ -8,10 +8,12 @@ import javax.inject.Inject
 
 class TicketNavigationProviderImpl @Inject constructor() : TicketNavigationProvider {
 
-	override fun toChat(): NavCommand = NavCommand(R.id.action_ticketFragment_to_chatFragment)
+	override fun toChat(): NavCommand = NavCommand(R.id.from_ticket_to_chat)
 
 	override fun toTask(args: Bundle): NavCommand = NavCommand(
-		action = R.id.action_ticketFragment_to_taskFragment,
+		action = R.id.from_ticket_to_task,
 		args = args
 	)
+
+	override fun toSign(): NavCommand = NavCommand(R.id.from_ticket_to_sign_in)
 }

@@ -2,14 +2,15 @@ package ru.kamanin.nstu.graduate.thesis.feature.exam.list.ui
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.WithFragmentBindings
 import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.subscribe
+import ru.kamanin.nstu.graduate.thesis.component.core.error.ErrorState
 import ru.kamanin.nstu.graduate.thesis.component.navigation.navigate
 import ru.kamanin.nstu.graduate.thesis.component.ui.colors.colorFromAttr
 import ru.kamanin.nstu.graduate.thesis.component.ui.insets.setupBaseInsets
@@ -23,6 +24,7 @@ import ru.kamanin.nstu.graduate.thesis.feature.exam.list.ui.adapter.ExamAdapter
 import javax.inject.Inject
 
 @AndroidEntryPoint
+@WithFragmentBindings
 class ExamListFragment : Fragment(R.layout.fragment_exam_list), ExamListViewModel.EventListener {
 
 	private val viewBinding: FragmentExamListBinding by viewBinding()
@@ -83,7 +85,6 @@ class ExamListFragment : Fragment(R.layout.fragment_exam_list), ExamListViewMode
 	private fun initObservers() {
 		viewModel.state.subscribe(viewLifecycleOwner, ::renderState)
 		viewModel.eventDispatcher.bind(viewLifecycleOwner, this)
-		viewModel.errorEvent.subscribe(viewLifecycleOwner, ::showError)
 		viewModel.swipeRefreshEvent.subscribe(viewLifecycleOwner, viewBinding.swipeRefresh::setRefreshing)
 	}
 
@@ -93,6 +94,7 @@ class ExamListFragment : Fragment(R.layout.fragment_exam_list), ExamListViewMode
 			ExamListState.Loading    -> renderLoadingState()
 			ExamListState.NoContent  -> renderNoContentState()
 			is ExamListState.Content -> renderContentState(state)
+			is ExamListState.Error   -> renderErrorState(state.errorState)
 		}
 	}
 
@@ -100,12 +102,18 @@ class ExamListFragment : Fragment(R.layout.fragment_exam_list), ExamListViewMode
 		viewBinding.progressBar.isVisible = true
 		viewBinding.examList.isVisible = false
 		viewBinding.hintExamEmpty.isVisible = false
+		viewBinding.filter.isVisible = true
+		viewBinding.swipeRefresh.isEnabled = false
+		viewBinding.errorView.isVisible = false
 	}
 
 	private fun renderNoContentState() {
 		viewBinding.progressBar.isVisible = false
 		viewBinding.examList.isVisible = false
 		viewBinding.hintExamEmpty.isVisible = true
+		viewBinding.filter.isVisible = true
+		viewBinding.swipeRefresh.isEnabled = true
+		viewBinding.errorView.isVisible = false
 	}
 
 	private fun renderContentState(state: ExamListState.Content) {
@@ -114,6 +122,9 @@ class ExamListFragment : Fragment(R.layout.fragment_exam_list), ExamListViewMode
 		viewBinding.progressBar.isVisible = false
 		viewBinding.examList.isVisible = true
 		viewBinding.hintExamEmpty.isVisible = false
+		viewBinding.filter.isVisible = true
+		viewBinding.swipeRefresh.isEnabled = true
+		viewBinding.errorView.isVisible = false
 
 		val tabPosition = when (state.filter) {
 			ExamFilter.ACTIVE   -> 0
@@ -122,8 +133,16 @@ class ExamListFragment : Fragment(R.layout.fragment_exam_list), ExamListViewMode
 		viewBinding.filter.getTabAt(tabPosition)?.select()
 	}
 
-	private fun showError(throwable: Throwable) {
-		Toast.makeText(requireContext(), throwable.message ?: throwable.toString(), Toast.LENGTH_LONG).show()
+	private fun renderErrorState(errorState: ErrorState) {
+		viewBinding.progressBar.isVisible = false
+		viewBinding.examList.isVisible = false
+		viewBinding.hintExamEmpty.isVisible = false
+		viewBinding.swipeRefresh.isEnabled = false
+		viewBinding.filter.isVisible = false
+
+		viewBinding.errorView.errorState = errorState
+		viewBinding.errorView.errorButtonListener = viewModel::refresh
+		viewBinding.errorView.isVisible = true
 	}
 
 	override fun navigateToSignIn() {

@@ -28,6 +28,8 @@
 	<string name="toolbar_ticket_title">Билет</string>
 	<string name="toolbar_ticket_subtitle">Экзамены</string>
 	<string name="item_chat_text">Чат</string>
+	<string name="item_rating_text">%1$d/%2$d</string>
+	<string name="item_unknown_rating_text">-/%d</string>
 
 	<!-- Вопрос / Задача -->
 	<string name="toolbar_task_subtitle">Билет</string>
@@ -48,6 +50,8 @@
 	<string name="share_bottom_sheet_document">Документом</string>
 
 	<!-- Диалог ошибки -->
+	<string name="error_button_repeat">Повторить</string>
+
 	<string name="error_title_lost_connection">Ошибка соединения!</string>
 	<string name="error_description_lost_connection">Проверьте подключение к интернету.</string>
 

@@ -3,6 +3,7 @@ package ru.kamanin.nstu.graduate.thesis.component.core.time
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.onCompletion
 
 typealias RemainingTime = Triple<Long, Long, Long>
 
@@ -21,4 +22,6 @@ fun getRemainingTime(endTime: Long, currentTime: Long): Flow<RemainingTime> =
 
 			remainingTime--
 		}
+	}.onCompletion {
+		emit(Triple(0, 0, 0))
 	}

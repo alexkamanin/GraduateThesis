@@ -15,7 +15,7 @@ internal object Configuration {
 		listOf("META-INF/*.kotlin_module")
 
 	const val BACKEND_ENDPOINT_FIELD = "BACKEND_ENDPOINT"
-	const val BACKEND_MOCK_URL = "http://nstu.mock.ru/"
+	const val BACKEND_DEVELOP_URL = "http://nstu.mock.ru/"
 	const val BACKEND_LIVE_URL = "http://217.71.129.139:4502/"
 
 	object BuiltTypes {
@@ -26,7 +26,7 @@ internal object Configuration {
 
 	object ProductFlavors {
 
-		const val MOCK = "mock"
+		const val DEVELOP = "develop"
 		const val LIVE = "live"
 	}
 }

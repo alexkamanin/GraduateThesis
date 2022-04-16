@@ -9,10 +9,10 @@ import androidx.core.view.isVisible
 import androidx.core.view.marginBottom
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.WithFragmentBindings
 import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.bind
 import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.subscribe
 import ru.kamanin.nstu.graduate.thesis.component.core.error.ErrorState
@@ -27,6 +27,7 @@ import ru.kamanin.nstu.graduate.thesis.feature.sign.presentation.SignInViewModel
 import javax.inject.Inject
 
 @AndroidEntryPoint
+@WithFragmentBindings
 class SignInFragment : Fragment(R.layout.fragment_sign), SignInViewModel.EventListener {
 
 	private val viewBinding: FragmentSignBinding by viewBinding()
@@ -80,8 +81,8 @@ class SignInFragment : Fragment(R.layout.fragment_sign), SignInViewModel.EventLi
 	}
 
 	private fun initObservers() {
-		viewModel.email.bind(lifecycleScope, viewBinding.emailText)
-		viewModel.password.bind(lifecycleScope, viewBinding.passwordText)
+		viewModel.email.bind(viewLifecycleOwner, viewBinding.emailText)
+		viewModel.password.bind(viewLifecycleOwner, viewBinding.passwordText)
 		viewModel.eventDispatcher.bind(viewLifecycleOwner, this)
 		viewModel.errorEvent.subscribe(viewLifecycleOwner, ::handleError)
 		viewModel.state.subscribe(viewLifecycleOwner, ::renderState)

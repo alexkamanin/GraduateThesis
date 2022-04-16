@@ -48,14 +48,26 @@
 		android:layout_width="match_parent"
 		android:layout_height="match_parent">
 
-		<androidx.recyclerview.widget.RecyclerView
-			android:id="@+id/taskList"
+		<FrameLayout
 			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:visibility="gone"
-			app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-			tools:listitem="@layout/item_task"
-			tools:visibility="visible" />
+			android:layout_height="match_parent">
+
+			<androidx.recyclerview.widget.RecyclerView
+				android:id="@+id/taskList"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:visibility="gone"
+				app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+				tools:listitem="@layout/item_task"
+				tools:visibility="visible" />
+
+			<ru.kamanin.nstu.graduate.thesis.component.core.view.ErrorView
+				android:id="@+id/errorView"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:visibility="gone" />
+
+		</FrameLayout>
 
 	</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

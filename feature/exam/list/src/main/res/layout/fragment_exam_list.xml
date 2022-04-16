@@ -30,8 +30,8 @@
 
 		<com.google.android.material.tabs.TabItem
 			android:layout_width="wrap_content"
-			android:tag="inactive"
 			android:layout_height="wrap_content"
+			android:tag="inactive"
 			android:text="@string/tab_exam_list_inactive"
 			tools:text="Прошедшие" />
 
@@ -68,6 +68,12 @@
 				android:layout_gravity="center_horizontal|center_vertical"
 				android:indeterminateTint="?attr/colorProgressBarTint"
 				tools:visibility="gone" />
+
+			<ru.kamanin.nstu.graduate.thesis.component.core.view.ErrorView
+				android:id="@+id/errorView"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:visibility="gone" />
 
 		</FrameLayout>
 

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<style name="MaterialAlertDialog.Rounded" parent="@style/ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+		<item name="shapeAppearanceOverlay">@style/MaterialAlertDialog.Rounded.Corners</item>
+		<item name="android:background">?attr/colorGreyVariant</item>
+
+		<item name="materialAlertDialogTitleTextStyle">@style/MaterialAlertDialog.Rounded.Text.Title</item>
+		<item name="materialAlertDialogBodyTextStyle">@style/MaterialAlertDialog.Rounded.Text.Body</item>
+	</style>
+
+	<style name="MaterialAlertDialog.Rounded.Corners">
+		<item name="cornerFamily">rounded</item>
+		<item name="cornerSize">20dp</item>
+	</style>
+
+	<style name="MaterialAlertDialog.Rounded.Text.Title" parent="@style/MaterialAlertDialog.MaterialComponents.Title.Text">
+		<item name="android:textStyle">bold</item>
+		<item name="android:textAppearance">?attr/textAppearanceHeadline4</item>
+	</style>
+
+	<style name="MaterialAlertDialog.Rounded.Text.Body" parent="@style/MaterialAlertDialog.MaterialComponents.Body.Text">
+		<item name="android:textSize">16sp</item>
+	</style>
+
+</resources>
