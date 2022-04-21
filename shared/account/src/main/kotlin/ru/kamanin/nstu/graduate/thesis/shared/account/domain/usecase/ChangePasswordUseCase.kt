@@ -1,10 +1,10 @@
 package ru.kamanin.nstu.graduate.thesis.shared.account.domain.usecase
 
-import ru.kamanin.nstu.graduate.thesis.shared.account.domain.repository.RemoteAccountRepository
+import ru.kamanin.nstu.graduate.thesis.shared.account.domain.repository.AccountRepository
 import javax.inject.Inject
 
 class ChangePasswordUseCase @Inject constructor(
-	private val repository: RemoteAccountRepository
+	private val repository: AccountRepository
 ) {
 
 	suspend operator fun invoke(username: String, password: String, verificationCode: String) {

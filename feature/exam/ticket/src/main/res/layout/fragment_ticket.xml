@@ -67,17 +67,17 @@
 				android:layout_height="match_parent"
 				android:visibility="gone" />
 
+			<ProgressBar
+				android:id="@+id/progressBar"
+				android:layout_width="@dimen/progress_bar_large"
+				android:layout_height="@dimen/progress_bar_large"
+				android:layout_gravity="center"
+				android:layout_weight="1"
+				android:indeterminateTint="?attr/colorProgressBarTint"
+				android:visibility="gone" />
+
 		</FrameLayout>
 
 	</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-	<ProgressBar
-		android:id="@+id/progressBar"
-		android:layout_width="@dimen/progress_bar_large"
-		android:layout_height="@dimen/progress_bar_large"
-		android:layout_gravity="center"
-		android:layout_weight="1"
-		android:indeterminateTint="?attr/colorProgressBarTint"
-		android:visibility="gone" />
 
 </LinearLayout>

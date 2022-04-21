@@ -1,13 +1,13 @@
 package ru.kamanin.nstu.graduate.thesis.feature.exam.chat.presentation
 
-import ru.kamanin.nstu.graduate.thesis.feature.exam.chat.domain.entity.Message
+import androidx.paging.PagingData
+import ru.kamanin.nstu.graduate.thesis.feature.exam.chat.presentation.model.MessageItem
 
 sealed interface ChatState {
 
 	object Initial : ChatState
 
-	data class Content(
-		val messageItems: List<Message>,
-		val needClearMessageText: Boolean
-	) : ChatState
+	object Loading : ChatState
+
+	data class Content(val messages: PagingData<MessageItem>) : ChatState
 }

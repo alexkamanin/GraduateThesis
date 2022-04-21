@@ -118,11 +118,7 @@ class ExamListViewModel @Inject constructor(
 
 	fun selectExam(exam: Exam) {
 		eventDispatcher.dispatchEvent {
-			val args = bundleOf(
-				"examId" to exam.id,
-				"period" to exam.period,
-				"regulationRating" to exam.regulationRating
-			)
+			val args = bundleOf(Exam::class.java.name to exam)
 			navigateToTicket(args)
 		}
 	}

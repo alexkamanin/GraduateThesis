@@ -1,0 +1,9 @@
+{
+  "id": 2,
+  "username": "ivanov@stud.nstu.ru",
+  "name": "Ivan",
+  "surname": "Ivanov",
+  "roles": [
+    "ROLE_STUDENT"
+  ]
+}

@@ -30,15 +30,13 @@ import javax.inject.Inject
 @HiltViewModel
 class TicketViewModel @Inject constructor(
 	private val logoutScenario: LogoutScenario,
-	private val repository: TicketRepository,
+	private val repository: TicketRepository, //todo добавить юзкейсы
 	private val timeManager: TimeManager,
 	private val errorConverter: ErrorConverter,
 	savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
-	private val examId: Long = requireNotNull(savedStateHandle["examId"])
-	private val period: Exam.Period = requireNotNull(savedStateHandle["period"])
-	private val regulationRating: Exam.RegulationRating = requireNotNull(savedStateHandle["regulationRating"])
+	private val exam: Exam = requireNotNull(savedStateHandle[Exam::class.java.name])
 
 	private val _state = MutableStateFlow<TicketState>(TicketState.Initial)
 	val state: StateFlow<TicketState> get() = _state.asStateFlow()
@@ -53,11 +51,16 @@ class TicketViewModel @Inject constructor(
 
 	interface EventListener {
 
-		fun navigateToChat()
+		fun navigateToChat(args: Bundle)
 
 		fun navigateToTask(args: Bundle)
 
 		fun navigateToSignIn()
+	}
+
+	init {
+		_state.value = TicketState.Loading
+		loadTasks()
 	}
 
 	fun refresh() {
@@ -67,20 +70,15 @@ class TicketViewModel @Inject constructor(
 	private fun loadTasks() {
 		//TODO подумать об обновлении при возврате с чата
 
-		getRemainingTime(period.end, timeManager.currentTime)
+		getRemainingTime(exam.period.end, timeManager.currentTime)
 			.onEach(_remainingTimeEvent::emit)
 			.launchIn(viewModelScope)
 
 		viewModelScope.launch(::handleError) {
-			val answers = repository.getAnswers(examId, regulationRating)
+			val answers = repository.getAnswers(exam.id, exam.regulationRating)
 			_swipeRefreshEvent.invoke(false)
 			_state.value = TicketState.Content(answers)
 		}
-	}
-
-	init {
-		_state.value = TicketState.Loading
-		loadTasks()
 	}
 
 	private fun handleError(throwable: Throwable) {
@@ -104,13 +102,14 @@ class TicketViewModel @Inject constructor(
 
 	fun selectTask(answer: Answer) {
 		val args = bundleOf(
-			"answer" to answer,
-			"period" to period
+			Answer::class.java.name to answer,
+			Exam::class.java.name to exam
 		)
 		eventDispatcher.dispatchEvent { navigateToTask(args) }
 	}
 
 	fun openChat() {
-		eventDispatcher.dispatchEvent { navigateToChat() }
+		val args = bundleOf(Exam::class.java.name to exam)
+		eventDispatcher.dispatchEvent { navigateToChat(args) }
 	}
 }

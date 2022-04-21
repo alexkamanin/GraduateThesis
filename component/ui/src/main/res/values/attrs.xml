@@ -14,4 +14,7 @@
 	<attr name="colorBackgroundGreyTint" />
 
 	<attr name="colorBackgroundStateTint" />
+
+	<attr name="colorBackgroundSentArtefact" />
+	<attr name="colorBackgroundReceiveArtefact" />
 </resources>

@@ -35,13 +35,13 @@ class TaskFragment : Fragment(R.layout.fragment_task) {
 		initListeners()
 
 		viewModel.remainingTimeEvent.subscribe(viewLifecycleOwner, ::showRemainingTime)
-		viewBinding.taskText.text = viewModel.text.description
-		viewBinding.textTheme.text = viewModel.text.theme
-		val titleRes = when (viewModel.text.taskType) {
+		viewBinding.taskText.text = viewModel.answer.description
+		viewBinding.textTheme.text = viewModel.answer.theme
+		val titleRes = when (viewModel.answer.taskType) {
 			TaskType.QUESTION -> R.string.question_title
 			TaskType.EXERCISE -> R.string.exercise_title
 		}
-		viewBinding.toolbar.title = getString(titleRes, viewModel.text.number)
+		viewBinding.toolbar.title = getString(titleRes, viewModel.answer.number)
 	}
 
 	private fun showRemainingTime(time: RemainingTime) {

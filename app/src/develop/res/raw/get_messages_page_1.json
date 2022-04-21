@@ -1,0 +1,139 @@
+{
+  "content": [
+    {
+      "id": 6381,
+      "text": "Оценку снизил в половину",
+      "sendTime": 1651291260000,
+      "accountId": 1
+    },
+    {
+      "id": 6380,
+      "text": "Ок",
+      "sendTime": 1651291260000,
+      "accountId": 1
+    },
+    {
+      "id": 6379,
+      "text": "test выполняет сортировку вставками https://habr.com/ru/post/415935/",
+      "sendTime": 1651291080000,
+      "accountId": 2
+    },
+    {
+      "id": 6378,
+      "text": "В main список создается, затем в init заполняется данными",
+      "sendTime": 1651291080000,
+      "accountId": 2
+    },
+    {
+      "id": 6377,
+      "text": "Вынес класс для двухсвязного списка в отдельный файл",
+      "sendTime": 1651291020000,
+      "accountId": 2
+    },
+    {
+      "id": 6376,
+      "sendTime": 1651291020000,
+      "artefactId": 5161,
+      "accountId": 2
+    },
+    {
+      "id": 6375,
+      "text": "Сделал",
+      "sendTime": 1651291020000,
+      "accountId": 2
+    },
+    {
+      "id": 6374,
+      "sendTime": 1651289760000,
+      "artefactId": 5163,
+      "accountId": 1
+    },
+    {
+      "id": 6373,
+      "text": "20 минут...",
+      "sendTime": 1651289760000,
+      "accountId": 1
+    },
+    {
+      "id": 6372,
+      "text": "Решайте!!!!",
+      "sendTime": 1651289700000,
+      "accountId": 1
+    },
+    {
+      "id": 6371,
+      "text": "Можно решить другую?",
+      "sendTime": 1651289520000,
+      "accountId": 2
+    },
+    {
+      "id": 6370,
+      "text": "Извините",
+      "sendTime": 1651289520000,
+      "accountId": 2
+    },
+    {
+      "id": 6369,
+      "text": "Баллы анулирую...",
+      "sendTime": 1651289400000,
+      "accountId": 1
+    },
+    {
+      "id": 6368,
+      "sendTime": 1651289340000,
+      "artefactId": 5162,
+      "accountId": 1
+    },
+    {
+      "id": 6368,
+      "text": "Задача полностью списана у Сидорова из 814.",
+      "sendTime": 1651289340000,
+      "accountId": 1
+    },
+    {
+      "id": 6367,
+      "sendTime": 1651289160000,
+      "artefactId": 5161,
+      "accountId": 2
+    },
+    {
+      "id": 6366,
+      "text": "Проверьте",
+      "sendTime": 1651289100000,
+      "accountId": 2
+    },
+    {
+      "id": 6365,
+      "text": "Зануление вынесено в отдельную функцию clearMas()",
+      "sendTime": 1651289100000,
+      "accountId": 2
+    },
+    {
+      "id": 6364,
+      "text": "Иванов, почему не зануляете ссылки в конце? Минус балл.",
+      "sendTime": 1651289040000,
+      "accountId": 1
+    },
+    {
+      "id": 6363,
+      "text": "Хорошо, спасибо.",
+      "sendTime": 1651289040000,
+      "accountId": 2
+    }
+  ],
+  "pageable": {
+    "offset": 0,
+    "pageNumber": 0,
+    "pageSize": 20,
+    "paged": true,
+    "unpaged": false
+  },
+  "totalPages": 2,
+  "totalElements": 22,
+  "last": false,
+  "number": 0,
+  "size": 20,
+  "numberOfElements": 20,
+  "first": true,
+  "empty": false
+}

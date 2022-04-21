@@ -4,10 +4,10 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import ru.kamanin.nstu.graduate.thesis.shared.account.data.repository.LocalAccountRepositoryImpl
-import ru.kamanin.nstu.graduate.thesis.shared.account.data.repository.RemoteAccountRepositoryImpl
-import ru.kamanin.nstu.graduate.thesis.shared.account.domain.repository.LocalAccountRepository
-import ru.kamanin.nstu.graduate.thesis.shared.account.domain.repository.RemoteAccountRepository
+import ru.kamanin.nstu.graduate.thesis.shared.account.data.repository.AccountMetaDataRepositoryImpl
+import ru.kamanin.nstu.graduate.thesis.shared.account.data.repository.AccountRepositoryImpl
+import ru.kamanin.nstu.graduate.thesis.shared.account.domain.repository.AccountMetaDataRepository
+import ru.kamanin.nstu.graduate.thesis.shared.account.domain.repository.AccountRepository
 import javax.inject.Singleton
 
 @Module
@@ -16,9 +16,9 @@ interface AccountModule {
 
 	@Binds
 	@Singleton
-	fun bindRemoteAccountRepository(impl: RemoteAccountRepositoryImpl): RemoteAccountRepository
+	fun bindAccountRepository(impl: AccountRepositoryImpl): AccountRepository
 
 	@Binds
 	@Singleton
-	fun bindLocalAccountRepository(impl: LocalAccountRepositoryImpl): LocalAccountRepository
+	fun bindAccountMetaDataRepository(impl: AccountMetaDataRepositoryImpl): AccountMetaDataRepository
 }

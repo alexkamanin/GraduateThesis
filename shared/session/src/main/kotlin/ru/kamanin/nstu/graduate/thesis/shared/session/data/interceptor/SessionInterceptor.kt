@@ -2,7 +2,7 @@ package ru.kamanin.nstu.graduate.thesis.shared.session.data.interceptor
 
 import okhttp3.Interceptor
 import okhttp3.Response
-import ru.kamanin.nstu.graduate.thesis.component.core.network.Headers
+import ru.kamanin.nstu.graduate.thesis.component.core.network.Headers.X_Access_Token
 import ru.kamanin.nstu.graduate.thesis.shared.session.domain.repository.LocalSessionRepository
 import javax.inject.Inject
 
@@ -16,7 +16,7 @@ class SessionInterceptor @Inject constructor(
 
 		val authRequest = request
 			.newBuilder()
-			.addHeader(Headers.XAccessToken, token)
+			.addHeader(X_Access_Token, token)
 			.build()
 
 		return chain.proceed(authRequest)

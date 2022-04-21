@@ -12,6 +12,8 @@
 	<color name="blue_600">#FF697580</color>
 	<color name="blue_900">#FF375570</color>
 
+	<color name="blue_400_alpha_40">#669EADBC</color>
+
 	<!-- Grey -->
 	<color name="grey_50">#FFF4F4F4</color>
 	<color name="grey_70">#FFFEFEFE</color>
@@ -21,8 +23,10 @@
 	<color name="grey_400">#FF6D7475</color>
 	<color name="grey_500">#FF434B4D</color>
 
+	<color name="grey_300_alpha_20">#33C1C1C1</color>
 	<color name="grey_300_alpha_40">#66C1C1C1</color>
 	<color name="grey_500_alpha_50">#4D434B4D</color>
+	<color name="grey_300_alpha_60">#99C1C1C1</color>
 
 	<!-- Green -->
 	<color name="green_300">#FF9ED09E</color>

@@ -1,5 +1,8 @@
 ## Выпускная квалификационная работа бакалавра по направлению 09.03.04 "Программная инженерия"
 
+[![developDebug](https://github.com/alexkamanin/GraduateThesis/actions/workflows/assembleDevelopDebug.yml/badge.svg)](https://github.com/alexkamanin/GraduateThesis/actions/workflows/assembleDevelopDebug.yml)
+[![liveDebug](https://github.com/alexkamanin/GraduateThesis/actions/workflows/assembleLiveDebug.yml/badge.svg)](https://github.com/alexkamanin/GraduateThesis/actions/workflows/assembleLiveDebug.yml)
+
 ### Краткое содержание
 
 #### Авторизация/Регистрация
@@ -21,8 +24,8 @@
 
 #### Варианты сборок
 
-* **mockDebug** - запуск приложения с моками.
-* **liveDebug** - запуск приложения с запросами на [сервер](http://217.71.129.139:4502/swagger-ui/index.html).
+* **developDebug** - сборка приложения с моками.
+* **liveDebug** - сборка приложения с запросами на [сервер](http://217.71.129.139:4502/swagger-ui/index.html).
 
 ### Демонстрация
 

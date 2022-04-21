@@ -44,4 +44,5 @@ dependencies {
 	implementation(projects.shared.session)
 	implementation(projects.shared.account)
 	implementation(projects.shared.exam)
+	implementation(projects.shared.chat)
 }

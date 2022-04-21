@@ -30,7 +30,7 @@ class LocalSessionRepositoryImpl @Inject constructor(
 		moshi.adapter(Session::class.java)
 	}
 
-	override suspend fun save(session: Session) {
+	override suspend fun set(session: Session) {
 		withContext(ioDispatcher) {
 			sessionPreferences
 				.edit()

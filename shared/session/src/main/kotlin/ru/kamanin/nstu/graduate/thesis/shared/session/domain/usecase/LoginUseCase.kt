@@ -11,6 +11,6 @@ class LoginUseCase @Inject constructor(
 
 	suspend operator fun invoke(username: String, password: String) {
 		val session = remoteRepository.login(username, password)
-		localRepository.save(session)
+		localRepository.set(session)
 	}
 }

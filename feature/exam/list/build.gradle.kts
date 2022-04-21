@@ -25,5 +25,6 @@ dependencies {
 	implementation(projects.component.ui)
 
 	implementation(projects.shared.exam)
+	implementation(projects.shared.account)
 	implementation(projects.shared.session)
 }

@@ -42,6 +42,8 @@
 	<string name="toolbar_chat_title">Чат с преподавателем</string>
 	<string name="toolbar_chat_subtitle">Билет</string>
 	<string name="hint_input_text">Сообщение…</string>
+	<string name="hint_artefact_type_mb">%1$d МБ • %2$s</string>
+	<string name="hint_artefact_type_kb">%1$d КБ • %2$s</string>
 
 	<!-- Диалог поделиться -->
 	<string name="share_bottom_sheet_title">Поделиться…</string>

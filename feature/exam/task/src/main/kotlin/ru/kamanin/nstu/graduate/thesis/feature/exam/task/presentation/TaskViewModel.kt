@@ -21,15 +21,14 @@ class TaskViewModel @Inject constructor(
 	private val timeManager: TimeManager
 ) : ViewModel() {
 
-	val text: Answer = requireNotNull(savedStateHandle["answer"])
-
-	private val period: Exam.Period = requireNotNull(savedStateHandle["period"])
+	val answer: Answer = requireNotNull(savedStateHandle[Answer::class.java.name])
+	val exam: Exam = requireNotNull(savedStateHandle[Exam::class.java.name])
 
 	private val _remainingTimeEvent = MutableSharedFlow<RemainingTime>(replay = 1)
 	val remainingTimeEvent: SharedFlow<RemainingTime> get() = _remainingTimeEvent
 
 	init {
-		getRemainingTime(period.end, timeManager.currentTime)
+		getRemainingTime(exam.period.end, timeManager.currentTime)
 			.onEach(_remainingTimeEvent::emit)
 			.launchIn(viewModelScope)
 	}

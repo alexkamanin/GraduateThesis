@@ -155,8 +155,8 @@ class TicketFragment : Fragment(R.layout.fragment_ticket), TicketViewModel.Event
 		}
 	}
 
-	override fun navigateToChat() {
-		navigate(navigationProvider.toChat())
+	override fun navigateToChat(args: Bundle) {
+		navigate(navigationProvider.toChat(args))
 	}
 
 	override fun navigateToTask(args: Bundle) {

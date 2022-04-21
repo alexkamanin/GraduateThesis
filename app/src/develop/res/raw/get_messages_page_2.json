@@ -1,0 +1,31 @@
+{
+  "content": [
+    {
+      "id": 6362,
+      "text": "Здравствуйте, да!",
+      "sendTime": 1651288920000,
+      "accountId": 1
+    },
+    {
+      "id": 6361,
+      "text": "Евгений Леонидович, здравствуйте. Подскажите пожалуйста, во второй задаче необходимо учитывать пустой массив?",
+      "sendTime": 1651288800000,
+      "accountId": 2
+    }
+  ],
+  "pageable": {
+    "offset": 20,
+    "pageNumber": 1,
+    "pageSize": 20,
+    "paged": true,
+    "unpaged": false
+  },
+  "totalPages": 2,
+  "totalElements": 22,
+  "last": true,
+  "number": 1,
+  "size": 20,
+  "numberOfElements": 2,
+  "first": false,
+  "empty": false
+}

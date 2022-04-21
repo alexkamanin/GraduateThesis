@@ -1,5 +1,6 @@
 package ru.kamanin.nstu.graduate.thesis.shared.exam.data.mapper
 
+import ru.kamanin.nstu.graduate.thesis.shared.account.data.mapper.toEntity
 import ru.kamanin.nstu.graduate.thesis.shared.exam.data.dto.ExamDto
 import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.Exam
 
@@ -20,7 +21,5 @@ fun ExamDto.toEntity() =
 fun ExamDto.Teacher.toEntity() =
 	Exam.Teacher(
 		id = id,
-		username = account.username,
-		name = account.name,
-		surname = account.surname
+		account = account.toEntity()
 	)
