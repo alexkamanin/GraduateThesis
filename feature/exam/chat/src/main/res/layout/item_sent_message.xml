@@ -1,44 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:layout_marginEnd="@dimen/margin_padding_10"
 	android:paddingVertical="@dimen/margin_padding_2">
 
-	<LinearLayout
+	<androidx.constraintlayout.widget.ConstraintLayout
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_gravity="end"
-		android:layout_marginVertical="@dimen/margin_padding_2"
+		android:layout_marginStart="100dp"
 		android:background="@drawable/background_sent_message"
-		android:orientation="vertical"
-		android:paddingHorizontal="@dimen/margin_padding_5">
+		android:paddingHorizontal="@dimen/margin_padding_5"
+		android:paddingVertical="@dimen/margin_padding_2">
+
+		<LinearLayout
+			android:id="@+id/artefactContainer"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/margin_padding_3"
+			android:background="@drawable/shape_anywhere_radius"
+			android:backgroundTint="?attr/colorBackgroundSentArtefact"
+			android:orientation="horizontal"
+			android:paddingHorizontal="@dimen/margin_padding_2"
+			android:paddingVertical="@dimen/margin_padding_5"
+			android:visibility="gone"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintTop_toTopOf="parent"
+			tools:visibility="visible">
+
+			<ImageView
+				android:id="@+id/artefactIcon"
+				android:layout_width="36dp"
+				android:layout_height="36dp"
+				android:layout_gravity="center_vertical"
+				android:contentDescription="@null"
+				android:visibility="gone"
+				tools:src="@drawable/ic_pdf"
+				tools:visibility="visible" />
+
+			<TextView
+				android:id="@+id/artefactName"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical"
+				android:ellipsize="end"
+				android:maxLines="1"
+				android:paddingHorizontal="@dimen/margin_padding_5"
+				android:singleLine="true"
+				android:textSize="16sp"
+				android:visibility="gone"
+				tools:text="АВТ-815 Иванов Вопрос 14.pdf"
+				tools:visibility="visible" />
+
+		</LinearLayout>
 
 		<TextView
 			android:id="@+id/messageText"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:maxEms="12"
+			android:autoLink="all"
+			android:linksClickable="true"
 			android:minWidth="@dimen/message_min_width"
-			android:paddingHorizontal="@dimen/margin_padding_3"
-			android:paddingTop="@dimen/margin_padding_3"
+			android:paddingHorizontal="@dimen/margin_padding_2"
 			android:textIsSelectable="true"
 			android:textSize="16sp"
-			tools:text="Отправленное сообщение" />
+			android:visibility="gone"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/artefactContainer"
+			tools:text="Отправленное сообщение"
+			tools:visibility="visible" />
+
+		<TextView
+			android:id="@+id/artefactType"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="@dimen/margin_padding_2"
+			android:layout_marginEnd="@dimen/margin_padding_5"
+			android:textSize="10sp"
+			android:visibility="gone"
+			app:layout_constraintEnd_toStartOf="@+id/messageTime"
+			app:layout_constraintTop_toBottomOf="@+id/messageText"
+			tools:ignore="SmallSp"
+			tools:text="14 МБ • PNG" />
 
 		<TextView
 			android:id="@+id/messageTime"
-			android:layout_width="match_parent"
+			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:gravity="end"
-			android:paddingEnd="@dimen/margin_padding_3"
-			android:paddingBottom="@dimen/margin_padding_2"
+			android:layout_marginTop="@dimen/margin_padding_2"
 			android:textSize="10sp"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/messageText"
+			tools:ignore="SmallSp"
 			tools:text="10:30" />
 
-	</LinearLayout>
+	</androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
-
-

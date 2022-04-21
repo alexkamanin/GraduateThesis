@@ -11,6 +11,7 @@ import ru.kamanin.nstu.graduate.thesis.component.ui.colors.colorFromAttr
 import ru.kamanin.nstu.graduate.thesis.feature.exam.list.R
 import ru.kamanin.nstu.graduate.thesis.feature.exam.list.databinding.ItemExamBinding
 import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.Exam
+import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.Exam.*
 import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.PeriodState
 
 class ExamViewHolder(private val parent: ViewGroup) : RecyclerView.ViewHolder(getView(parent)) {
@@ -40,6 +41,6 @@ class ExamViewHolder(private val parent: ViewGroup) : RecyclerView.ViewHolder(ge
 		}
 	}
 
-	private fun Exam.Teacher.toSingleLine() =
-		parent.context.getString(R.string.hint_exam_teacher, surname, name.first())
+	private fun Teacher.toSingleLine() =
+		parent.context.getString(R.string.hint_exam_teacher, account.surname, account.name.first())
 }

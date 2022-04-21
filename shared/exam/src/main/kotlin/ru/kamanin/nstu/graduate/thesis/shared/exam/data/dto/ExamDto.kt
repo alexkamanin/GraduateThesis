@@ -1,6 +1,7 @@
 package ru.kamanin.nstu.graduate.thesis.shared.exam.data.dto
 
 import com.squareup.moshi.JsonClass
+import ru.kamanin.nstu.graduate.thesis.shared.account.data.dto.AccountDto
 import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.PeriodState
 
 @JsonClass(generateAdapter = true)
@@ -19,17 +20,8 @@ data class ExamDto(
 	@JsonClass(generateAdapter = true)
 	data class Teacher(
 		val id: Long,
-		val account: Account
-	) {
-
-		@JsonClass(generateAdapter = true)
-		data class Account(
-			val id: Long,
-			val username: String,
-			val name: String,
-			val surname: String
-		)
-	}
+		val account: AccountDto
+	)
 
 	@JsonClass(generateAdapter = true)
 	data class Period(

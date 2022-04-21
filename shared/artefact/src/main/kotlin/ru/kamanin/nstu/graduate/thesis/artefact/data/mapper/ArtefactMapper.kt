@@ -7,6 +7,6 @@ fun ArtefactDto.toEntity() =
 	Artefact(
 		id = id,
 		size = fileSize,
-		extension = artefactType,
+		extension = Artefact.Extension.valueOf(artefactType),
 		fullName = fileName
 	)

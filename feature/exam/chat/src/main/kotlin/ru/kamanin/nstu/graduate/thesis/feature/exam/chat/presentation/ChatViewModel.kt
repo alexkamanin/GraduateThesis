@@ -3,25 +3,44 @@ package ru.kamanin.nstu.graduate.thesis.feature.exam.chat.presentation
 import android.graphics.Bitmap
 import android.net.Uri
 import android.util.Log
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.cachedIn
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import ru.kamanin.nstu.graduate.thesis.artefact.domain.entity.Artefact
 import ru.kamanin.nstu.graduate.thesis.artefact.domain.usecase.DownloadArtefactUseCase
 import ru.kamanin.nstu.graduate.thesis.artefact.domain.usecase.GetArtefactUseCase
 import ru.kamanin.nstu.graduate.thesis.artefact.domain.usecase.UploadArtefactUseCase
 import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.exception.launch
-import ru.kamanin.nstu.graduate.thesis.feature.exam.chat.domain.entity.Message
+import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.LiveState
+import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.MutableLiveState
+import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.asLiveState
+import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.invoke
+import ru.kamanin.nstu.graduate.thesis.feature.exam.chat.presentation.model.MessageItem
+import ru.kamanin.nstu.graduate.thesis.shared.account.domain.usecase.GetPersonalAccountUseCase
+import ru.kamanin.nstu.graduate.thesis.shared.chat.data.paging.mapPaging
+import ru.kamanin.nstu.graduate.thesis.shared.chat.domain.usecase.GetMessagesUseCase
+import ru.kamanin.nstu.graduate.thesis.shared.chat.domain.usecase.SendMessageUseCase
+import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.Exam
 import javax.inject.Inject
+
+//TODO при скачивании файла кидать пользователю пуш, при клике открывать файл
 
 @HiltViewModel
 class ChatViewModel @Inject constructor(
 	private val uploadArtefactUseCase: UploadArtefactUseCase,
 	private val downloadArtefactUseCase: DownloadArtefactUseCase,
-	private var getArtefactUseCase: GetArtefactUseCase
+	private val getArtefactUseCase: GetArtefactUseCase,
+	private val getPersonalAccountUseCase: GetPersonalAccountUseCase,
+	private val getMessagesUseCase: GetMessagesUseCase,
+	private val sendMessageUseCase: SendMessageUseCase,
+	savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
 	private companion object {
@@ -29,41 +48,42 @@ class ChatViewModel @Inject constructor(
 		const val EMPTY_TEXT = ""
 	}
 
-	private var messageList = mutableListOf<Message>()
+	private val exam: Exam = requireNotNull(savedStateHandle[Exam::class.java.name])
 
 	private val _state = MutableStateFlow<ChatState>(ChatState.Initial)
 	val state: StateFlow<ChatState> get() = _state.asStateFlow()
 
+	private val _sendEvent = MutableLiveState<Unit>()
+	val sendEvent: LiveState<Unit> = _sendEvent.asLiveState()
+
 	val message = MutableStateFlow(EMPTY_TEXT)
 
-	private var i = 13L
-
 	init {
-		viewModelScope.launch {
-			downloadArtefactUseCase(5142)
+		_state.value = ChatState.Loading
 
-			getArtefactUseCase(5142)
+		viewModelScope.launch {
+
+			val personalAccount = getPersonalAccountUseCase()
+			val teacherAccount = exam.teacher.account
+
+			getMessagesUseCase(5165)
+				.cachedIn(viewModelScope)
+				.mapPaging { message ->
+					MessageItem.from(
+						message = message,
+						personalAccount = personalAccount,
+						otherAccount = teacherAccount,
+						loadArtefact = getArtefactUseCase::invoke
+					)
+				}
+				.collectLatest {
+					_state.value = ChatState.Content(it)
+				}
 		}
-		messageList.addAll(
-			listOf(
-				Message.ReceivedMessage(5, "Поправил", "11:05"),
-				Message.ReceivedMessage(6, "Ок", "11:05"),
-				Message.SentMessage(7, "Проверьте", "11:03"),
-				Message.SentMessage(8, "Зануление вынесено в отдельную функцию clearMas()", "11:03"),
-				Message.ReceivedMessage(9, "Иванов, почему не зануляете ссылки в конце? Минус балл.", "11:02"),
-				Message.SentMessage(10, "Хорошо, спасибо.", "10:41"),
-				Message.ReceivedMessage(11, "Здравствуйте, да!", "10:32"),
-				Message.SentMessage(
-					12,
-					"Евгений Леонидович, здравствуйте. Подскажите пожалуйста, во второй задаче необходимо учитывать пустой массив?",
-					"10:30"
-				)
-			)
-		)
-		_state.value = ChatState.Content(messageList, false)
 	}
 
 	fun shareContent(uri: Uri) {
+		Log.d("TEST_TECH", uri.toString())
 		viewModelScope.launch(::handleArtefactLoadError) {
 			val artefact = uploadArtefactUseCase(uri)
 		}
@@ -77,11 +97,21 @@ class ChatViewModel @Inject constructor(
 		Log.d("TEST_TECH", bitmap.toString())
 	}
 
+	fun openArtefact(artefact: Artefact) {
+		Log.d("TEST_TECH", artefact.toString())
+
+//		viewModelScope.launch {
+//			downloadArtefactUseCase(5142)
+//			getArtefactUseCase(5142)
+//		}
+	}
+
 	fun send() {
 		if (message.value.isNotEmpty()) {
-			val new = listOf(Message.SentMessage(i++, message.value, "12:00")).plus(messageList)
-			messageList = new.toMutableList()
-			_state.value = ChatState.Content(new, true)
+			viewModelScope.launch {
+				sendMessageUseCase(5165, message.value)
+				_sendEvent(Unit)
+			}
 		}
 	}
 }

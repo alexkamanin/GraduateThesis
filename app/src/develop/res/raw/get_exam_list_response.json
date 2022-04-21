@@ -10,7 +10,7 @@
       "start": 1647826200000,
       "end": 1647831600000,
       "examId": 882,
-      "state": "PROGRESS"
+      "state": "CLOSED"
     },
     "teacher": {
       "id": 1,
@@ -66,7 +66,7 @@
       "start": 1651129200000,
       "end": 1651134600000,
       "examId": 884,
-      "state": "PROGRESS"
+      "state": "CLOSED"
     },
     "teacher": {
       "id": 1,

@@ -36,6 +36,9 @@
 		<item name="colorBackgroundGreyTint">@color/grey_300_alpha_40</item>
 
 		<item name="colorBackgroundStateTint">@color/grey_500_alpha_50</item>
+
+		<item name="colorBackgroundSentArtefact">@color/blue_400_alpha_40</item>
+		<item name="colorBackgroundReceiveArtefact">@color/grey_300_alpha_20</item>
 	</style>
 
 </resources>

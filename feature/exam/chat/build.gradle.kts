@@ -11,6 +11,7 @@ dependencies {
 	implementation(libs.android.fragment)
 	implementation(libs.android.appcompat)
 	implementation(libs.android.material)
+	implementation(libs.android.paging)
 	implementation(libs.android.constraintlayout)
 	implementation(libs.android.navigation.fragment)
 
@@ -23,7 +24,10 @@ dependencies {
 	implementation(projects.component.core)
 	implementation(projects.component.navigation)
 
-	implementation(projects.shared.artefact)
-
 	implementation(libs.squareup.retrofit)
+
+	implementation(projects.shared.artefact)
+	implementation(projects.shared.account)
+	implementation(projects.shared.exam)
+	implementation(projects.shared.chat)
 }

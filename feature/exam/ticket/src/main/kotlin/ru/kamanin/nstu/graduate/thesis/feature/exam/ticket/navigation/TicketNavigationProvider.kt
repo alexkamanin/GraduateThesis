@@ -5,7 +5,7 @@ import ru.kamanin.nstu.graduate.thesis.component.navigation.NavCommand
 
 interface TicketNavigationProvider {
 
-	fun toChat(): NavCommand
+	fun toChat(args: Bundle): NavCommand
 
 	fun toTask(args: Bundle): NavCommand
 

@@ -11,10 +11,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import ru.kamanin.nstu.graduate.thesis.di.network.Authorized
 import ru.kamanin.nstu.graduate.thesis.di.network.NotAuthorized
-import ru.kamanin.nstu.graduate.thesis.di.network.develop.handlers.ChangePasswordHandler
-import ru.kamanin.nstu.graduate.thesis.di.network.develop.handlers.ExamHandler
-import ru.kamanin.nstu.graduate.thesis.di.network.develop.handlers.SessionHandler
-import ru.kamanin.nstu.graduate.thesis.di.network.develop.handlers.TicketFoundHandler
+import ru.kamanin.nstu.graduate.thesis.di.network.develop.handlers.*
 import ru.kamanin.nstu.graduate.thesis.shared.session.data.interceptor.SessionInterceptor
 import javax.inject.Singleton
 
@@ -23,9 +20,12 @@ import javax.inject.Singleton
 object NetworkModule {
 
 	private val handlers = listOf(
-		SessionHandler,
-		ExamHandler,
+		AccountHandler,
+		ArtefactHandler,
 		ChangePasswordHandler,
+		ChatHandler,
+		ExamHandler,
+		SessionHandler,
 		TicketFoundHandler,
 	)
 
