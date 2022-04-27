@@ -27,8 +27,8 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew assembleDevelopDebug --stacktrace
         
-      - name: Upload develop apk - ${{ env.repository_name }}
+      - name: Upload develop apk
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ env.date_today }} - ${{ env.playstore_name }} - ${{ env.repository_name }} - APK(s) debug generated
+          name: app-develop-debug.apk
           path: build/outputs/apk/develop/debug/app-develop-debug.apk
