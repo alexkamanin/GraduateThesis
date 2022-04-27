@@ -2,7 +2,7 @@ package ru.kamanin.nstu.graduate.thesis.feature.exam.list.ui.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import ru.kamanin.nstu.graduate.thesis.component.core.recyclerview.DiffUtilCallback
+import ru.kamanin.nstu.graduate.thesis.component.ui.core.utils.DiffUtilCallback
 import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.Exam
 
 class ExamAdapter(private val onExamClick: (Exam) -> Unit) : RecyclerView.Adapter<ExamViewHolder>() {

@@ -69,7 +69,7 @@
 				android:indeterminateTint="?attr/colorProgressBarTint"
 				tools:visibility="gone" />
 
-			<ru.kamanin.nstu.graduate.thesis.component.core.view.ErrorView
+			<ru.kamanin.nstu.graduate.thesis.component.ui.core.views.ErrorView
 				android:id="@+id/errorView"
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"

@@ -2,8 +2,8 @@ package ru.kamanin.nstu.graduate.thesis.shared.chat.data.api
 
 import retrofit2.http.*
 import ru.kamanin.nstu.graduate.thesis.shared.chat.data.dto.MessageDto
-import ru.kamanin.nstu.graduate.thesis.shared.chat.data.paging.Paging
 import ru.kamanin.nstu.graduate.thesis.shared.chat.domain.entity.MessageSummary
+import ru.kamanin.nstu.graduate.thesis.utils.paging.Paging
 
 interface ChatApi {
 

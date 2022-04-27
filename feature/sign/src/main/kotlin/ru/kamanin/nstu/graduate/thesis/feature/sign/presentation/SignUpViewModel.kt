@@ -4,21 +4,22 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
-import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.exception.launch
-import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.*
-import ru.kamanin.nstu.graduate.thesis.component.core.error.ErrorConverter
-import ru.kamanin.nstu.graduate.thesis.component.core.error.ErrorState
-import ru.kamanin.nstu.graduate.thesis.component.core.mvvm.lifecycle.EventDispatcher
-import ru.kamanin.nstu.graduate.thesis.component.core.validation.ValidationResult
 import ru.kamanin.nstu.graduate.thesis.feature.sign.domain.scenario.LoginScenario
-import ru.kamanin.nstu.graduate.thesis.feature.sign.domain.validation.EmailValidator
 import ru.kamanin.nstu.graduate.thesis.shared.account.domain.usecase.ChangePasswordUseCase
+import ru.kamanin.nstu.graduate.thesis.shared.validation.ValidationResult
+import ru.kamanin.nstu.graduate.thesis.shared.validation.email.EmailValidator
+import ru.kamanin.nstu.graduate.thesis.utils.coroutines.event.EventDispatcher
+import ru.kamanin.nstu.graduate.thesis.utils.coroutines.exception.launch
+import ru.kamanin.nstu.graduate.thesis.utils.coroutines.flow.*
+import ru.kamanin.nstu.graduate.thesis.utils.error.ErrorConverter
+import ru.kamanin.nstu.graduate.thesis.utils.error.ErrorState
 import javax.inject.Inject
 
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
 	private val loginScenario: LoginScenario,
 	private val changePasswordUseCase: ChangePasswordUseCase,
+	private val emailValidator: EmailValidator,
 	private val errorConverter: ErrorConverter
 ) : ViewModel() {
 
@@ -32,8 +33,6 @@ class SignUpViewModel @Inject constructor(
 
 	private val _errorEvent = MutableLiveState<ErrorState>()
 	val errorEvent: LiveState<ErrorState> get() = _errorEvent.asLiveState()
-
-	private val emailValidator = EmailValidator()
 
 	val email = MutableStateFlow(EMPTY_TEXT)
 	val password = MutableStateFlow(EMPTY_TEXT)

@@ -6,7 +6,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.dispatcher.ioDispatcher
+import ru.kamanin.nstu.graduate.thesis.utils.coroutines.dispatcher.ioDispatcher
 import javax.inject.Singleton
 
 @Module

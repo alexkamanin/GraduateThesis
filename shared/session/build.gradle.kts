@@ -14,7 +14,9 @@ dependencies {
 	implementation(libs.squareup.moshi.kotlin)
 	kapt(libs.squareup.moshi.codegen)
 
-	implementation(projects.component.core)
-
 	implementation(projects.shared.account)
+	implementation(projects.shared.api.headers)
+
+	implementation(projects.utils.coroutines)
+	implementation(projects.utils.encoding)
 }

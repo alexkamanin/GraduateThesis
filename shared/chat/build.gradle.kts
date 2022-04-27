@@ -16,5 +16,7 @@ dependencies {
 	implementation(libs.squareup.moshi.kotlin)
 	kapt(libs.squareup.moshi.codegen)
 
-	implementation(projects.component.core)
+	implementation(projects.utils.coroutines)
+	implementation(projects.utils.paging)
+	implementation(projects.utils.time)
 }

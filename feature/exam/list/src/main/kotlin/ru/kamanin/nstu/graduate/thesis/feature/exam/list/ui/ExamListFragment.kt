@@ -9,10 +9,8 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.WithFragmentBindings
-import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.subscribe
-import ru.kamanin.nstu.graduate.thesis.component.core.error.ErrorState
 import ru.kamanin.nstu.graduate.thesis.component.navigation.navigate
-import ru.kamanin.nstu.graduate.thesis.component.ui.colors.colorFromAttr
+import ru.kamanin.nstu.graduate.thesis.component.ui.core.colors.colorFromAttr
 import ru.kamanin.nstu.graduate.thesis.component.ui.insets.setupBaseInsets
 import ru.kamanin.nstu.graduate.thesis.feature.exam.list.R
 import ru.kamanin.nstu.graduate.thesis.feature.exam.list.databinding.FragmentExamListBinding
@@ -21,6 +19,8 @@ import ru.kamanin.nstu.graduate.thesis.feature.exam.list.presentation.ExamListSt
 import ru.kamanin.nstu.graduate.thesis.feature.exam.list.presentation.ExamListViewModel
 import ru.kamanin.nstu.graduate.thesis.feature.exam.list.presentation.model.ExamFilter
 import ru.kamanin.nstu.graduate.thesis.feature.exam.list.ui.adapter.ExamAdapter
+import ru.kamanin.nstu.graduate.thesis.utils.coroutines.flow.subscribe
+import ru.kamanin.nstu.graduate.thesis.utils.error.ErrorState
 import javax.inject.Inject
 
 @AndroidEntryPoint

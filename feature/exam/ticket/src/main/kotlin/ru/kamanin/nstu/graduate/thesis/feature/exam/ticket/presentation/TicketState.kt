@@ -1,7 +1,7 @@
 package ru.kamanin.nstu.graduate.thesis.feature.exam.ticket.presentation
 
-import ru.kamanin.nstu.graduate.thesis.component.core.error.ErrorState
-import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.Answer
+import ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.entity.Task
+import ru.kamanin.nstu.graduate.thesis.utils.error.ErrorState
 
 sealed interface TicketState {
 
@@ -9,7 +9,7 @@ sealed interface TicketState {
 
 	object Loading : TicketState
 
-	data class Content(val answers: List<Answer>) : TicketState
+	data class Content(val tasks: List<Task>) : TicketState
 
 	data class Error(val errorState: ErrorState) : TicketState
 }

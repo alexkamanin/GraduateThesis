@@ -14,6 +14,7 @@ dependencies {
 
 	implementation(libs.hilt.android)
 
-	implementation(projects.component.core)
 	implementation(projects.shared.account)
+
+	implementation(projects.utils.coroutines)
 }

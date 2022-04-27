@@ -8,18 +8,18 @@ import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.WithFragmentBindings
-import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.subscribe
-import ru.kamanin.nstu.graduate.thesis.component.core.fragment.dialog.ShareResult
-import ru.kamanin.nstu.graduate.thesis.component.core.fragment.dialog.setShareBottomSheetResultListener
-import ru.kamanin.nstu.graduate.thesis.component.core.fragment.dialog.showShareBottomSheetDialog
-import ru.kamanin.nstu.graduate.thesis.component.core.fragment.showFailedPermissionDialog
-import ru.kamanin.nstu.graduate.thesis.component.core.fragment.showSettingDialog
-import ru.kamanin.nstu.graduate.thesis.component.core.time.RemainingTime
+import ru.kamanin.nstu.graduate.thesis.component.ui.core.dialogs.bottom.ShareResult
+import ru.kamanin.nstu.graduate.thesis.component.ui.core.dialogs.bottom.setShareBottomSheetResultListener
+import ru.kamanin.nstu.graduate.thesis.component.ui.core.dialogs.bottom.showShareBottomSheetDialog
+import ru.kamanin.nstu.graduate.thesis.component.ui.core.dialogs.extensions.showFailedPermissionDialog
+import ru.kamanin.nstu.graduate.thesis.component.ui.core.dialogs.extensions.showSettingDialog
 import ru.kamanin.nstu.graduate.thesis.component.ui.insets.setupKeyboardInsets
 import ru.kamanin.nstu.graduate.thesis.feature.exam.task.R
 import ru.kamanin.nstu.graduate.thesis.feature.exam.task.databinding.FragmentTaskBinding
 import ru.kamanin.nstu.graduate.thesis.feature.exam.task.presentation.TaskViewModel
-import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.TaskType
+import ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.entity.TaskType
+import ru.kamanin.nstu.graduate.thesis.utils.coroutines.flow.subscribe
+import ru.kamanin.nstu.graduate.thesis.utils.time.RemainingTime
 
 @AndroidEntryPoint
 @WithFragmentBindings
@@ -35,13 +35,13 @@ class TaskFragment : Fragment(R.layout.fragment_task) {
 		initListeners()
 
 		viewModel.remainingTimeEvent.subscribe(viewLifecycleOwner, ::showRemainingTime)
-		viewBinding.taskText.text = viewModel.answer.description
-		viewBinding.textTheme.text = viewModel.answer.theme
-		val titleRes = when (viewModel.answer.taskType) {
+		viewBinding.taskText.text = viewModel.task.description
+		viewBinding.textTheme.text = viewModel.task.theme
+		val titleRes = when (viewModel.task.taskType) {
 			TaskType.QUESTION -> R.string.question_title
 			TaskType.EXERCISE -> R.string.exercise_title
 		}
-		viewBinding.toolbar.title = getString(titleRes, viewModel.answer.number)
+		viewBinding.toolbar.title = getString(titleRes, viewModel.task.number)
 	}
 
 	private fun showRemainingTime(time: RemainingTime) {

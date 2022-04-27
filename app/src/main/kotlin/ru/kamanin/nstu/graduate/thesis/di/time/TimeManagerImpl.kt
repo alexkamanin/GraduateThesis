@@ -1,7 +1,7 @@
 package ru.kamanin.nstu.graduate.thesis.di.time
 
 import ru.kamanin.nstu.graduate.thesis.BuildConfig
-import ru.kamanin.nstu.graduate.thesis.component.core.time.TimeManager
+import ru.kamanin.nstu.graduate.thesis.utils.time.TimeManager
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton

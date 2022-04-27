@@ -12,17 +12,17 @@ import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.WithFragmentBindings
-import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.bind
-import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.subscribe
-import ru.kamanin.nstu.graduate.thesis.component.core.error.ErrorState
-import ru.kamanin.nstu.graduate.thesis.component.core.fragment.showErrorDialog
-import ru.kamanin.nstu.graduate.thesis.component.core.validation.ValidationResult
 import ru.kamanin.nstu.graduate.thesis.component.navigation.navigate
+import ru.kamanin.nstu.graduate.thesis.component.ui.core.dialogs.extensions.showErrorDialog
 import ru.kamanin.nstu.graduate.thesis.feature.sign.R
 import ru.kamanin.nstu.graduate.thesis.feature.sign.databinding.FragmentSignBinding
 import ru.kamanin.nstu.graduate.thesis.feature.sign.navigation.SignUpNavigationProvider
 import ru.kamanin.nstu.graduate.thesis.feature.sign.presentation.SignUpState
 import ru.kamanin.nstu.graduate.thesis.feature.sign.presentation.SignUpViewModel
+import ru.kamanin.nstu.graduate.thesis.shared.validation.ValidationResult
+import ru.kamanin.nstu.graduate.thesis.utils.coroutines.flow.bind
+import ru.kamanin.nstu.graduate.thesis.utils.coroutines.flow.subscribe
+import ru.kamanin.nstu.graduate.thesis.utils.error.ErrorState
 import javax.inject.Inject
 
 @AndroidEntryPoint

@@ -13,21 +13,23 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import ru.kamanin.nstu.graduate.thesis.artefact.domain.entity.Artefact
-import ru.kamanin.nstu.graduate.thesis.artefact.domain.usecase.DownloadArtefactUseCase
-import ru.kamanin.nstu.graduate.thesis.artefact.domain.usecase.GetArtefactUseCase
-import ru.kamanin.nstu.graduate.thesis.artefact.domain.usecase.UploadArtefactUseCase
-import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.exception.launch
-import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.LiveState
-import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.MutableLiveState
-import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.asLiveState
-import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.invoke
 import ru.kamanin.nstu.graduate.thesis.feature.exam.chat.presentation.model.MessageItem
 import ru.kamanin.nstu.graduate.thesis.shared.account.domain.usecase.GetPersonalAccountUseCase
-import ru.kamanin.nstu.graduate.thesis.shared.chat.data.paging.mapPaging
-import ru.kamanin.nstu.graduate.thesis.shared.chat.domain.usecase.GetMessagesUseCase
-import ru.kamanin.nstu.graduate.thesis.shared.chat.domain.usecase.SendMessageUseCase
+import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.entity.Artefact
+import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.entity.FileInfo
+import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.repository.FileInfoRepository
+import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.usecase.DownloadArtefactUseCase
+import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.usecase.GetArtefactUseCase
+import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.usecase.UploadArtefactUseCase
+import ru.kamanin.nstu.graduate.thesis.shared.chat.domain.usecase.GetMessagesByPeriodUseCase
+import ru.kamanin.nstu.graduate.thesis.shared.chat.domain.usecase.SendMessageByPeriodUseCase
 import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.Exam
+import ru.kamanin.nstu.graduate.thesis.utils.coroutines.exception.launch
+import ru.kamanin.nstu.graduate.thesis.utils.coroutines.flow.LiveState
+import ru.kamanin.nstu.graduate.thesis.utils.coroutines.flow.MutableLiveState
+import ru.kamanin.nstu.graduate.thesis.utils.coroutines.flow.asLiveState
+import ru.kamanin.nstu.graduate.thesis.utils.coroutines.flow.invoke
+import ru.kamanin.nstu.graduate.thesis.utils.paging.mapPaging
 import javax.inject.Inject
 
 //TODO при скачивании файла кидать пользователю пуш, при клике открывать файл
@@ -38,8 +40,9 @@ class ChatViewModel @Inject constructor(
 	private val downloadArtefactUseCase: DownloadArtefactUseCase,
 	private val getArtefactUseCase: GetArtefactUseCase,
 	private val getPersonalAccountUseCase: GetPersonalAccountUseCase,
-	private val getMessagesUseCase: GetMessagesUseCase,
-	private val sendMessageUseCase: SendMessageUseCase,
+	private val getMessagesByPeriodUseCase: GetMessagesByPeriodUseCase,
+	private val sendMessageByPeriodUseCase: SendMessageByPeriodUseCase,
+	private val fileInfoRepository: FileInfoRepository,
 	savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
@@ -56,6 +59,11 @@ class ChatViewModel @Inject constructor(
 	private val _sendEvent = MutableLiveState<Unit>()
 	val sendEvent: LiveState<Unit> = _sendEvent.asLiveState()
 
+	private val _fileAttachedEvent = MutableLiveState<FileInfo?>()
+	val fileAttachedEvent: LiveState<FileInfo?> get() = _fileAttachedEvent.asLiveState()
+
+	private var file: FileInfo? = null
+	private var uri: Uri? = null
 	val message = MutableStateFlow(EMPTY_TEXT)
 
 	init {
@@ -66,7 +74,7 @@ class ChatViewModel @Inject constructor(
 			val personalAccount = getPersonalAccountUseCase()
 			val teacherAccount = exam.teacher.account
 
-			getMessagesUseCase(5165)
+			getMessagesByPeriodUseCase(5165)
 				.cachedIn(viewModelScope)
 				.mapPaging { message ->
 					MessageItem.from(
@@ -82,10 +90,11 @@ class ChatViewModel @Inject constructor(
 		}
 	}
 
-	fun shareContent(uri: Uri) {
-		Log.d("TEST_TECH", uri.toString())
+	fun attachContent(uri: Uri) {
+		this.uri = uri
 		viewModelScope.launch(::handleArtefactLoadError) {
-			val artefact = uploadArtefactUseCase(uri)
+			file = fileInfoRepository.get(uri)
+			_fileAttachedEvent(file)
 		}
 	}
 
@@ -93,7 +102,7 @@ class ChatViewModel @Inject constructor(
 		Log.e("TEST_TECH", throwable.stackTraceToString())
 	}
 
-	fun shareImage(bitmap: Bitmap) {
+	fun attachImage(bitmap: Bitmap) {
 		Log.d("TEST_TECH", bitmap.toString())
 	}
 
@@ -102,16 +111,27 @@ class ChatViewModel @Inject constructor(
 
 //		viewModelScope.launch {
 //			downloadArtefactUseCase(5142)
-//			getArtefactUseCase(5142)
 //		}
 	}
 
 	fun send() {
-		if (message.value.isNotEmpty()) {
+		if (message.value.isNotEmpty() || uri != null) {
 			viewModelScope.launch {
-				sendMessageUseCase(5165, message.value)
+				val artefact = if (uri != null) {
+					uploadArtefactUseCase(requireNotNull(uri))
+				} else {
+					null
+				}
+				sendMessageByPeriodUseCase(5165, message.value.takeIf { it.isNotEmpty() }, artefact?.id)
+				message.value = ""
+				uri = null
 				_sendEvent(Unit)
 			}
 		}
+	}
+
+	fun detachFile() {
+		file = null
+		_fileAttachedEvent(file)
 	}
 }

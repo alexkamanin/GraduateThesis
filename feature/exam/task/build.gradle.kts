@@ -17,9 +17,14 @@ dependencies {
 	implementation(libs.hilt.android)
 	kapt(libs.hilt.compiler)
 
+	implementation(projects.component.ui.resources)
+	implementation(projects.component.ui.core)
 	implementation(projects.component.navigation)
-	implementation(projects.component.core)
-	implementation(projects.component.ui)
 
+	implementation(projects.shared.ticket)
 	implementation(projects.shared.exam)
+
+	implementation(projects.utils.coroutines)
+	implementation(projects.utils.error)
+	implementation(projects.utils.time)
 }

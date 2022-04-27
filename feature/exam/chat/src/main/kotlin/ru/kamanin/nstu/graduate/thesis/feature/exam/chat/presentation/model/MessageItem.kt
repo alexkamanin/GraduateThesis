@@ -1,7 +1,7 @@
 package ru.kamanin.nstu.graduate.thesis.feature.exam.chat.presentation.model
 
-import ru.kamanin.nstu.graduate.thesis.artefact.domain.entity.Artefact
 import ru.kamanin.nstu.graduate.thesis.shared.account.domain.entity.Account
+import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.entity.Artefact
 import ru.kamanin.nstu.graduate.thesis.shared.chat.domain.entity.Message
 
 sealed interface MessageItem {

@@ -8,29 +8,27 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.exception.launch
-import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.LiveState
-import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.MutableLiveState
-import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.asLiveState
-import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.invoke
-import ru.kamanin.nstu.graduate.thesis.component.core.error.ErrorConverter
-import ru.kamanin.nstu.graduate.thesis.component.core.error.ErrorState
-import ru.kamanin.nstu.graduate.thesis.component.core.mvvm.lifecycle.EventDispatcher
-import ru.kamanin.nstu.graduate.thesis.component.core.time.RemainingTime
-import ru.kamanin.nstu.graduate.thesis.component.core.time.TimeManager
-import ru.kamanin.nstu.graduate.thesis.component.core.time.getRemainingTime
-import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.Answer
 import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.Exam
-import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.repository.TicketRepository
 import ru.kamanin.nstu.graduate.thesis.shared.session.domain.scenario.LogoutScenario
+import ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.entity.Task
+import ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.usecase.GetTicketUseCase
+import ru.kamanin.nstu.graduate.thesis.utils.coroutines.event.EventDispatcher
+import ru.kamanin.nstu.graduate.thesis.utils.coroutines.exception.launch
+import ru.kamanin.nstu.graduate.thesis.utils.coroutines.flow.LiveState
+import ru.kamanin.nstu.graduate.thesis.utils.coroutines.flow.MutableLiveState
+import ru.kamanin.nstu.graduate.thesis.utils.coroutines.flow.asLiveState
+import ru.kamanin.nstu.graduate.thesis.utils.coroutines.flow.invoke
+import ru.kamanin.nstu.graduate.thesis.utils.error.ErrorConverter
+import ru.kamanin.nstu.graduate.thesis.utils.error.ErrorState
+import ru.kamanin.nstu.graduate.thesis.utils.time.RemainingTime
+import ru.kamanin.nstu.graduate.thesis.utils.time.TimeManager
+import ru.kamanin.nstu.graduate.thesis.utils.time.getRemainingTime
 import javax.inject.Inject
-
-//TODO заменить все названия Task на Answer
 
 @HiltViewModel
 class TicketViewModel @Inject constructor(
+	private val getTicketUseCase: GetTicketUseCase,
 	private val logoutScenario: LogoutScenario,
-	private val repository: TicketRepository, //todo добавить юзкейсы
 	private val timeManager: TimeManager,
 	private val errorConverter: ErrorConverter,
 	savedStateHandle: SavedStateHandle,
@@ -75,9 +73,9 @@ class TicketViewModel @Inject constructor(
 			.launchIn(viewModelScope)
 
 		viewModelScope.launch(::handleError) {
-			val answers = repository.getAnswers(exam.id, exam.regulationRating)
+			val tasks = getTicketUseCase(exam.id, exam.regulationRating)
 			_swipeRefreshEvent.invoke(false)
-			_state.value = TicketState.Content(answers)
+			_state.value = TicketState.Content(tasks)
 		}
 	}
 
@@ -100,9 +98,9 @@ class TicketViewModel @Inject constructor(
 		}
 	}
 
-	fun selectTask(answer: Answer) {
+	fun selectTask(task: Task) {
 		val args = bundleOf(
-			Answer::class.java.name to answer,
+			Task::class.java.name to task,
 			Exam::class.java.name to exam
 		)
 		eventDispatcher.dispatchEvent { navigateToTask(args) }

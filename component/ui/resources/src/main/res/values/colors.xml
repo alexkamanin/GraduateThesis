@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="black">#FF000000</color>
+	<color name="white">#FFFFFFFF</color>
+
+	<!-- White -->
+	<color name="white_200">#F5F5F5</color>
+
+	<!-- Blue -->
+	<color name="blue_200">#FFE3F3FF</color>
+	<color name="blue_400">#FF9EADBC</color>
+	<color name="blue_600">#FF697580</color>
+	<color name="blue_900">#FF375570</color>
+
+	<color name="blue_200_alpha_80">#CCDBEBF6</color>
+	<color name="blue_400_alpha_40">#669EADBC</color>
+
+	<!-- Grey -->
+	<color name="grey_50">#FFF4F4F4</color>
+	<color name="grey_70">#FFFEFEFE</color>
+	<color name="grey_100">#FFC8C9CB</color>
+	<color name="grey_300">#FFC1C1C1</color>
+	<color name="grey_350">#FF959393</color>
+	<color name="grey_400">#FF6D7475</color>
+	<color name="grey_500">#FF434B4D</color>
+
+	<color name="grey_200_alpha_75">#B3E9E9E9</color>
+	<color name="grey_300_alpha_20">#33C1C1C1</color>
+	<color name="grey_300_alpha_40">#66C1C1C1</color>
+	<color name="grey_500_alpha_50">#4D434B4D</color>
+	<color name="grey_300_alpha_60">#99C1C1C1</color>
+
+	<!-- Green -->
+	<color name="green_300">#FF9ED09E</color>
+
+	<color name="green_300_alpha_60">#999ED09E</color>
+
+	<!-- Red -->
+	<color name="red_300">#FFFFB2B2</color>
+	<color name="red_500">#FFE24C4B</color>
+
+	<color name="red_300_alpha_60">#99FFB2B2</color>
+
+	<!-- Yellow -->
+	<color name="yellow_300">#FFDCDC97</color>
+
+	<color name="yellow_300_alpha_60">#99DCDC97</color>
+</resources>

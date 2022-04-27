@@ -36,13 +36,20 @@ dependencies {
 
 	// ---- Component ----
 	implementation(projects.component.navigation)
-	implementation(projects.component.core)
-	implementation(projects.component.ui)
+	implementation(projects.component.ui.resources)
+	implementation(projects.component.ui.core)
 
 	// ----- Shared ------
+	implementation(projects.shared.api.headers)
 	implementation(projects.shared.artefact)
 	implementation(projects.shared.session)
 	implementation(projects.shared.account)
+	implementation(projects.shared.ticket)
 	implementation(projects.shared.exam)
 	implementation(projects.shared.chat)
+
+	// ------ Utils ------
+	implementation(projects.utils.coroutines)
+	implementation(projects.utils.paging)
+	implementation(projects.utils.time)
 }

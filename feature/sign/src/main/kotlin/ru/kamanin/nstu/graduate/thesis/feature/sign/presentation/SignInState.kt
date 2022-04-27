@@ -1,6 +1,6 @@
 package ru.kamanin.nstu.graduate.thesis.feature.sign.presentation
 
-import ru.kamanin.nstu.graduate.thesis.component.core.validation.ValidationResult
+import ru.kamanin.nstu.graduate.thesis.shared.validation.ValidationResult
 
 data class SignInState(
 	val emailValidationResult: ValidationResult = ValidationResult.NONE,

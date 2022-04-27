@@ -2,12 +2,12 @@ package ru.kamanin.nstu.graduate.thesis.shared.exam.data.repository
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
-import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.dispatcher.ioDispatcher
 import ru.kamanin.nstu.graduate.thesis.shared.exam.data.api.ExamApi
 import ru.kamanin.nstu.graduate.thesis.shared.exam.data.dto.ExamDto
 import ru.kamanin.nstu.graduate.thesis.shared.exam.data.mapper.toEntity
 import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.Exam
 import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.repository.ExamRepository
+import ru.kamanin.nstu.graduate.thesis.utils.coroutines.dispatcher.ioDispatcher
 import javax.inject.Inject
 
 class ExamRepositoryImpl @Inject constructor(

@@ -5,9 +5,9 @@ import com.squareup.moshi.Moshi
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
-import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.dispatcher.ioDispatcher
 import ru.kamanin.nstu.graduate.thesis.shared.session.domain.entity.Session
 import ru.kamanin.nstu.graduate.thesis.shared.session.domain.repository.LocalSessionRepository
+import ru.kamanin.nstu.graduate.thesis.utils.coroutines.dispatcher.ioDispatcher
 import javax.inject.Inject
 
 class LocalSessionRepositoryImpl @Inject constructor(

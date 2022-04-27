@@ -2,7 +2,7 @@ package ru.kamanin.nstu.graduate.thesis.shared.session.data.interceptor
 
 import okhttp3.Interceptor
 import okhttp3.Response
-import ru.kamanin.nstu.graduate.thesis.component.core.network.Headers.X_Access_Token
+import ru.kamanin.nstu.graduate.thesis.shared.api.headers.Headers.X_Access_Token
 import ru.kamanin.nstu.graduate.thesis.shared.session.domain.repository.LocalSessionRepository
 import javax.inject.Inject
 

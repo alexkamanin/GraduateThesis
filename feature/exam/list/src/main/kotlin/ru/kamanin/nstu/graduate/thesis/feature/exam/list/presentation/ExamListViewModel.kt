@@ -9,19 +9,19 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.exception.launch
-import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.LiveState
-import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.MutableLiveState
-import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.asLiveState
-import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.invoke
-import ru.kamanin.nstu.graduate.thesis.component.core.error.ErrorConverter
-import ru.kamanin.nstu.graduate.thesis.component.core.error.ErrorState
-import ru.kamanin.nstu.graduate.thesis.component.core.mvvm.lifecycle.EventDispatcher
-import ru.kamanin.nstu.graduate.thesis.component.core.time.TimeManager
 import ru.kamanin.nstu.graduate.thesis.feature.exam.list.presentation.model.ExamFilter
 import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.Exam
 import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.usecase.GetExamListUseCase
 import ru.kamanin.nstu.graduate.thesis.shared.session.domain.scenario.LogoutScenario
+import ru.kamanin.nstu.graduate.thesis.utils.coroutines.event.EventDispatcher
+import ru.kamanin.nstu.graduate.thesis.utils.coroutines.exception.launch
+import ru.kamanin.nstu.graduate.thesis.utils.coroutines.flow.LiveState
+import ru.kamanin.nstu.graduate.thesis.utils.coroutines.flow.MutableLiveState
+import ru.kamanin.nstu.graduate.thesis.utils.coroutines.flow.asLiveState
+import ru.kamanin.nstu.graduate.thesis.utils.coroutines.flow.invoke
+import ru.kamanin.nstu.graduate.thesis.utils.error.ErrorConverter
+import ru.kamanin.nstu.graduate.thesis.utils.error.ErrorState
+import ru.kamanin.nstu.graduate.thesis.utils.time.TimeManager
 import javax.inject.Inject
 
 @HiltViewModel

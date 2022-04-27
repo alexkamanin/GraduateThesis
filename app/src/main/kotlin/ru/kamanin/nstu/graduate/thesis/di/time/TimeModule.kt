@@ -4,7 +4,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import ru.kamanin.nstu.graduate.thesis.component.core.time.TimeManager
+import ru.kamanin.nstu.graduate.thesis.utils.time.TimeManager
 
 @Module
 @InstallIn(SingletonComponent::class)

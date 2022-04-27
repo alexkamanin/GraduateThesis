@@ -10,12 +10,9 @@ import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.WithFragmentBindings
-import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.subscribe
-import ru.kamanin.nstu.graduate.thesis.component.core.error.ErrorState
-import ru.kamanin.nstu.graduate.thesis.component.core.fragment.showInformationDialog
-import ru.kamanin.nstu.graduate.thesis.component.core.time.RemainingTime
 import ru.kamanin.nstu.graduate.thesis.component.navigation.navigate
-import ru.kamanin.nstu.graduate.thesis.component.ui.colors.colorFromAttr
+import ru.kamanin.nstu.graduate.thesis.component.ui.core.colors.colorFromAttr
+import ru.kamanin.nstu.graduate.thesis.component.ui.core.dialogs.extensions.showInformationDialog
 import ru.kamanin.nstu.graduate.thesis.component.ui.insets.setupBaseInsets
 import ru.kamanin.nstu.graduate.thesis.feature.exam.ticket.R
 import ru.kamanin.nstu.graduate.thesis.feature.exam.ticket.databinding.FragmentTicketBinding
@@ -23,6 +20,9 @@ import ru.kamanin.nstu.graduate.thesis.feature.exam.ticket.navigation.TicketNavi
 import ru.kamanin.nstu.graduate.thesis.feature.exam.ticket.presentation.TicketState
 import ru.kamanin.nstu.graduate.thesis.feature.exam.ticket.presentation.TicketViewModel
 import ru.kamanin.nstu.graduate.thesis.feature.exam.ticket.ui.adapter.TaskAdapter
+import ru.kamanin.nstu.graduate.thesis.utils.coroutines.flow.subscribe
+import ru.kamanin.nstu.graduate.thesis.utils.error.ErrorState
+import ru.kamanin.nstu.graduate.thesis.utils.time.RemainingTime
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -103,7 +103,7 @@ class TicketFragment : Fragment(R.layout.fragment_ticket), TicketViewModel.Event
 	}
 
 	private fun renderContentState(state: TicketState.Content) {
-		adapter?.items = state.answers
+		adapter?.items = state.tasks
 
 		viewBinding.toolbar.isVisible = true
 		viewBinding.progressBar.isVisible = false

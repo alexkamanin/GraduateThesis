@@ -4,10 +4,10 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import ru.kamanin.nstu.graduate.thesis.artefact.data.repository.ArtefactRepositoryImpl
-import ru.kamanin.nstu.graduate.thesis.artefact.data.repository.FileInfoRepositoryImpl
-import ru.kamanin.nstu.graduate.thesis.artefact.domain.repository.ArtefactRepository
-import ru.kamanin.nstu.graduate.thesis.artefact.domain.repository.FileInfoRepository
+import ru.kamanin.nstu.graduate.thesis.shared.artefact.data.repository.ArtefactRepositoryImpl
+import ru.kamanin.nstu.graduate.thesis.shared.artefact.data.repository.FileInfoRepositoryImpl
+import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.repository.ArtefactRepository
+import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.repository.FileInfoRepository
 import javax.inject.Singleton
 
 @Module

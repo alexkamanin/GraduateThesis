@@ -4,9 +4,9 @@ import android.content.Context
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
-import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.dispatcher.ioDispatcher
 import ru.kamanin.nstu.graduate.thesis.shared.account.domain.entity.AccountMetaData
 import ru.kamanin.nstu.graduate.thesis.shared.account.domain.repository.AccountMetaDataRepository
+import ru.kamanin.nstu.graduate.thesis.utils.coroutines.dispatcher.ioDispatcher
 import javax.inject.Inject
 
 class AccountMetaDataRepositoryImpl @Inject constructor(

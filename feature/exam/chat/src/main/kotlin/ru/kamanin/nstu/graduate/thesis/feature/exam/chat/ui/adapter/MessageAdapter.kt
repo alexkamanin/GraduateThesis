@@ -4,9 +4,9 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import ru.kamanin.nstu.graduate.thesis.artefact.domain.entity.Artefact
 import ru.kamanin.nstu.graduate.thesis.feature.exam.chat.R
 import ru.kamanin.nstu.graduate.thesis.feature.exam.chat.presentation.model.MessageItem
+import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.entity.Artefact
 
 class MessageAdapter(private val artefactClicked: (Artefact) -> Unit) : PagingDataAdapter<MessageItem, RecyclerView.ViewHolder>(MessageItemDiffCallback) {
 

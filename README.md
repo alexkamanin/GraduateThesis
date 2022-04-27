@@ -1,35 +1,24 @@
-## Выпускная квалификационная работа бакалавра по направлению 09.03.04 "Программная инженерия"
+## Выпускная квалификационная работа бакалавра по направлению 09.03.04 "Программная инженерия" [![developDebug](https://github.com/alexkamanin/GraduateThesis/actions/workflows/assembleDevelopDebug.yml/badge.svg)](https://github.com/alexkamanin/GraduateThesis/actions/workflows/assembleDevelopDebug.yml) [![liveDebug](https://github.com/alexkamanin/GraduateThesis/actions/workflows/assembleLiveDebug.yml/badge.svg)](https://github.com/alexkamanin/GraduateThesis/actions/workflows/assembleLiveDebug.yml)
 
-[![developDebug](https://github.com/alexkamanin/GraduateThesis/actions/workflows/assembleDevelopDebug.yml/badge.svg)](https://github.com/alexkamanin/GraduateThesis/actions/workflows/assembleDevelopDebug.yml)
-[![liveDebug](https://github.com/alexkamanin/GraduateThesis/actions/workflows/assembleLiveDebug.yml/badge.svg)](https://github.com/alexkamanin/GraduateThesis/actions/workflows/assembleLiveDebug.yml)
+[Как скачать приложение?](HELP.md)  
+[Ссылка на дизайн в Фигме](https://www.figma.com/file/FRGFhp2grpxPrL2b0rdtXy/Дизайн-Романов-Диплом)  
+[Ссылка на сервер](http://217.71.129.139:4502/swagger-ui/index.html)
 
-### Краткое содержание
+### О чем это приложение?
 
-#### Авторизация/Регистрация
-
-Необходимо реализовать мобильный клиент студента для дистанционной сдачи экзамена.  
+Необходимо реализовать мобильный клиент для аттестации студентов посредством тестовых заданий открытого типа.  
 Студент регистрируется в приложении посредством ввода **Корпоративной почты** и **Проверочного кода**, который пришел на указанную почту.  
-Далее он устанавливает придуманный пароль, после при **Авторизации** вход осуществляется через указание **Корпоративной почты** и **Придуманного пароля**
+Далее он устанавливает придуманный пароль, после при **Авторизации** вход осуществляется через указание **Корпоративной почты** и **Придуманного пароля**.  
+Студент может:
 
-#### Тестирование
-
-Студент выполняет билет. Билет представляет собой набор вопросов с ответом в открытой форме и одной задачей. Каждый ответ на вопрос оценивается (-2, 0, 1, 2)
-баллами. Задача оценивается от 0 до 20 баллов.
-
-#### Обратная связь
-
-В процессе экзамена студент может общаться с перподавателем в чате.
-
-### Разработка
-
-#### Варианты сборок
-
-* **developDebug** - сборка приложения с моками.
-* **liveDebug** - сборка приложения с запросами на [сервер](http://217.71.129.139:4502/swagger-ui/index.html).
+* просматривать назначенные и прошедшие экзамены;
+* проходить тестирование по дисциплине;
+    * Тестирование заключается в прохождении билета, содержащего вопросы и задачи.
+    * Каждый вопрос может оцениться `[-2, 0, 2, 2]`.
+    * Задача оценивается от `0` до `20` баллов.
+* задавать вопросы преподавателю в чате.
 
 ### Демонстрация
-
-[Ссылка на дизайн в Фигме](https://www.figma.com/file/FRGFhp2grpxPrL2b0rdtXy/Дизайн-Романов-Диплом)
 
 #### Скриншоты
 

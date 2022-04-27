@@ -2,12 +2,12 @@ package ru.kamanin.nstu.graduate.thesis.shared.account.data.repository
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
-import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.dispatcher.ioDispatcher
-import ru.kamanin.nstu.graduate.thesis.component.core.encoder.Base64Encoder
 import ru.kamanin.nstu.graduate.thesis.shared.account.data.dto.PasswordDto
 import ru.kamanin.nstu.graduate.thesis.shared.account.data.mapper.toEntity
 import ru.kamanin.nstu.graduate.thesis.shared.account.domain.entity.Account
 import ru.kamanin.nstu.graduate.thesis.shared.account.domain.repository.AccountRepository
+import ru.kamanin.nstu.graduate.thesis.utils.coroutines.dispatcher.ioDispatcher
+import ru.kamanin.nstu.graduate.thesis.utils.encoding.Base64Encoder
 import javax.inject.Inject
 import ru.kamanin.nstu.graduate.thesis.shared.account.data.api.authorized.AccountApi as AuthorizedAccountApi
 import ru.kamanin.nstu.graduate.thesis.shared.account.data.api.notauthorized.AccountApi as NotAuthorizedAccountApi

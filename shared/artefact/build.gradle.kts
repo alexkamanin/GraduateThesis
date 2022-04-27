@@ -6,13 +6,14 @@ plugins {
 }
 
 dependencies {
+	implementation(libs.android.core)
 	implementation(libs.bundles.kotlin.coroutines)
 
 	implementation(libs.hilt.android)
 
-	implementation(projects.component.core)
-
 	implementation(libs.squareup.retrofit)
 	implementation(libs.squareup.moshi.kotlin)
 	kapt(libs.squareup.moshi.codegen)
+
+	implementation(projects.utils.coroutines)
 }

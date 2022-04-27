@@ -13,17 +13,17 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.WithFragmentBindings
-import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.bind
-import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.subscribe
-import ru.kamanin.nstu.graduate.thesis.component.core.error.ErrorState
-import ru.kamanin.nstu.graduate.thesis.component.core.fragment.showErrorDialog
-import ru.kamanin.nstu.graduate.thesis.component.core.validation.ValidationResult
 import ru.kamanin.nstu.graduate.thesis.component.navigation.navigate
+import ru.kamanin.nstu.graduate.thesis.component.ui.core.dialogs.extensions.showErrorDialog
 import ru.kamanin.nstu.graduate.thesis.feature.sign.R
 import ru.kamanin.nstu.graduate.thesis.feature.sign.databinding.FragmentSignBinding
 import ru.kamanin.nstu.graduate.thesis.feature.sign.navigation.SignInNavigationProvider
 import ru.kamanin.nstu.graduate.thesis.feature.sign.presentation.SignInState
 import ru.kamanin.nstu.graduate.thesis.feature.sign.presentation.SignInViewModel
+import ru.kamanin.nstu.graduate.thesis.shared.validation.ValidationResult
+import ru.kamanin.nstu.graduate.thesis.utils.coroutines.flow.bind
+import ru.kamanin.nstu.graduate.thesis.utils.coroutines.flow.subscribe
+import ru.kamanin.nstu.graduate.thesis.utils.error.ErrorState
 import javax.inject.Inject
 
 @AndroidEntryPoint

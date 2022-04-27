@@ -7,12 +7,12 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.exception.launch
-import ru.kamanin.nstu.graduate.thesis.component.core.error.ErrorConverter
-import ru.kamanin.nstu.graduate.thesis.component.core.error.ErrorState
-import ru.kamanin.nstu.graduate.thesis.component.core.mvvm.lifecycle.EventDispatcher
 import ru.kamanin.nstu.graduate.thesis.shared.session.domain.scenario.ExtendSessionScenario
 import ru.kamanin.nstu.graduate.thesis.shared.session.domain.scenario.LogoutScenario
+import ru.kamanin.nstu.graduate.thesis.utils.coroutines.event.EventDispatcher
+import ru.kamanin.nstu.graduate.thesis.utils.coroutines.exception.launch
+import ru.kamanin.nstu.graduate.thesis.utils.error.ErrorConverter
+import ru.kamanin.nstu.graduate.thesis.utils.error.ErrorState
 import javax.inject.Inject
 
 @HiltViewModel

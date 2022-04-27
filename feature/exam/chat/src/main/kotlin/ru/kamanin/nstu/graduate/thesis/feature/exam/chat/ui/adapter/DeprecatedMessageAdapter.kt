@@ -2,10 +2,10 @@ package ru.kamanin.nstu.graduate.thesis.feature.exam.chat.ui.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import ru.kamanin.nstu.graduate.thesis.artefact.domain.entity.Artefact
-import ru.kamanin.nstu.graduate.thesis.component.core.recyclerview.DiffUtilCallback
+import ru.kamanin.nstu.graduate.thesis.component.ui.core.utils.DiffUtilCallback
 import ru.kamanin.nstu.graduate.thesis.feature.exam.chat.R
 import ru.kamanin.nstu.graduate.thesis.feature.exam.chat.presentation.model.MessageItem
+import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.entity.Artefact
 
 @Deprecated(message = "Оставлено для худших времен")
 class DeprecatedMessageAdapter(private val artefactClicked: (Artefact) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {

@@ -38,7 +38,7 @@
 				android:layout_gravity="center_vertical"
 				android:contentDescription="@null"
 				android:visibility="gone"
-				tools:src="@drawable/ic_pdf"
+				tools:src="@drawable/ic_artefact_pdf"
 				tools:visibility="visible" />
 
 			<TextView

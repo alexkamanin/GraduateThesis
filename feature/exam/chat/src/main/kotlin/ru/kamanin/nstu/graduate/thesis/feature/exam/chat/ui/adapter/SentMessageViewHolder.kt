@@ -7,13 +7,11 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
-import ru.kamanin.nstu.graduate.thesis.artefact.domain.entity.Artefact
-import ru.kamanin.nstu.graduate.thesis.artefact.domain.extension.icon
-import ru.kamanin.nstu.graduate.thesis.artefact.domain.extension.sizeInKiloByte
-import ru.kamanin.nstu.graduate.thesis.artefact.domain.extension.sizeInMegaByte
+import ru.kamanin.nstu.graduate.thesis.component.ui.core.icons.icon
 import ru.kamanin.nstu.graduate.thesis.feature.exam.chat.R
 import ru.kamanin.nstu.graduate.thesis.feature.exam.chat.databinding.ItemSentMessageBinding
 import ru.kamanin.nstu.graduate.thesis.feature.exam.chat.presentation.model.MessageItem
+import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.entity.Artefact
 
 class SentMessageViewHolder(private val parent: ViewGroup) : RecyclerView.ViewHolder(getView(parent)) {
 

@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
-import ru.kamanin.nstu.graduate.thesis.component.core.coroutines.flow.subscribe
 import ru.kamanin.nstu.graduate.thesis.component.navigation.navigate
 import ru.kamanin.nstu.graduate.thesis.component.ui.insets.setupBaseInsets
 import ru.kamanin.nstu.graduate.thesis.navigation.R
@@ -15,6 +14,7 @@ import ru.kamanin.nstu.graduate.thesis.navigation.databinding.FragmentNavigation
 import ru.kamanin.nstu.graduate.thesis.navigation.navigation.NavigationProvider
 import ru.kamanin.nstu.graduate.thesis.navigation.presentation.NavigationState
 import ru.kamanin.nstu.graduate.thesis.navigation.presentation.NavigationViewModel
+import ru.kamanin.nstu.graduate.thesis.utils.coroutines.flow.subscribe
 import javax.inject.Inject
 
 @AndroidEntryPoint

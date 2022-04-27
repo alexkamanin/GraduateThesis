@@ -38,7 +38,7 @@
 				android:layout_gravity="center_vertical"
 				android:contentDescription="@null"
 				android:visibility="gone"
-				tools:src="@drawable/ic_pdf"
+				tools:src="@drawable/ic_artefact_pdf"
 				tools:visibility="visible" />
 
 			<TextView
@@ -65,6 +65,7 @@
 			android:linksClickable="true"
 			android:minWidth="@dimen/message_min_width"
 			android:paddingHorizontal="@dimen/margin_padding_2"
+			android:textColorLink="?android:attr/textColorSecondary"
 			android:textIsSelectable="true"
 			android:textSize="16sp"
 			android:visibility="gone"
