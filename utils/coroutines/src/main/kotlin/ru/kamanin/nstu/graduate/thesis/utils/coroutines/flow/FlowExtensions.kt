@@ -19,3 +19,18 @@ fun <T> MutableSharedFlow<T>.asLiveState() = asSharedFlow()
 operator fun <T> MutableSharedFlow<T>.invoke(value: T) {
 	tryEmit(value)
 }
+
+fun MutableLiveEvent() =
+	MutableSharedFlow<Unit>(
+		replay = 0,
+		onBufferOverflow = BufferOverflow.DROP_OLDEST,
+		extraBufferCapacity = 1
+	)
+
+typealias LiveEvent = SharedFlow<Unit>
+
+fun MutableSharedFlow<Unit>.asLiveEvent() = asSharedFlow()
+
+operator fun MutableSharedFlow<Unit>.invoke() {
+	tryEmit(Unit)
+}

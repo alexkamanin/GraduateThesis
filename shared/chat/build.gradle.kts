@@ -16,6 +16,9 @@ dependencies {
 	implementation(libs.squareup.moshi.kotlin)
 	kapt(libs.squareup.moshi.codegen)
 
+	implementation(projects.shared.account)
+	implementation(projects.shared.artefact)
+
 	implementation(projects.utils.coroutines)
 	implementation(projects.utils.paging)
 	implementation(projects.utils.time)

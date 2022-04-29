@@ -1,5 +1,5 @@
 <resources>
-	<string name="app_name">GraduateThesis</string>
+	<string name="app_name">Rexam</string>
 
 	<!-- Авторизация/Регистрация -->
 	<string name="toolbar_sign_in_title">Авторизация</string>
@@ -77,5 +77,5 @@
 	<string name="permission_camera_description">Приложению требуется разрешение на съемку фотографий.</string>
 
 	<string name="permission_content_title">Доступ к файлам запрещен</string>
-	<string name="permission_content_description">Приложению требуется разрешение к файлам.</string>
+	<string name="permission_content_description">Приложению требуется разрешение на сохранение и чтение файлов.</string>
 </resources>

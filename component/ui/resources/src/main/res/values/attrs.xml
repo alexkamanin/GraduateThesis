@@ -17,4 +17,7 @@
 
 	<attr name="colorBackgroundSentArtefact" />
 	<attr name="colorBackgroundReceiveArtefact" />
+
+	<attr name="colorRippleSentArtefact" />
+	<attr name="colorRippleReceiveArtefact" />
 </resources>

@@ -1,7 +1,7 @@
 package ru.kamanin.nstu.graduate.thesis.feature.exam.chat.presentation
 
 import androidx.paging.PagingData
-import ru.kamanin.nstu.graduate.thesis.feature.exam.chat.presentation.model.MessageItem
+import ru.kamanin.nstu.graduate.thesis.shared.chat.presentation.model.MessageItem
 
 sealed interface ChatState {
 

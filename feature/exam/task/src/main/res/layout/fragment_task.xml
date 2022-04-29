@@ -32,56 +32,20 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:gravity="center"
-			android:paddingVertical="5dp"
+			android:paddingVertical="@dimen/margin_padding_5"
 			android:text="@string/card_time_text"
 			android:textStyle="bold"
 			tools:text="Осталось: 01:30:00" />
 
 	</com.google.android.material.card.MaterialCardView>
 
-	<com.google.android.material.card.MaterialCardView
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginHorizontal="@dimen/margin_padding_16"
-		android:layout_marginVertical="8dp"
-		app:cardBackgroundColor="?attr/colorGreyVariant"
-		app:cardCornerRadius="@dimen/corner_radius_4"
-		app:cardElevation="@dimen/elevation_0">
-
-		<LinearLayout
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:orientation="vertical">
-
-			<TextView
-				android:id="@+id/textTheme"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:paddingHorizontal="8dp"
-				android:paddingTop="8dp"
-				android:textIsSelectable="true"
-				android:textSize="18sp"
-				android:textStyle="bold"
-				tools:text="Тема вопроса" />
-
-			<TextView
-				android:id="@+id/taskText"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:paddingHorizontal="8dp"
-				android:paddingBottom="8dp"
-				android:textIsSelectable="true"
-				android:textSize="16sp"
-				tools:text="Учитель написал на доске некое натуральное число. После этого первый ученик сказал: «Это число делится на 1». Второй сказал: «Это число делится на 2», …, 50-й сказал: «Это число делится на 50». И что интересно, только двое из них были неправы. Более того, два неверных утверждения были сделаны подряд одно за другим. Какое наименьшее число мог написать на доске учитель?" />
-
-		</LinearLayout>
-
-	</com.google.android.material.card.MaterialCardView>
-
 	<androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/taskList"
 		android:layout_width="match_parent"
 		android:layout_height="@dimen/margin_padding_undefined"
-		android:layout_weight="1" />
+		android:layout_weight="1"
+		app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+		tools:listitem="@layout/item_task_message" />
 
 	<include
 		android:id="@+id/inputBottomPanel"

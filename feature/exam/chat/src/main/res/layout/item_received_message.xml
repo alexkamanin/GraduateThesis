@@ -11,7 +11,7 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_gravity="start"
-		android:layout_marginEnd="100dp"
+		android:layout_marginEnd="@dimen/message_margin"
 		android:background="@drawable/background_received_message"
 		android:paddingHorizontal="@dimen/margin_padding_5"
 		android:paddingVertical="@dimen/margin_padding_2">
@@ -21,8 +21,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginTop="@dimen/margin_padding_3"
-			android:background="@drawable/shape_anywhere_radius"
-			android:backgroundTint="?attr/colorBackgroundReceiveArtefact"
+			android:background="@drawable/ripple_received_message_artefact"
 			android:orientation="horizontal"
 			android:paddingHorizontal="@dimen/margin_padding_2"
 			android:paddingVertical="@dimen/margin_padding_5"
@@ -33,10 +32,10 @@
 
 			<ImageView
 				android:id="@+id/artefactIcon"
-				android:layout_width="36dp"
-				android:layout_height="36dp"
+				android:layout_width="@dimen/artefact_size"
+				android:layout_height="@dimen/artefact_size"
 				android:layout_gravity="center_vertical"
-				android:contentDescription="@null"
+				android:importantForAccessibility="no"
 				android:visibility="gone"
 				tools:src="@drawable/ic_artefact_pdf"
 				tools:visibility="visible" />
@@ -50,7 +49,7 @@
 				android:maxLines="1"
 				android:paddingHorizontal="@dimen/margin_padding_5"
 				android:singleLine="true"
-				android:textSize="16sp"
+				android:textSize="@dimen/font_size_16"
 				android:visibility="gone"
 				tools:text="АВТ-815 Иванов Вопрос 14.pdf"
 				tools:visibility="visible" />
@@ -66,8 +65,9 @@
 			android:linksClickable="true"
 			android:minWidth="@dimen/message_min_width"
 			android:paddingHorizontal="@dimen/margin_padding_2"
+			android:textColorLink="?android:attr/textColorSecondary"
 			android:textIsSelectable="true"
-			android:textSize="16sp"
+			android:textSize="@dimen/font_size_16"
 			android:visibility="gone"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toBottomOf="@+id/artefactContainer"
@@ -80,12 +80,14 @@
 			android:layout_height="wrap_content"
 			android:layout_marginTop="@dimen/margin_padding_2"
 			android:layout_marginEnd="@dimen/margin_padding_5"
-			android:textSize="10sp"
+			android:paddingStart="@dimen/message_min_width"
+			android:textSize="@dimen/font_size_10"
 			android:visibility="gone"
 			app:layout_constraintEnd_toStartOf="@+id/messageTime"
 			app:layout_constraintTop_toBottomOf="@+id/messageText"
 			tools:ignore="SmallSp"
-			tools:text="14 МБ • PNG" />
+			tools:text="14 МБ • PNG"
+			tools:visibility="visible" />
 
 		<TextView
 			android:id="@+id/messageTime"
@@ -93,7 +95,7 @@
 			android:layout_height="wrap_content"
 			android:layout_marginTop="@dimen/margin_padding_2"
 			android:layout_marginEnd="@dimen/margin_padding_2"
-			android:textSize="10sp"
+			android:textSize="@dimen/font_size_10"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintTop_toBottomOf="@+id/messageText"
 			tools:ignore="SmallSp"

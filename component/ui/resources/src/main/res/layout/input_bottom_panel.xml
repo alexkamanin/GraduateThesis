@@ -53,7 +53,7 @@
 				android:layout_width="24dp"
 				android:layout_height="match_parent"
 				android:layout_gravity="center_vertical"
-				android:layout_marginEnd="5dp"
+				android:layout_marginEnd="@dimen/margin_padding_5"
 				android:src="@drawable/ic_cancel" />
 
 		</LinearLayout>
@@ -83,7 +83,7 @@
 		android:layout_height="wrap_content"
 		android:layout_gravity="bottom"
 		android:layout_margin="@dimen/margin_padding_10"
-		android:contentDescription="@null"
+		android:importantForAccessibility="no"
 		android:src="@drawable/ic_share" />
 
 	<ImageView
@@ -92,7 +92,7 @@
 		android:layout_height="wrap_content"
 		android:layout_gravity="bottom"
 		android:layout_margin="@dimen/margin_padding_10"
-		android:contentDescription="@null"
+		android:importantForAccessibility="no"
 		android:src="@drawable/ic_send" />
 
 </LinearLayout>

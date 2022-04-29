@@ -1,12 +1,11 @@
 package ru.kamanin.nstu.graduate.thesis.feature.exam.list.ui.adapter
 
-import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import ru.kamanin.nstu.graduate.thesis.component.ui.core.colors.colorFromAttr
+import ru.kamanin.nstu.graduate.thesis.component.ui.core.utils.inflate
 import ru.kamanin.nstu.graduate.thesis.feature.exam.list.R
 import ru.kamanin.nstu.graduate.thesis.feature.exam.list.databinding.ItemExamBinding
 import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.Exam
@@ -14,14 +13,7 @@ import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.Exam.*
 import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.PeriodState
 import ru.kamanin.nstu.graduate.thesis.utils.time.dateStringFormat
 
-class ExamViewHolder(private val parent: ViewGroup) : RecyclerView.ViewHolder(getView(parent)) {
-
-	private companion object {
-
-		fun getView(parent: ViewGroup): View =
-			LayoutInflater.from(parent.context)
-				.inflate(R.layout.item_exam, parent, false)
-	}
+class ExamViewHolder(private val parent: ViewGroup) : RecyclerView.ViewHolder(parent.inflate(R.layout.item_exam)) {
 
 	private val viewBinding by viewBinding(ItemExamBinding::bind)
 

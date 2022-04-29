@@ -1,7 +1,12 @@
 package ru.kamanin.nstu.graduate.thesis.feature.exam.chat.ui
 
+import android.Manifest
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -26,6 +31,7 @@ import ru.kamanin.nstu.graduate.thesis.feature.exam.chat.presentation.ChatState
 import ru.kamanin.nstu.graduate.thesis.feature.exam.chat.presentation.ChatViewModel
 import ru.kamanin.nstu.graduate.thesis.feature.exam.chat.ui.adapter.MessageAdapter
 import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.entity.FileInfo
+import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.entity.Openable
 import ru.kamanin.nstu.graduate.thesis.utils.coroutines.flow.bind
 import ru.kamanin.nstu.graduate.thesis.utils.coroutines.flow.subscribe
 
@@ -51,6 +57,27 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
 		}
 	}
 
+	private val writeStoragePermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+		val permission = Manifest.permission.WRITE_EXTERNAL_STORAGE
+		val shouldRationale = shouldShowRequestPermissionRationale(permission)
+		when {
+			shouldRationale || !granted -> {
+				viewModel.clearSelectedArtefact()
+				showFailedPermissionDialog(permission = permission, okay = ::showSettingDialog)
+			}
+
+			granted                     -> {
+				viewModel.afterStoragePermissionGranted()
+			}
+		}
+	}
+
+	private val selectDocumentTree = registerForActivityResult(ActivityResultContracts.OpenDocumentTree()) { uri: Uri? ->
+		if (uri != null) {
+			viewModel.selectDocumentTreeDirectory(uri)
+		}
+	}
+
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 		viewBinding.setupKeyboardInsets()
@@ -61,17 +88,14 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
 	}
 
 	private fun initAdapter() {
-		adapter = MessageAdapter { artefact ->
-			//TODO запросить разрешение на сохранение
-			viewModel.openArtefact(artefact)
-		}
+		adapter = MessageAdapter(viewModel::selectArtefact)
 		viewBinding.messageList.adapter = adapter
 	}
 
 	private fun initListeners() {
-		viewBinding.inputBottomPanel.sendButton.setOnClickListener { viewModel.send() }
-		viewBinding.inputBottomPanel.artefactCancel.setOnClickListener { viewModel.detachFile() }
 		viewBinding.toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
+		viewBinding.inputBottomPanel.sendButton.setOnClickListener { viewModel.send() }
+		viewBinding.inputBottomPanel.artefactCancel.setOnClickListener { viewModel.detachContent() }
 		viewBinding.inputBottomPanel.shareButton.setOnClickListener {
 			viewBinding.inputBottomPanel.messageEditText.clearFocus()
 			showShareBottomSheetDialog()
@@ -81,7 +105,7 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
 
 	private fun handleShareResult(result: ShareResult) {
 		when (result) {
-			is ShareResult.Camera    -> viewModel.attachImage(result.bitmap)
+			is ShareResult.Camera    -> viewModel.attachContent(result.uri)
 			is ShareResult.Content   -> viewModel.attachContent(result.uri)
 			is ShareResult.Rationale -> showFailedPermissionDialog(permission = result.permission, okay = ::showSettingDialog)
 		}
@@ -90,8 +114,12 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
 	private fun initObservers() {
 		viewModel.message.bind(viewLifecycleOwner, viewBinding.inputBottomPanel.messageEditText)
 		viewModel.state.subscribe(viewLifecycleOwner, ::renderState)
-		viewModel.sendEvent.subscribe(viewLifecycleOwner, ::handleSendEvent)
-		viewModel.fileAttachedEvent.subscribe(viewLifecycleOwner, ::handleAttachedFile)
+		viewModel.sendMessageEvent.subscribe(viewLifecycleOwner, ::handleSendEvent)
+		viewModel.openFileEvent.subscribe(viewLifecycleOwner, ::handleOpenFileEvent)
+		viewModel.attachFileEvent.subscribe(viewLifecycleOwner, ::handleFileAttachedEvent)
+		viewModel.attachUnsupportedFileEvent.subscribe(viewLifecycleOwner, ::handleUnsupportedFileEvent)
+		viewModel.storagePermissionEvent.subscribe(viewLifecycleOwner, ::handleStoragePermissionEvent)
+		viewModel.selectDocumentTreeEvent.subscribe(viewLifecycleOwner, ::handleSelectDocumentEvent)
 	}
 
 	private fun renderState(state: ChatState) {
@@ -114,12 +142,35 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
 		viewBinding.inputBottomPanel.artefactContainer.isVisible = false
 	}
 
-	private fun handleAttachedFile(file: FileInfo?) {
+	private fun handleOpenFileEvent(openable: Openable) {
+		val intent = Intent().apply {
+			action = Intent.ACTION_VIEW
+			addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+			addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+			setDataAndType(openable.uri, openable.mimeType)
+		}
+
+		startActivity(intent)
+	}
+
+	private fun handleFileAttachedEvent(file: FileInfo?) {
 		if (file != null) {
 			showAttachedFile(file)
 		} else {
 			hideAttachedFile()
 		}
+	}
+
+	private fun handleUnsupportedFileEvent(file: FileInfo) {
+		Toast.makeText(requireContext(), "Файл не поддреживается", Toast.LENGTH_SHORT).show()
+	}
+
+	private fun handleStoragePermissionEvent() {
+		writeStoragePermission.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+	}
+
+	private fun handleSelectDocumentEvent() {
+		selectDocumentTree.launch(null)
 	}
 
 	private fun showAttachedFile(file: FileInfo) {

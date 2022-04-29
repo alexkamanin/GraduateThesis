@@ -1,25 +1,18 @@
 package ru.kamanin.nstu.graduate.thesis.feature.exam.ticket.ui.adapter
 
-import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import ru.kamanin.nstu.graduate.thesis.component.ui.core.colors.colorFromAttr
+import ru.kamanin.nstu.graduate.thesis.component.ui.core.utils.inflate
 import ru.kamanin.nstu.graduate.thesis.feature.exam.ticket.R
 import ru.kamanin.nstu.graduate.thesis.feature.exam.ticket.databinding.ItemTaskBinding
 import ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.entity.Status
 import ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.entity.Task
+import ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.entity.TaskType
 
-class TaskViewHolder(private val parent: ViewGroup) : RecyclerView.ViewHolder(getView(parent)) {
-
-	private companion object {
-
-		fun getView(parent: ViewGroup): View =
-			LayoutInflater.from(parent.context)
-				.inflate(R.layout.item_task, parent, false)
-	}
+class TaskViewHolder(private val parent: ViewGroup) : RecyclerView.ViewHolder(parent.inflate(R.layout.item_task)) {
 
 	private val viewBinding by viewBinding(ItemTaskBinding::bind)
 
@@ -39,11 +32,11 @@ class TaskViewHolder(private val parent: ViewGroup) : RecyclerView.ViewHolder(ge
 		viewBinding.statusBackground.setCardBackgroundColor(parent.context.colorFromAttr(background))
 		viewBinding.statusIcon.setImageDrawable(ContextCompat.getDrawable(parent.context, icon))
 		viewBinding.taskName.text = when (task.taskType) {
-			ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.entity.TaskType.QUESTION -> parent.resources.getString(
+			TaskType.QUESTION -> parent.resources.getString(
 				R.string.question_title,
 				task.number
 			)
-			ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.entity.TaskType.EXERCISE -> parent.resources.getString(
+			TaskType.EXERCISE -> parent.resources.getString(
 				R.string.exercise_title,
 				task.number
 			)

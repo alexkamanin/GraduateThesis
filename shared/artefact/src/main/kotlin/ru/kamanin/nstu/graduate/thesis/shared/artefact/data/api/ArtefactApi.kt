@@ -16,5 +16,5 @@ interface ArtefactApi {
 	suspend fun download(@Path("artefactId") artefactId: Long): ResponseBody
 
 	@GET("/artefact/{artefactId}/info")
-	suspend fun getInfo(@Path("artefactId") artefactId: Long): ArtefactDto
+	suspend fun getMetaData(@Path("artefactId") artefactId: Long): ArtefactDto
 }

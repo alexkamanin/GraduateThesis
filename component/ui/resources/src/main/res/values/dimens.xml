@@ -2,9 +2,20 @@
 <resources>
 	<!-- Margin & Padding -->
 	<dimen name="margin_padding_undefined">0dp</dimen>
+	<dimen name="margin_padding_2">2dp</dimen>
+	<dimen name="margin_padding_3">3dp</dimen>
+	<dimen name="margin_padding_4">4dp</dimen>
+	<dimen name="margin_padding_5">5dp</dimen>
+	<dimen name="margin_padding_8">8dp</dimen>
 	<dimen name="margin_padding_10">10dp</dimen>
+	<dimen name="margin_padding_12">12dp</dimen>
 	<dimen name="margin_padding_16">16dp</dimen>
 	<dimen name="margin_padding_20">20dp</dimen>
+
+	<!-- Fonts -->
+	<dimen name="font_size_10">10sp</dimen>
+	<dimen name="font_size_16">16sp</dimen>
+	<dimen name="font_size_18">18sp</dimen>
 
 	<!-- Elevation -->
 	<dimen name="elevation_0">0dp</dimen>
@@ -13,6 +24,7 @@
 	<dimen name="corner_radius_0">0dp</dimen>
 	<dimen name="corner_radius_4">4dp</dimen>
 	<dimen name="corner_radius_8">8dp</dimen>
+	<dimen name="corner_radius_16">16dp</dimen>
 
 	<!-- Progress bar -->
 	<dimen name="progress_bar_small">26dp</dimen>

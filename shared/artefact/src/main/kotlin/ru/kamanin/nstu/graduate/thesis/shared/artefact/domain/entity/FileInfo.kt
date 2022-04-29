@@ -7,8 +7,23 @@ data class FileInfo(
 ) {
 
 	val fullName: String
-		get() = "{$name}${requireExtension()}"
+		get() = "$name$requireExtension"
 
-	private fun requireExtension() =
-		if (extension != null) ".$extension" else ""
+	private val requireExtension: String
+		get() = if (extension != null) ".$extension" else ""
+
+	val isAllowed: Boolean
+		get() {
+
+			fun String.isSupportedType() =
+				uppercase()
+					.runCatching(ArtefactMetaData.Extension::valueOf)
+					.map { true }
+					.getOrDefault(false)
+
+			return when {
+				extension.isNullOrEmpty() -> true
+				else                      -> extension.isSupportedType()
+			}
+		}
 }

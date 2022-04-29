@@ -7,6 +7,7 @@ plugins {
 
 dependencies {
 	implementation(libs.android.core)
+	implementation(libs.android.document)
 	implementation(libs.bundles.kotlin.coroutines)
 
 	implementation(libs.hilt.android)

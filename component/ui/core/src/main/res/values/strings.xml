@@ -26,4 +26,7 @@
 	<string name="share_bottom_sheet_camera" />
 	<string name="share_bottom_sheet_gallery" />
 	<string name="share_bottom_sheet_document" />
+
+	<string name="hint_artefact_type_mb" />
+	<string name="hint_artefact_type_kb" />
 </resources>

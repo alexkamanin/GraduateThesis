@@ -1,8 +1,8 @@
 {
   "id": 2,
   "username": "ivanov@stud.nstu.ru",
-  "name": "Ivan",
-  "surname": "Ivanov",
+  "name": "Иван",
+  "surname": "Иванов",
   "roles": [
     "ROLE_STUDENT"
   ]

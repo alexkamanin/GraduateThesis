@@ -2,7 +2,7 @@ package ru.kamanin.nstu.graduate.thesis.component.ui.core.icons
 
 import androidx.annotation.DrawableRes
 import ru.kamanin.nstu.graduate.thesis.component.ui.resources.R
-import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.entity.Artefact.Extension.*
+import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.entity.ArtefactMetaData.Extension.*
 import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.entity.FileInfo
 
 val FileInfo.icon: Int

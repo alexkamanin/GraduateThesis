@@ -2,10 +2,10 @@ package ru.kamanin.nstu.graduate.thesis.component.ui.core.icons
 
 import androidx.annotation.DrawableRes
 import ru.kamanin.nstu.graduate.thesis.component.ui.resources.R
-import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.entity.Artefact
-import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.entity.Artefact.Extension.*
+import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.entity.ArtefactMetaData
+import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.entity.ArtefactMetaData.Extension.*
 
-val Artefact.icon: Int
+val ArtefactMetaData.icon: Int
 	@DrawableRes
 	get() = when (extension) {
 		PNG  -> R.drawable.ic_artefact_png

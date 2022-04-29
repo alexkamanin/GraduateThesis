@@ -5,7 +5,7 @@
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:layout_marginHorizontal="@dimen/margin_padding_16"
-	android:layout_marginVertical="8sp"
+	android:layout_marginVertical="@dimen/margin_padding_8"
 	app:cardBackgroundColor="?attr/colorGreyVariant"
 	app:cardCornerRadius="@dimen/corner_radius_4"
 	app:cardElevation="@dimen/elevation_0">
@@ -14,9 +14,9 @@
 		android:id="@+id/taskName"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:paddingVertical="12dp"
+		android:paddingVertical="@dimen/margin_padding_12"
 		android:paddingStart="@dimen/margin_padding_20"
-		android:textSize="16sp"
+		android:textSize="@dimen/font_size_16"
 		tools:text="Вопрос 1" />
 
 	<com.google.android.material.card.MaterialCardView
@@ -27,8 +27,8 @@
 		android:layout_marginEnd="@dimen/margin_padding_10"
 		android:gravity="center"
 		android:orientation="horizontal"
-		android:paddingVertical="2dp"
-		app:cardCornerRadius="16dp"
+		android:paddingVertical="@dimen/margin_padding_2"
+		app:cardCornerRadius="@dimen/corner_radius_16"
 		app:cardElevation="@dimen/elevation_0"
 		tools:backgroundTint="?attr/colorBackgroundGreyTint">
 
@@ -36,7 +36,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:orientation="horizontal"
-			android:paddingVertical="3dp">
+			android:paddingVertical="@dimen/margin_padding_3">
 
 			<TextView
 				android:id="@+id/rating"
@@ -44,8 +44,8 @@
 				android:layout_height="wrap_content"
 				android:layout_gravity="center_vertical"
 				android:gravity="center"
-				android:paddingStart="4dp"
-				android:textSize="15sp"
+				android:paddingStart="@dimen/margin_padding_4"
+				android:textSize="@dimen/font_size_16"
 				android:textStyle="bold"
 				tools:text="10/20" />
 
@@ -54,8 +54,8 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center_vertical"
-				android:contentDescription="@null"
-				android:paddingEnd="3dp"
+				android:importantForAccessibility="no"
+				android:paddingEnd="@dimen/margin_padding_3"
 				tools:src="@drawable/ic_new" />
 
 		</LinearLayout>

@@ -1,13 +1,13 @@
 package ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.repository
 
 import android.net.Uri
-import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.entity.Artefact
+import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.entity.ArtefactMetaData
 
 interface ArtefactRepository {
 
-	suspend fun upload(uri: Uri): Artefact
+	suspend fun getMetaData(artefactId: Long): ArtefactMetaData
 
-	suspend fun getInfo(artefactId: Long): Artefact
+	suspend fun upload(uri: Uri): ArtefactMetaData
 
-	suspend fun download(artefactId: Long): Uri
+	suspend fun download(artefact: ArtefactMetaData): Uri
 }

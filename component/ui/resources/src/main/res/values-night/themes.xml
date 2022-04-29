@@ -39,6 +39,9 @@
 
 		<item name="colorBackgroundSentArtefact">@color/blue_400_alpha_40</item>
 		<item name="colorBackgroundReceiveArtefact">@color/grey_300_alpha_20</item>
+
+		<item name="colorRippleSentArtefact">@color/blue_400</item>
+		<item name="colorRippleReceiveArtefact">@color/grey_300_alpha_20</item>
 	</style>
 
 </resources>

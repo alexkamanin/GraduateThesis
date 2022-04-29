@@ -39,9 +39,12 @@ fun Fragment.showInformationDialog(
 
 fun Fragment.showFailedPermissionDialog(permission: String, cancel: (() -> Unit)? = null, okay: (() -> Unit)? = null) {
 	val (titleId, descriptionId) = when (permission) {
-		Manifest.permission.CAMERA                -> R.string.permission_camera_title to R.string.permission_camera_description
-		Manifest.permission.READ_EXTERNAL_STORAGE -> R.string.permission_content_title to R.string.permission_content_description
-		else                                      -> throw Exception("Permission not found")
+		Manifest.permission.CAMERA                 -> R.string.permission_camera_title to R.string.permission_camera_description
+
+		Manifest.permission.READ_EXTERNAL_STORAGE,
+		Manifest.permission.WRITE_EXTERNAL_STORAGE -> R.string.permission_content_title to R.string.permission_content_description
+
+		else                                       -> throw Exception("Permission not found")
 	}
 	MaterialAlertDialogBuilder(requireContext())
 		.setTitle(titleId)

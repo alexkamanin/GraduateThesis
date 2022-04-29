@@ -47,6 +47,9 @@
 </p>
 
 #### Видео
+https://user-images.githubusercontent.com/51982941/166413317-747994b6-0017-4f98-a462-3e85be10f1e7.mp4
+
+https://user-images.githubusercontent.com/51982941/166413339-09e4c1e1-d6cf-474a-ab9b-5efee4e83fad.mp4
 
 ### Используемые технологии
 

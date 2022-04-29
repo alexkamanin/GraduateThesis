@@ -1,43 +1,41 @@
 package ru.kamanin.nstu.graduate.thesis.feature.exam.chat.ui.adapter
 
-import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import ru.kamanin.nstu.graduate.thesis.component.ui.core.icons.icon
+import ru.kamanin.nstu.graduate.thesis.component.ui.core.strings.artefactSingleLineType
+import ru.kamanin.nstu.graduate.thesis.component.ui.core.utils.inflate
 import ru.kamanin.nstu.graduate.thesis.feature.exam.chat.R
 import ru.kamanin.nstu.graduate.thesis.feature.exam.chat.databinding.ItemReceivedMessageBinding
-import ru.kamanin.nstu.graduate.thesis.feature.exam.chat.presentation.model.MessageItem
-import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.entity.Artefact
+import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.entity.ArtefactMetaData
+import ru.kamanin.nstu.graduate.thesis.shared.chat.presentation.model.MessageItem
 
-class ReceivedMessageViewHolder(private val parent: ViewGroup) : RecyclerView.ViewHolder(getView(parent)) {
+//todo поправить длину контейнера артефакта в разметке
 
-	private companion object {
-
-		fun getView(parent: ViewGroup): View =
-			LayoutInflater.from(parent.context)
-				.inflate(R.layout.item_received_message, parent, false)
-	}
+class ReceivedMessageViewHolder(private val parent: ViewGroup) : RecyclerView.ViewHolder(parent.inflate(R.layout.item_received_message)) {
 
 	private val viewBinding by viewBinding(ItemReceivedMessageBinding::bind)
 
-	fun bind(message: MessageItem.ReceivedMessage, artefactClicked: (Artefact) -> Unit) {
+	fun bind(message: MessageItem.ReceivedMessage, artefactClicked: (ArtefactMetaData) -> Unit) {
 		with(viewBinding) {
 			messageTime.text = message.time
 
 			if (message.artefact != null) {
-				artefactType.text = message.artefact.toSingleLineType()
-				artefactName.text = message.artefact.fullName
-				artefactIcon.setImageDrawable(androidx.core.content.ContextCompat.getDrawable(parent.context, message.artefact.icon))
+				val artefact = requireNotNull(message.artefact)
+
+				artefactType.text = artefactSingleLineType(parent.context, artefact)
+				artefactName.text = artefact.fullName
+				artefactIcon.setImageDrawable(ContextCompat.getDrawable(parent.context, artefact.icon))
 
 				artefactName.isVisible = true
 				artefactIcon.isVisible = true
 				artefactType.isVisible = true
 				artefactContainer.isVisible = true
 
-				artefactContainer.setOnClickListener { artefactClicked(message.artefact) }
+				artefactContainer.setOnClickListener { artefactClicked(artefact) }
 			} else {
 				artefactType.isVisible = false
 				artefactIcon.isVisible = false
@@ -53,10 +51,4 @@ class ReceivedMessageViewHolder(private val parent: ViewGroup) : RecyclerView.Vi
 			}
 		}
 	}
-
-	private fun Artefact.toSingleLineType(): String =
-		when {
-			sizeInMegaByte > 0 -> parent.context.getString(R.string.hint_artefact_type_mb, sizeInMegaByte, extension)
-			else               -> parent.context.getString(R.string.hint_artefact_type_kb, sizeInKiloByte, extension)
-		}
 }

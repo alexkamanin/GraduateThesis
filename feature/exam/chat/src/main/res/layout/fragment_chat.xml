@@ -23,7 +23,7 @@
 		android:layout_height="@dimen/margin_padding_undefined"
 		android:layout_weight="1"
 		android:clipToPadding="false"
-		android:paddingBottom="4dp"
+		android:paddingBottom="@dimen/margin_padding_4"
 		android:visibility="gone"
 		app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
 		app:reverseLayout="true"

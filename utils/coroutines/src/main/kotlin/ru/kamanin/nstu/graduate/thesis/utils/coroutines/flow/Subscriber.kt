@@ -28,3 +28,8 @@ inline fun <T> LiveState<T>.subscribe(owner: LifecycleOwner, crossinline observe
 inline fun <T> LiveState<T>.subscribe(owner: LifecycleOwner, crossinline observer: (T) -> Unit) {
 	onEach { observer(it) }.launchIn(owner.lifecycleScope)
 }
+
+@JvmName("LiveEventSubscribe")
+inline fun LiveEvent.subscribe(owner: LifecycleOwner, crossinline observer: () -> Unit) {
+	onEach { observer() }.launchIn(owner.lifecycleScope)
+}

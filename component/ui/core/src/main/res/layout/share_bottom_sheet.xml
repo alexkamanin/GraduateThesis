@@ -48,7 +48,7 @@
 			android:layout_marginStart="@dimen/margin_padding_10"
 			android:text="@string/share_bottom_sheet_camera"
 			android:textColor="?attr/colorIconTint"
-			android:textSize="16sp"
+			android:textSize="@dimen/font_size_16"
 			tools:text="Фотографией с камеры" />
 
 	</LinearLayout>
@@ -77,7 +77,7 @@
 			android:layout_marginStart="@dimen/margin_padding_10"
 			android:text="@string/share_bottom_sheet_gallery"
 			android:textColor="?attr/colorIconTint"
-			android:textSize="16sp"
+			android:textSize="@dimen/font_size_16"
 			tools:text="Изображением из галереи" />
 
 	</LinearLayout>
@@ -106,7 +106,7 @@
 			android:layout_marginStart="@dimen/margin_padding_10"
 			android:text="@string/share_bottom_sheet_document"
 			android:textColor="?attr/colorIconTint"
-			android:textSize="16sp"
+			android:textSize="@dimen/font_size_16"
 			tools:text="Документом" />
 
 	</LinearLayout>

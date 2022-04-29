@@ -1,7 +1,7 @@
-package ru.kamanin.nstu.graduate.thesis.feature.exam.chat.presentation.model
+package ru.kamanin.nstu.graduate.thesis.shared.chat.presentation.model
 
 import ru.kamanin.nstu.graduate.thesis.shared.account.domain.entity.Account
-import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.entity.Artefact
+import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.entity.ArtefactMetaData
 import ru.kamanin.nstu.graduate.thesis.shared.chat.domain.entity.Message
 
 sealed interface MessageItem {
@@ -12,7 +12,7 @@ sealed interface MessageItem {
 			message: Message,
 			personalAccount: Account,
 			otherAccount: Account,
-			loadArtefact: suspend (artefactId: Long) -> Artefact
+			loadArtefact: suspend (artefactId: Long) -> ArtefactMetaData
 		): MessageItem = with(message) {
 
 			if (personalAccount.id == message.accountId) {
@@ -39,14 +39,14 @@ sealed interface MessageItem {
 	val time: String
 	val account: Account
 	val text: String?
-	val artefact: Artefact?
+	val artefact: ArtefactMetaData?
 
 	data class SentMessage(
 		override val id: Long,
 		override val time: String,
 		override val account: Account,
 		override val text: String? = null,
-		override val artefact: Artefact? = null
+		override val artefact: ArtefactMetaData? = null
 	) : MessageItem
 
 	data class ReceivedMessage(
@@ -54,6 +54,6 @@ sealed interface MessageItem {
 		override val time: String,
 		override val account: Account,
 		override val text: String? = null,
-		override val artefact: Artefact? = null
+		override val artefact: ArtefactMetaData? = null
 	) : MessageItem
 }

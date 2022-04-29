@@ -26,6 +26,7 @@ object NetworkModule {
 		ChatHandler,
 		ExamHandler,
 		SessionHandler,
+		TaskHandler,
 		TicketFoundHandler,
 	)
 

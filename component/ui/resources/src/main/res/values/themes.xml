@@ -40,6 +40,9 @@
 
 		<item name="colorBackgroundSentArtefact">@color/blue_200_alpha_80</item>
 		<item name="colorBackgroundReceiveArtefact">@color/grey_200_alpha_75</item>
+
+		<item name="colorRippleSentArtefact">@color/blue_300_alpha_40</item>
+		<item name="colorRippleReceiveArtefact">@color/grey_300</item>
 	</style>
 
 </resources>

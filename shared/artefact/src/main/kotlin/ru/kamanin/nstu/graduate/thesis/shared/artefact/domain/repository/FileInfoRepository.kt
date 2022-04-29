@@ -5,5 +5,5 @@ import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.entity.FileInfo
 
 interface FileInfoRepository {
 
-	fun get(uri: Uri): FileInfo
+	suspend fun get(uri: Uri): FileInfo
 }
