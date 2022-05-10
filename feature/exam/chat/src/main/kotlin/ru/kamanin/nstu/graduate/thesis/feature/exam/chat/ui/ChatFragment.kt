@@ -5,7 +5,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
@@ -24,7 +23,9 @@ import ru.kamanin.nstu.graduate.thesis.component.ui.core.dialogs.bottom.showShar
 import ru.kamanin.nstu.graduate.thesis.component.ui.core.dialogs.extensions.showFailedPermissionDialog
 import ru.kamanin.nstu.graduate.thesis.component.ui.core.dialogs.extensions.showSettingDialog
 import ru.kamanin.nstu.graduate.thesis.component.ui.core.icons.icon
-import ru.kamanin.nstu.graduate.thesis.component.ui.insets.setupKeyboardInsets
+import ru.kamanin.nstu.graduate.thesis.component.ui.core.insets.setupKeyboardInsets
+import ru.kamanin.nstu.graduate.thesis.component.ui.core.snackbar.showErrorSnackbar
+import ru.kamanin.nstu.graduate.thesis.component.ui.core.snackbar.showInfoSnackbar
 import ru.kamanin.nstu.graduate.thesis.feature.exam.chat.R
 import ru.kamanin.nstu.graduate.thesis.feature.exam.chat.databinding.FragmentChatBinding
 import ru.kamanin.nstu.graduate.thesis.feature.exam.chat.presentation.ChatState
@@ -32,6 +33,7 @@ import ru.kamanin.nstu.graduate.thesis.feature.exam.chat.presentation.ChatViewMo
 import ru.kamanin.nstu.graduate.thesis.feature.exam.chat.ui.adapter.MessageAdapter
 import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.entity.FileInfo
 import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.entity.Openable
+import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.error.ArtefactErrorState
 import ru.kamanin.nstu.graduate.thesis.utils.coroutines.flow.bind
 import ru.kamanin.nstu.graduate.thesis.utils.coroutines.flow.subscribe
 
@@ -88,7 +90,10 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
 	}
 
 	private fun initAdapter() {
-		adapter = MessageAdapter(viewModel::selectArtefact)
+		adapter = MessageAdapter(
+			artefactClicked = viewModel::selectArtefact,
+			textClicked = viewModel::copyText
+		)
 		viewBinding.messageList.adapter = adapter
 	}
 
@@ -115,11 +120,12 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
 		viewModel.message.bind(viewLifecycleOwner, viewBinding.inputBottomPanel.messageEditText)
 		viewModel.state.subscribe(viewLifecycleOwner, ::renderState)
 		viewModel.sendMessageEvent.subscribe(viewLifecycleOwner, ::handleSendEvent)
+		viewModel.infoEvent.subscribe(viewLifecycleOwner, ::handleInfoEvent)
 		viewModel.openFileEvent.subscribe(viewLifecycleOwner, ::handleOpenFileEvent)
 		viewModel.attachFileEvent.subscribe(viewLifecycleOwner, ::handleFileAttachedEvent)
-		viewModel.attachUnsupportedFileEvent.subscribe(viewLifecycleOwner, ::handleUnsupportedFileEvent)
 		viewModel.storagePermissionEvent.subscribe(viewLifecycleOwner, ::handleStoragePermissionEvent)
 		viewModel.selectDocumentTreeEvent.subscribe(viewLifecycleOwner, ::handleSelectDocumentEvent)
+		viewModel.artefactErrorEvent.subscribe(viewLifecycleOwner, ::handleArtefactErrorEvent)
 	}
 
 	private fun renderState(state: ChatState) {
@@ -142,6 +148,10 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
 		viewBinding.inputBottomPanel.artefactContainer.isVisible = false
 	}
 
+	private fun handleInfoEvent(text: String) {
+		showInfoSnackbar(text, R.id.inputBottomPanel)
+	}
+
 	private fun handleOpenFileEvent(openable: Openable) {
 		val intent = Intent().apply {
 			action = Intent.ACTION_VIEW
@@ -161,16 +171,25 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
 		}
 	}
 
-	private fun handleUnsupportedFileEvent(file: FileInfo) {
-		Toast.makeText(requireContext(), "Файл не поддреживается", Toast.LENGTH_SHORT).show()
-	}
-
 	private fun handleStoragePermissionEvent() {
 		writeStoragePermission.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
 	}
 
 	private fun handleSelectDocumentEvent() {
 		selectDocumentTree.launch(null)
+	}
+
+	private fun handleArtefactErrorEvent(errorState: ArtefactErrorState) {
+		val message = when (errorState) {
+			ArtefactErrorState.DownloadError       -> getString(R.string.artefact_download_error)
+
+			ArtefactErrorState.UploadError         -> getString(R.string.artefact_upload_error)
+
+			ArtefactErrorState.NotFoundError       -> getString(R.string.artefact_not_found_error)
+
+			is ArtefactErrorState.UnsupportedError -> getString(R.string.artefact_unsupported_error, errorState.file.extension)
+		}
+		showErrorSnackbar(message, R.id.inputBottomPanel)
 	}
 
 	private fun showAttachedFile(file: FileInfo) {

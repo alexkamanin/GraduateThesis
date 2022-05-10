@@ -41,6 +41,8 @@ dependencies {
 
 	// ----- Shared ------
 	implementation(projects.shared.api.headers)
+	implementation(projects.shared.validation)
+	implementation(projects.shared.clipdata)
 	implementation(projects.shared.artefact)
 	implementation(projects.shared.session)
 	implementation(projects.shared.account)
@@ -50,6 +52,8 @@ dependencies {
 
 	// ------ Utils ------
 	implementation(projects.utils.coroutines)
+	implementation(projects.utils.encoding)
 	implementation(projects.utils.paging)
 	implementation(projects.utils.time)
+	implementation(projects.utils.error)
 }

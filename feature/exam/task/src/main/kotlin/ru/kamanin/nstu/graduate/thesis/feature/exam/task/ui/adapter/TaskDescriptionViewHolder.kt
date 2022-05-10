@@ -12,8 +12,16 @@ class TaskDescriptionViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(par
 
 	private val viewBinding by viewBinding(ItemTaskDescriptionBinding::bind)
 
-	fun bind(task: Task) {
+	fun bind(task: Task, textClicked: (String) -> Unit) {
 		viewBinding.taskText.text = task.description
+		viewBinding.taskText.setOnLongClickListener {
+			textClicked(viewBinding.taskText.text.toString())
+			true
+		}
 		viewBinding.textTheme.text = task.theme
+		viewBinding.textTheme.setOnLongClickListener {
+			textClicked(viewBinding.textTheme.text.toString())
+			true
+		}
 	}
 }

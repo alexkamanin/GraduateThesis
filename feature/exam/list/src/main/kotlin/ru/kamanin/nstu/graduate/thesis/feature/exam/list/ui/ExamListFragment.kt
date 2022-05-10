@@ -11,7 +11,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.WithFragmentBindings
 import ru.kamanin.nstu.graduate.thesis.component.navigation.navigate
 import ru.kamanin.nstu.graduate.thesis.component.ui.core.colors.colorFromAttr
-import ru.kamanin.nstu.graduate.thesis.component.ui.insets.setupBaseInsets
+import ru.kamanin.nstu.graduate.thesis.component.ui.core.insets.setupBaseInsets
 import ru.kamanin.nstu.graduate.thesis.feature.exam.list.R
 import ru.kamanin.nstu.graduate.thesis.feature.exam.list.databinding.FragmentExamListBinding
 import ru.kamanin.nstu.graduate.thesis.feature.exam.list.navigation.ExamListNavigationProvider

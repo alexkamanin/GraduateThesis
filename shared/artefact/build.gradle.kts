@@ -17,4 +17,5 @@ dependencies {
 	kapt(libs.squareup.moshi.codegen)
 
 	implementation(projects.utils.coroutines)
+	implementation(projects.utils.error)
 }

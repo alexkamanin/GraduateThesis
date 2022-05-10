@@ -50,4 +50,7 @@ data class ArtefactMetaData(
 
 	val isDocument: Boolean
 		get() = extension.isDocument()
+
+	val savedName: String
+		get() = "${id}_${fullName}"
 }

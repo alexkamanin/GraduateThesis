@@ -1,4 +1,9 @@
 <resources>
 	<string name="toolbar_chat_title" />
 	<string name="toolbar_chat_subtitle" />
+
+	<string name="artefact_download_error" />
+	<string name="artefact_upload_error" />
+	<string name="artefact_not_found_error" />
+	<string name="artefact_unsupported_error" />
 </resources>

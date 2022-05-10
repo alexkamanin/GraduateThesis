@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<!-- Margin & Padding -->
-	<dimen name="message_min_width">40dp</dimen>
+	<dimen name="artefact_type_min_padding_start">40dp</dimen>
 	<dimen name="message_margin">100dp</dimen>
 	<dimen name="artefact_size">36dp</dimen>
 </resources>

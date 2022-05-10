@@ -41,7 +41,7 @@ class MediaDataSourceImpl @Inject constructor(
 			val resolver = context.contentResolver
 
 			val contentValues = ContentValues().apply {
-				put(MediaStore.MediaColumns.DISPLAY_NAME, artefact.fullName)
+				put(MediaStore.MediaColumns.DISPLAY_NAME, artefact.savedName)
 				put(MediaStore.MediaColumns.MIME_TYPE, artefact.mimeType)
 			}
 
@@ -65,7 +65,7 @@ class MediaDataSourceImpl @Inject constructor(
 			)
 
 			context.contentResolver.query(collection, projection, null, null, null)
-				?.use { cursor -> retrieveMediaUri(cursor, collection, artefact.fullName) }
+				?.use { cursor -> retrieveMediaUri(cursor, collection, artefact.savedName) }
 		}
 
 	private fun retrieveMediaUri(cursor: Cursor, collection: Uri, mediaName: String): Uri? {

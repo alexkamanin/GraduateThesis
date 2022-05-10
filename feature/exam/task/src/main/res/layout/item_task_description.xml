@@ -20,9 +20,9 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:paddingHorizontal="@dimen/margin_padding_8"
-			android:paddingTop="@dimen/margin_padding_8"
+			android:paddingVertical="@dimen/margin_padding_8"
 			android:textIsSelectable="true"
-			android:textSize="@dimen/font_size_18"
+			android:textSize="@dimen/font_size_14"
 			android:textStyle="bold"
 			tools:text="Тема вопроса" />
 

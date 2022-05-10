@@ -78,4 +78,19 @@
 
 	<string name="permission_content_title">Доступ к файлам запрещен</string>
 	<string name="permission_content_description">Приложению требуется разрешение на сохранение и чтение файлов.</string>
+
+	<!-- Уведомления -->
+	<string name="notification_download_channel_id" translatable="false">downloadNotificationId</string>
+	<string name="notification_download_channel_name">Загрузки</string>
+	<string name="notification_download_start_title">Загружается…</string>
+	<string name="notification_download_end_title">Загрузка завершена</string>
+
+	<!-- Копирование -->
+	<string name="clip_data_copied_title">Скопировано</string>
+
+	<!-- Артефакты -->
+	<string name="artefact_download_error">Не удалось скачать файл</string>
+	<string name="artefact_upload_error">Не удалось загрузить файл</string>
+	<string name="artefact_not_found_error">Файл не существует</string>
+	<string name="artefact_unsupported_error">Файл с расширением %1$s не поддерживается</string>
 </resources>

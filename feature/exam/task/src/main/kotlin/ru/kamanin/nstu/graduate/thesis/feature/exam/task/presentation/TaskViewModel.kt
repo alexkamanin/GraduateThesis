@@ -12,12 +12,12 @@ import ru.kamanin.nstu.graduate.thesis.shared.account.domain.usecase.GetPersonal
 import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.delegate.ArtefactViewModelDelegate
 import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.usecase.GetArtefactMetaDataUseCase
 import ru.kamanin.nstu.graduate.thesis.shared.chat.presentation.model.MessageItem
+import ru.kamanin.nstu.graduate.thesis.shared.clipdata.di.CopiedText
+import ru.kamanin.nstu.graduate.thesis.shared.clipdata.domain.usecase.SetClipDataUseCase
 import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.Exam
 import ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.entity.Task
 import ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.usecase.GetMessagesByTaskUseCase
-import ru.kamanin.nstu.graduate.thesis.utils.coroutines.flow.LiveEvent
-import ru.kamanin.nstu.graduate.thesis.utils.coroutines.flow.MutableLiveEvent
-import ru.kamanin.nstu.graduate.thesis.utils.coroutines.flow.asLiveEvent
+import ru.kamanin.nstu.graduate.thesis.utils.coroutines.flow.*
 import ru.kamanin.nstu.graduate.thesis.utils.paging.mapPaging
 import ru.kamanin.nstu.graduate.thesis.utils.time.RemainingTime
 import ru.kamanin.nstu.graduate.thesis.utils.time.TimeManager
@@ -29,9 +29,11 @@ class TaskViewModel @Inject constructor(
 	private val getArtefactMetaDataUseCase: GetArtefactMetaDataUseCase,
 	private val getPersonalAccountUseCase: GetPersonalAccountUseCase,
 	private val getMessagesByTaskUseCase: GetMessagesByTaskUseCase,
+	private val setClipDataUseCase: SetClipDataUseCase,
 	private val timeManager: TimeManager,
 	artefactViewModelDelegate: ArtefactViewModelDelegate,
 	savedStateHandle: SavedStateHandle,
+	@CopiedText private val copiedText: String
 ) : ViewModel(), ArtefactViewModelDelegate by artefactViewModelDelegate {
 
 	private companion object {
@@ -52,6 +54,9 @@ class TaskViewModel @Inject constructor(
 
 	private val _remainingTimeEvent = MutableSharedFlow<RemainingTime>(replay = 1)
 	val remainingTimeEvent: SharedFlow<RemainingTime> get() = _remainingTimeEvent
+
+	private val _infoEvent = MutableLiveState<String>()
+	val infoEvent: LiveState<String> get() = _infoEvent
 
 	init {
 		getRemainingTime(exam.period.end, timeManager.currentTime)
@@ -86,5 +91,11 @@ class TaskViewModel @Inject constructor(
 
 	fun send() {
 		//TODO("Not yet implemented")
+	}
+
+	fun copyText(text: String) {
+		setClipDataUseCase(text)
+
+		_infoEvent.invoke(copiedText)
 	}
 }

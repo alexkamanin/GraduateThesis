@@ -15,9 +15,20 @@ import ru.kamanin.nstu.graduate.thesis.shared.chat.presentation.model.MessageIte
 
 class SentMessageViewHolder(private val parent: ViewGroup) : RecyclerView.ViewHolder(parent.inflate(R.layout.item_sent_message)) {
 
+	private companion object {
+
+		const val EMPTY_PADDING = 0
+		const val START_PADDING = 5
+		const val END_PADDING = 60
+	}
+
 	private val viewBinding by viewBinding(ItemSentMessageBinding::bind)
 
-	fun bind(message: MessageItem.SentMessage, artefactClicked: (ArtefactMetaData) -> Unit) {
+	fun bind(
+		message: MessageItem.SentMessage,
+		artefactClicked: (ArtefactMetaData) -> Unit,
+		textClicked: (String) -> Unit
+	) {
 		with(viewBinding) {
 			messageTime.text = message.time
 
@@ -32,6 +43,7 @@ class SentMessageViewHolder(private val parent: ViewGroup) : RecyclerView.ViewHo
 				artefactIcon.isVisible = true
 				artefactType.isVisible = true
 				artefactContainer.isVisible = true
+				messageText.setPadding(EMPTY_PADDING, EMPTY_PADDING, EMPTY_PADDING, EMPTY_PADDING)
 
 				artefactContainer.setOnClickListener { artefactClicked(artefact) }
 			} else {
@@ -39,11 +51,16 @@ class SentMessageViewHolder(private val parent: ViewGroup) : RecyclerView.ViewHo
 				artefactIcon.isVisible = false
 				artefactType.isVisible = false
 				artefactContainer.isVisible = false
+				messageText.setPadding(START_PADDING, EMPTY_PADDING, END_PADDING, EMPTY_PADDING)
 			}
 
 			if (message.text != null) {
 				messageText.text = message.text
 				messageText.isVisible = true
+				messageText.setOnLongClickListener {
+					textClicked(messageText.text.toString())
+					true
+				}
 			} else {
 				messageText.isVisible = false
 			}

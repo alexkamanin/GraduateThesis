@@ -8,7 +8,7 @@ import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import ru.kamanin.nstu.graduate.thesis.component.navigation.navigate
-import ru.kamanin.nstu.graduate.thesis.component.ui.insets.setupBaseInsets
+import ru.kamanin.nstu.graduate.thesis.component.ui.core.insets.setupBaseInsets
 import ru.kamanin.nstu.graduate.thesis.navigation.R
 import ru.kamanin.nstu.graduate.thesis.navigation.databinding.FragmentNavigationBinding
 import ru.kamanin.nstu.graduate.thesis.navigation.navigation.NavigationProvider

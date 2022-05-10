@@ -8,12 +8,15 @@ import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.entity.ArtefactMet
 import ru.kamanin.nstu.graduate.thesis.shared.chat.presentation.model.MessageItem
 import ru.kamanin.nstu.graduate.thesis.shared.chat.ui.adapter.MessageItemDiffCallback
 
-class MessageAdapter(private val artefactClicked: (ArtefactMetaData) -> Unit) : PagingDataAdapter<MessageItem, RecyclerView.ViewHolder>(MessageItemDiffCallback) {
+class MessageAdapter(
+	private val artefactClicked: (ArtefactMetaData) -> Unit,
+	private val textClicked: (String) -> Unit
+) : PagingDataAdapter<MessageItem, RecyclerView.ViewHolder>(MessageItemDiffCallback) {
 
 	override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 		when (val item = getItem(position)) {
-			is MessageItem.SentMessage     -> (holder as SentMessageViewHolder).bind(item, artefactClicked)
-			is MessageItem.ReceivedMessage -> (holder as ReceivedMessageViewHolder).bind(item, artefactClicked)
+			is MessageItem.SentMessage     -> (holder as SentMessageViewHolder).bind(item, artefactClicked, textClicked)
+			is MessageItem.ReceivedMessage -> (holder as ReceivedMessageViewHolder).bind(item, artefactClicked, textClicked)
 
 			else                           -> throw IllegalStateException("Unknown type '$item' in message adapter")
 		}

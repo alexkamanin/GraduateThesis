@@ -3,6 +3,7 @@ package ru.kamanin.nstu.graduate.thesis.shared.artefact.data.repository
 import android.net.Uri
 import ru.kamanin.nstu.graduate.thesis.shared.artefact.data.datasource.ArtefactDataSource
 import ru.kamanin.nstu.graduate.thesis.shared.artefact.data.datasource.DocumentDataSource
+import ru.kamanin.nstu.graduate.thesis.shared.artefact.data.datasource.DownloadNotificationDataSource
 import ru.kamanin.nstu.graduate.thesis.shared.artefact.data.datasource.MediaDataSource
 import ru.kamanin.nstu.graduate.thesis.shared.artefact.data.mapper.toEntity
 import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.entity.ArtefactMetaData
@@ -13,6 +14,7 @@ class ArtefactRepositoryImpl @Inject constructor(
 	private val mediaDataSource: MediaDataSource,
 	private val documentDataSource: DocumentDataSource,
 	private val artefactDataSource: ArtefactDataSource,
+	private val downloadNotificationDataSource: DownloadNotificationDataSource
 ) : ArtefactRepository {
 
 	override suspend fun getMetaData(artefactId: Long): ArtefactMetaData =
@@ -32,11 +34,19 @@ class ArtefactRepositoryImpl @Inject constructor(
 	}
 
 	private suspend fun getRemote(artefact: ArtefactMetaData): Uri {
-		val responseBody = artefactDataSource.get(artefact.id)
+		downloadNotificationDataSource.start(artefact)
 
-		return when {
+		val responseBody = runCatching { artefactDataSource.get(artefact.id) }
+			.also { downloadNotificationDataSource.cancel(artefact) }
+			.getOrThrow()
+
+		val uri = when {
 			artefact.isMedia -> mediaDataSource.set(artefact, responseBody)
 			else             -> documentDataSource.set(artefact, responseBody)
 		}
+
+		downloadNotificationDataSource.end(artefact, uri)
+
+		return uri
 	}
 }

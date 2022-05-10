@@ -2,12 +2,14 @@ package ru.kamanin.nstu.graduate.thesis.di.artefact
 
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import ru.kamanin.nstu.graduate.thesis.shared.artefact.data.datasource.*
 import ru.kamanin.nstu.graduate.thesis.shared.artefact.data.repository.ArtefactRepositoryImpl
 import ru.kamanin.nstu.graduate.thesis.shared.artefact.data.repository.DocumentTreeRepositoryImpl
 import ru.kamanin.nstu.graduate.thesis.shared.artefact.data.repository.FileInfoRepositoryImpl
+import ru.kamanin.nstu.graduate.thesis.shared.artefact.di.DownloadIconId
 import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.delegate.ArtefactViewModelDelegate
 import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.delegate.ArtefactViewModelDelegateImpl
 import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.repository.ArtefactRepository
@@ -18,6 +20,15 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 interface ArtefactModule {
+
+	companion object {
+
+		@Provides
+		@Singleton
+		@DownloadIconId
+		fun provideDownloadNotificationIcon(): Int =
+			ru.kamanin.nstu.graduate.thesis.component.ui.resources.R.drawable.ic_download
+	}
 
 	@Binds
 	@Singleton
@@ -54,6 +65,10 @@ interface ArtefactModule {
 	@Binds
 	@Singleton
 	fun bindArtefactRepository(impl: ArtefactRepositoryImpl): ArtefactRepository
+
+	@Binds
+	@Singleton
+	fun bindDownloadNotificationDataSource(impl: DownloadNotificationDataSourceImpl): DownloadNotificationDataSource
 
 	@Binds
 	fun bindArtefactViewModelDelegate(impl: ArtefactViewModelDelegateImpl): ArtefactViewModelDelegate

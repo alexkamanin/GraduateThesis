@@ -21,6 +21,7 @@ dependencies {
 	implementation(projects.component.ui.core)
 	implementation(projects.component.navigation)
 
+	implementation(projects.shared.clipdata)
 	implementation(projects.shared.ticket)
 	implementation(projects.shared.account)
 	implementation(projects.shared.artefact)

@@ -5,7 +5,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
@@ -25,7 +24,9 @@ import ru.kamanin.nstu.graduate.thesis.component.ui.core.dialogs.bottom.showShar
 import ru.kamanin.nstu.graduate.thesis.component.ui.core.dialogs.extensions.showFailedPermissionDialog
 import ru.kamanin.nstu.graduate.thesis.component.ui.core.dialogs.extensions.showSettingDialog
 import ru.kamanin.nstu.graduate.thesis.component.ui.core.icons.icon
-import ru.kamanin.nstu.graduate.thesis.component.ui.insets.setupKeyboardInsets
+import ru.kamanin.nstu.graduate.thesis.component.ui.core.insets.setupKeyboardInsets
+import ru.kamanin.nstu.graduate.thesis.component.ui.core.snackbar.showErrorSnackbar
+import ru.kamanin.nstu.graduate.thesis.component.ui.core.snackbar.showInfoSnackbar
 import ru.kamanin.nstu.graduate.thesis.feature.exam.task.R
 import ru.kamanin.nstu.graduate.thesis.feature.exam.task.databinding.FragmentTaskBinding
 import ru.kamanin.nstu.graduate.thesis.feature.exam.task.presentation.TaskState
@@ -34,6 +35,7 @@ import ru.kamanin.nstu.graduate.thesis.feature.exam.task.ui.adapter.TaskDescript
 import ru.kamanin.nstu.graduate.thesis.feature.exam.task.ui.adapter.TaskMessageAdapter
 import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.entity.FileInfo
 import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.entity.Openable
+import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.error.ArtefactErrorState
 import ru.kamanin.nstu.graduate.thesis.shared.chat.presentation.model.MessageItem
 import ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.entity.Task
 import ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.entity.TaskType
@@ -85,7 +87,10 @@ class TaskFragment : Fragment(R.layout.fragment_task) {
 	}
 
 	private fun initAdapter() {
-		messagesAdapter = TaskMessageAdapter(viewModel::selectArtefact)
+		messagesAdapter = TaskMessageAdapter(
+			artefactClicked = viewModel::selectArtefact,
+			textClicked = viewModel::copyText
+		)
 		concatAdapter = ConcatAdapter(messagesAdapter)
 
 		viewBinding.taskList.adapter = concatAdapter
@@ -106,9 +111,10 @@ class TaskFragment : Fragment(R.layout.fragment_task) {
 		viewModel.message.bind(viewLifecycleOwner, viewBinding.inputBottomPanel.messageEditText)
 		viewModel.state.subscribe(viewLifecycleOwner, ::renderState)
 		viewModel.sendMessageEvent.subscribe(viewLifecycleOwner, ::handleSendEvent)
+		viewModel.infoEvent.subscribe(viewLifecycleOwner, ::handleInfoEvent)
 		viewModel.openFileEvent.subscribe(viewLifecycleOwner, ::handleOpenFileEvent)
 		viewModel.attachFileEvent.subscribe(viewLifecycleOwner, ::handleFileAttachedEvent)
-		viewModel.attachUnsupportedFileEvent.subscribe(viewLifecycleOwner, ::handleUnsupportedFileEvent)
+		viewModel.artefactErrorEvent.subscribe(viewLifecycleOwner, ::handleArtefactErrorEvent)
 		viewModel.storagePermissionEvent.subscribe(viewLifecycleOwner, ::handleStoragePermissionEvent)
 		viewModel.selectDocumentTreeEvent.subscribe(viewLifecycleOwner, ::handleSelectDocumentEvent)
 		viewModel.remainingTimeEvent.subscribe(viewLifecycleOwner, ::showRemainingTime)
@@ -141,6 +147,10 @@ class TaskFragment : Fragment(R.layout.fragment_task) {
 		viewBinding.inputBottomPanel.artefactContainer.isVisible = false
 	}
 
+	private fun handleInfoEvent(text: String) {
+		showInfoSnackbar(text, R.id.inputBottomPanel)
+	}
+
 	private fun handleOpenFileEvent(openable: Openable) {
 		val intent = Intent().apply {
 			action = Intent.ACTION_VIEW
@@ -160,8 +170,17 @@ class TaskFragment : Fragment(R.layout.fragment_task) {
 		}
 	}
 
-	private fun handleUnsupportedFileEvent(file: FileInfo) {
-		Toast.makeText(requireContext(), "Файл не поддреживается", Toast.LENGTH_SHORT).show()
+	private fun handleArtefactErrorEvent(errorState: ArtefactErrorState) {
+		val message = when (errorState) {
+			ArtefactErrorState.DownloadError       -> getString(R.string.artefact_download_error)
+
+			ArtefactErrorState.UploadError         -> getString(R.string.artefact_upload_error)
+
+			ArtefactErrorState.NotFoundError       -> getString(R.string.artefact_not_found_error)
+
+			is ArtefactErrorState.UnsupportedError -> getString(R.string.artefact_unsupported_error, errorState.file.extension)
+		}
+		showErrorSnackbar(message, R.id.inputBottomPanel)
 	}
 
 	private fun handleStoragePermissionEvent() {
@@ -196,7 +215,10 @@ class TaskFragment : Fragment(R.layout.fragment_task) {
 
 	private fun applyDescription(task: Task) {
 		if (descriptionAdapter == null) {
-			descriptionAdapter = TaskDescriptionAdapter(task)
+			descriptionAdapter = TaskDescriptionAdapter(
+				task = task,
+				textClicked = viewModel::copyText
+			)
 			concatAdapter?.addAdapter(0, requireNotNull(descriptionAdapter))
 		}
 	}

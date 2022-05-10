@@ -9,7 +9,7 @@ fun ExamDto.toEntity() =
 		id = id,
 		name = disciplineName,
 		mark = semesterRating + examRating,
-		period = Exam.Period(id = id, start = examPeriod.start, end = examPeriod.end, state = examPeriod.state),
+		period = Exam.Period(id = examPeriod.id, start = examPeriod.start, end = examPeriod.end, state = examPeriod.state),
 		allowed = allowed,
 		teacher = teacher.toEntity(),
 		regulationRating = Exam.RegulationRating(

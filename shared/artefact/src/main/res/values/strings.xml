@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="notification_download_channel_id" />
+	<string name="notification_download_channel_name" />
+	<string name="notification_download_start_title" />
+	<string name="notification_download_end_title" />
+</resources>

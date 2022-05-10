@@ -34,7 +34,7 @@ class DocumentDataSourceImpl @Inject constructor(
 		withContext(ioDispatcher) {
 			val documentDirectory = DocumentFile.fromTreeUri(context, documentTreeDataSource.get())
 				?: throw IllegalStateException("Cannot find document uri tree")
-			val document = documentDirectory.createFile(artefact.mimeType, artefact.fullName)
+			val document = documentDirectory.createFile(artefact.mimeType, artefact.savedName)
 				?: throw IllegalStateException("Cannot create file '${artefact.fullName} in directory '${documentDirectory.name}'")
 
 			responseBody.byteStream().use { inputStream ->
@@ -55,7 +55,7 @@ class DocumentDataSourceImpl @Inject constructor(
 			val documentDirectory = DocumentFile.fromTreeUri(context, documentTreeDataSource.get())
 				?: throw IllegalStateException("Cannot find document uri tree")
 
-			val file = documentDirectory.findFile(artefact.fullName)
+			val file = documentDirectory.findFile(artefact.savedName)
 			file?.uri
 		}
 }

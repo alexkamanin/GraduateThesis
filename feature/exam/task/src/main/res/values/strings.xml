@@ -3,4 +3,9 @@
 	<string name="card_time_text" />
 	<string name="question_title" />
 	<string name="exercise_title" />
+
+	<string name="artefact_download_error" />
+	<string name="artefact_upload_error" />
+	<string name="artefact_not_found_error" />
+	<string name="artefact_unsupported_error" />
 </resources>

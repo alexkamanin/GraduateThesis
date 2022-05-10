@@ -13,13 +13,22 @@ import ru.kamanin.nstu.graduate.thesis.feature.exam.chat.databinding.ItemReceive
 import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.entity.ArtefactMetaData
 import ru.kamanin.nstu.graduate.thesis.shared.chat.presentation.model.MessageItem
 
-//todo поправить длину контейнера артефакта в разметке
-
 class ReceivedMessageViewHolder(private val parent: ViewGroup) : RecyclerView.ViewHolder(parent.inflate(R.layout.item_received_message)) {
+
+	private companion object {
+
+		const val EMPTY_PADDING = 0
+		const val START_PADDING = 5
+		const val END_PADDING = 60
+	}
 
 	private val viewBinding by viewBinding(ItemReceivedMessageBinding::bind)
 
-	fun bind(message: MessageItem.ReceivedMessage, artefactClicked: (ArtefactMetaData) -> Unit) {
+	fun bind(
+		message: MessageItem.ReceivedMessage,
+		artefactClicked: (ArtefactMetaData) -> Unit,
+		textClicked: (String) -> Unit
+	) {
 		with(viewBinding) {
 			messageTime.text = message.time
 
@@ -34,6 +43,7 @@ class ReceivedMessageViewHolder(private val parent: ViewGroup) : RecyclerView.Vi
 				artefactIcon.isVisible = true
 				artefactType.isVisible = true
 				artefactContainer.isVisible = true
+				messageText.setPadding(EMPTY_PADDING, EMPTY_PADDING, EMPTY_PADDING, EMPTY_PADDING)
 
 				artefactContainer.setOnClickListener { artefactClicked(artefact) }
 			} else {
@@ -41,11 +51,16 @@ class ReceivedMessageViewHolder(private val parent: ViewGroup) : RecyclerView.Vi
 				artefactIcon.isVisible = false
 				artefactType.isVisible = false
 				artefactContainer.isVisible = false
+				messageText.setPadding(START_PADDING, EMPTY_PADDING, END_PADDING, EMPTY_PADDING)
 			}
 
 			if (message.text != null) {
 				messageText.text = message.text
 				messageText.isVisible = true
+				messageText.setOnLongClickListener {
+					textClicked(messageText.text.toString())
+					true
+				}
 			} else {
 				messageText.isVisible = false
 			}

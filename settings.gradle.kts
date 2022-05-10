@@ -37,6 +37,7 @@ include(":shared:exam")
 include(":shared:account")
 include(":shared:artefact")
 include(":shared:validation")
+include(":shared:clipdata")
 include(":shared:ticket")
 include(":shared:chat")
 // ----- Utils -------

@@ -1,4 +1,4 @@
-package ru.kamanin.nstu.graduate.thesis.component.ui.insets
+package ru.kamanin.nstu.graduate.thesis.component.ui.core.insets
 
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat

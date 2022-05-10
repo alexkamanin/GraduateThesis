@@ -8,7 +8,10 @@ import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.entity.ArtefactMet
 import ru.kamanin.nstu.graduate.thesis.shared.chat.presentation.model.MessageItem
 
 @Deprecated(message = "Оставлено для худших времен")
-class DeprecatedMessageAdapter(private val artefactClicked: (ArtefactMetaData) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class DeprecatedMessageAdapter(
+	private val artefactClicked: (ArtefactMetaData) -> Unit,
+	private val textClicked: (String) -> Unit
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 	var items: List<MessageItem> = emptyList()
 		set(value) {
@@ -27,8 +30,16 @@ class DeprecatedMessageAdapter(private val artefactClicked: (ArtefactMetaData) -
 
 	override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 		when (items[position]) {
-			is MessageItem.SentMessage     -> (holder as SentMessageViewHolder).bind(items[position] as MessageItem.SentMessage, artefactClicked)
-			is MessageItem.ReceivedMessage -> (holder as ReceivedMessageViewHolder).bind(items[position] as MessageItem.ReceivedMessage, artefactClicked)
+			is MessageItem.SentMessage     -> (holder as SentMessageViewHolder).bind(
+				items[position] as MessageItem.SentMessage,
+				artefactClicked,
+				textClicked
+			)
+			is MessageItem.ReceivedMessage -> (holder as ReceivedMessageViewHolder).bind(
+				items[position] as MessageItem.ReceivedMessage,
+				artefactClicked,
+				textClicked
+			)
 		}
 	}
 

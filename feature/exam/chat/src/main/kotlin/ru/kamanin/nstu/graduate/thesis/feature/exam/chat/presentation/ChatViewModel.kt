@@ -18,11 +18,10 @@ import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.usecase.UploadArte
 import ru.kamanin.nstu.graduate.thesis.shared.chat.domain.usecase.GetMessagesByPeriodUseCase
 import ru.kamanin.nstu.graduate.thesis.shared.chat.domain.usecase.SendMessageByPeriodUseCase
 import ru.kamanin.nstu.graduate.thesis.shared.chat.presentation.model.MessageItem
+import ru.kamanin.nstu.graduate.thesis.shared.clipdata.di.CopiedText
+import ru.kamanin.nstu.graduate.thesis.shared.clipdata.domain.usecase.SetClipDataUseCase
 import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.Exam
-import ru.kamanin.nstu.graduate.thesis.utils.coroutines.flow.LiveEvent
-import ru.kamanin.nstu.graduate.thesis.utils.coroutines.flow.MutableLiveEvent
-import ru.kamanin.nstu.graduate.thesis.utils.coroutines.flow.asLiveEvent
-import ru.kamanin.nstu.graduate.thesis.utils.coroutines.flow.invoke
+import ru.kamanin.nstu.graduate.thesis.utils.coroutines.flow.*
 import ru.kamanin.nstu.graduate.thesis.utils.paging.mapPaging
 import javax.inject.Inject
 
@@ -33,8 +32,10 @@ class ChatViewModel @Inject constructor(
 	private val getPersonalAccountUseCase: GetPersonalAccountUseCase,
 	private val getMessagesByPeriodUseCase: GetMessagesByPeriodUseCase,
 	private val sendMessageByPeriodUseCase: SendMessageByPeriodUseCase,
+	private val setClipDataUseCase: SetClipDataUseCase,
 	artefactViewModelDelegate: ArtefactViewModelDelegate,
 	savedStateHandle: SavedStateHandle,
+	@CopiedText private val copiedText: String
 ) : ViewModel(), ArtefactViewModelDelegate by artefactViewModelDelegate {
 
 	private companion object {
@@ -51,6 +52,9 @@ class ChatViewModel @Inject constructor(
 
 	private val _sendMessageEvent = MutableLiveEvent()
 	val sendMessageEvent: LiveEvent get() = _sendMessageEvent.asLiveEvent()
+
+	private val _infoEvent = MutableLiveState<String>()
+	val infoEvent: LiveState<String> get() = _infoEvent
 
 	init {
 		_state.value = ChatState.Loading
@@ -103,5 +107,11 @@ class ChatViewModel @Inject constructor(
 
 	private fun clearMessage() {
 		message.value = EMPTY_TEXT
+	}
+
+	fun copyText(text: String) {
+		setClipDataUseCase(text)
+
+		_infoEvent.invoke(copiedText)
 	}
 }

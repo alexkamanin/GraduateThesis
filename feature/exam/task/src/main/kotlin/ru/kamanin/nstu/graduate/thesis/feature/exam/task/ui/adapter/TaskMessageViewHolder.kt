@@ -17,7 +17,11 @@ class TaskMessageViewHolder(private val parent: ViewGroup) : RecyclerView.ViewHo
 
 	private val viewBinding by viewBinding(ItemTaskMessageBinding::bind)
 
-	fun bind(message: MessageItem, artefactClicked: (ArtefactMetaData) -> Unit) {
+	fun bind(
+		message: MessageItem,
+		artefactClicked: (ArtefactMetaData) -> Unit,
+		textClicked: (String) -> Unit
+	) {
 		with(viewBinding) {
 			messageAuthor.text = "${message.account.surname} ${message.account.name}"
 			messageTime.text = message.time
@@ -31,6 +35,10 @@ class TaskMessageViewHolder(private val parent: ViewGroup) : RecyclerView.ViewHo
 
 				if (message.text != null) {
 					messageText.text = message.text
+					viewBinding.messageText.setOnLongClickListener {
+						textClicked(viewBinding.messageText.text.toString())
+						true
+					}
 					messageText.isVisible = true
 				}
 
@@ -42,6 +50,10 @@ class TaskMessageViewHolder(private val parent: ViewGroup) : RecyclerView.ViewHo
 				artefactContainer.setOnClickListener { artefactClicked(artefact) }
 			} else {
 				messageText.text = message.text
+				viewBinding.messageText.setOnLongClickListener {
+					textClicked(viewBinding.messageText.text.toString())
+					true
+				}
 
 				messageText.isVisible = true
 				artefactName.isVisible = false

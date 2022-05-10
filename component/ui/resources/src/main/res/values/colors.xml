@@ -39,6 +39,7 @@
 	<!-- Red -->
 	<color name="red_300">#FFFFB2B2</color>
 	<color name="red_500">#FFE24C4B</color>
+	<color name="red_700">#8E1A1A</color>
 
 	<color name="red_300_alpha_60">#99FFB2B2</color>
 

@@ -13,7 +13,7 @@ import dagger.hilt.android.WithFragmentBindings
 import ru.kamanin.nstu.graduate.thesis.component.navigation.navigate
 import ru.kamanin.nstu.graduate.thesis.component.ui.core.colors.colorFromAttr
 import ru.kamanin.nstu.graduate.thesis.component.ui.core.dialogs.extensions.showInformationDialog
-import ru.kamanin.nstu.graduate.thesis.component.ui.insets.setupBaseInsets
+import ru.kamanin.nstu.graduate.thesis.component.ui.core.insets.setupBaseInsets
 import ru.kamanin.nstu.graduate.thesis.feature.exam.ticket.R
 import ru.kamanin.nstu.graduate.thesis.feature.exam.ticket.databinding.FragmentTicketBinding
 import ru.kamanin.nstu.graduate.thesis.feature.exam.ticket.navigation.TicketNavigationProvider

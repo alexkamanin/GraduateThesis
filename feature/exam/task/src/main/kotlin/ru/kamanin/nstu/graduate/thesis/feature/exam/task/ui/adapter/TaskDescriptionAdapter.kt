@@ -4,7 +4,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.entity.Task
 
-class TaskDescriptionAdapter(private val task: Task) : RecyclerView.Adapter<TaskDescriptionViewHolder>() {
+class TaskDescriptionAdapter(
+	private val task: Task,
+	private val textClicked: (String) -> Unit
+) : RecyclerView.Adapter<TaskDescriptionViewHolder>() {
 
 	companion object {
 
@@ -15,7 +18,7 @@ class TaskDescriptionAdapter(private val task: Task) : RecyclerView.Adapter<Task
 		TaskDescriptionViewHolder(parent)
 
 	override fun onBindViewHolder(holder: TaskDescriptionViewHolder, position: Int) {
-		holder.bind(task)
+		holder.bind(task, textClicked)
 	}
 
 	override fun getItemCount(): Int = ITEM_COUNT

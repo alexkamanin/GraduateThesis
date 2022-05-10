@@ -27,6 +27,7 @@ dependencies {
 	implementation(libs.squareup.retrofit)
 
 	implementation(projects.shared.artefact)
+	implementation(projects.shared.clipdata)
 	implementation(projects.shared.account)
 	implementation(projects.shared.exam)
 	implementation(projects.shared.chat)
