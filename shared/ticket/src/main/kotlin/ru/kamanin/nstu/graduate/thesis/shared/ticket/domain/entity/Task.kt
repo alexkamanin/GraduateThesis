@@ -10,5 +10,5 @@ data class Task(
 	val description: String,
 	val theme: String,
 	val taskType: TaskType,
-	val state: TaskState?
+	val state: TaskState
 ) : Serializable

@@ -9,6 +9,7 @@ import ru.kamanin.nstu.graduate.thesis.component.ui.core.utils.inflate
 import ru.kamanin.nstu.graduate.thesis.feature.exam.ticket.R
 import ru.kamanin.nstu.graduate.thesis.feature.exam.ticket.databinding.ItemTaskBinding
 import ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.entity.Task
+import ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.entity.TaskState
 import ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.entity.TaskType
 
 class TaskViewHolder(private val parent: ViewGroup) : RecyclerView.ViewHolder(parent.inflate(R.layout.item_task)) {
@@ -17,11 +18,13 @@ class TaskViewHolder(private val parent: ViewGroup) : RecyclerView.ViewHolder(pa
 
 	fun bind(task: Task, taskClicked: (Task) -> Unit) {
 		val (icon, background) = when (task.state) {
-//			State.CHECKING -> R.drawable.ic_checking to R.attr.colorBackgroundGreyTint
-//			State.REJECTED -> R.drawable.ic_rejected to R.attr.colorBackgroundRedTint
-//			State.REVISION -> R.drawable.ic_revision to R.attr.colorBackgroundYellowTint
-//			State.APPROVED -> R.drawable.ic_approved to R.attr.colorBackgroundGreenTint
-			else -> R.drawable.ic_new to R.attr.colorBackgroundGreyTint
+			TaskState.NO_ANSWER   -> R.drawable.ic_new to R.attr.colorBackgroundGreyTint
+			TaskState.IN_PROGRESS -> R.drawable.ic_checking to R.attr.colorBackgroundGreyTint
+			TaskState.NO_RATING   -> R.drawable.ic_rejected to R.attr.colorBackgroundRedTint
+			TaskState.CHECKING    -> R.drawable.ic_checking to R.attr.colorBlueVariant
+			TaskState.SENT        -> R.drawable.ic_checking to R.attr.colorBackgroundYellowTint
+			TaskState.RATED       -> R.drawable.ic_approved to R.attr.colorBackgroundGreenTint
+
 		}
 		val ratingText = if (task.rating == null) {
 			parent.context.getString(R.string.item_unknown_rating_text, task.maxRating)

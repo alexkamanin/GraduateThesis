@@ -10,7 +10,7 @@ data class TaskDto(
 	val number: Int,
 	val rating: Int?,
 	val task: TaskDescription,
-	val state: TaskState?
+	val state: TaskState
 ) {
 
 	@JsonClass(generateAdapter = true)
