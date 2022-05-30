@@ -8,16 +8,15 @@ data class Exam(
 	val name: String,
 	val mark: Int,
 	val period: Period,
-	val allowed: Boolean,
 	val teacher: Teacher,
-	val regulationRating: RegulationRating
+	val regulationRating: RegulationRating,
+	val examState: ExamState,
+	val ratingState: RatingState
 ) : Serializable {
 
 	data class Period(
-		val id: Long,
 		val start: Long,
 		val end: Long,
-		val state: PeriodState
 	) : Serializable
 
 	data class Teacher(

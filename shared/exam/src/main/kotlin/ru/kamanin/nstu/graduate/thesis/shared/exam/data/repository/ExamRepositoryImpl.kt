@@ -3,6 +3,7 @@ package ru.kamanin.nstu.graduate.thesis.shared.exam.data.repository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import ru.kamanin.nstu.graduate.thesis.shared.exam.data.api.ExamApi
+import ru.kamanin.nstu.graduate.thesis.shared.exam.data.api.Passing
 import ru.kamanin.nstu.graduate.thesis.shared.exam.data.dto.ExamDto
 import ru.kamanin.nstu.graduate.thesis.shared.exam.data.mapper.toEntity
 import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.Exam
@@ -19,4 +20,10 @@ class ExamRepositoryImpl @Inject constructor(
 		withContext(ioDispatcher) {
 			api.get().map(ExamDto::toEntity)
 		}
+
+	override suspend fun setState(state: Passing) {
+		withContext(ioDispatcher) {
+			api.setPassingStatus(state)
+		}
+	}
 }

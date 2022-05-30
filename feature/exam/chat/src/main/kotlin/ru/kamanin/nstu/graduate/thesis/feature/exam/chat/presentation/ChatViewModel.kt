@@ -64,7 +64,7 @@ class ChatViewModel @Inject constructor(
 			val personalAccount = getPersonalAccountUseCase()
 			val teacherAccount = exam.teacher.account
 
-			getMessagesByPeriodUseCase(exam.period.id)
+			getMessagesByPeriodUseCase(-1)
 				.cachedIn(viewModelScope)
 				.mapPaging { message ->
 					MessageItem.from(
@@ -86,7 +86,7 @@ class ChatViewModel @Inject constructor(
 				val artefact = getArtefact()
 				val message = getMessage()
 
-				sendMessageByPeriodUseCase(exam.period.id, message, artefact?.id)
+				sendMessageByPeriodUseCase(-1, message, artefact?.id)
 
 				clearMessage()
 				clearAttachedFile()

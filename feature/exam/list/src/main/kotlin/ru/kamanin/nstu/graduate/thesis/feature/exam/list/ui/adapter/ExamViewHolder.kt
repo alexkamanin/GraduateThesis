@@ -10,7 +10,7 @@ import ru.kamanin.nstu.graduate.thesis.feature.exam.list.R
 import ru.kamanin.nstu.graduate.thesis.feature.exam.list.databinding.ItemExamBinding
 import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.Exam
 import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.Exam.*
-import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.PeriodState
+import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.ExamState
 import ru.kamanin.nstu.graduate.thesis.utils.time.dateStringFormat
 
 class ExamViewHolder(private val parent: ViewGroup) : RecyclerView.ViewHolder(parent.inflate(R.layout.item_exam)) {
@@ -25,7 +25,7 @@ class ExamViewHolder(private val parent: ViewGroup) : RecyclerView.ViewHolder(pa
 			examDateTime.text = parent.context.getString(R.string.hint_exam_date_time, exam.period.start.dateStringFormat)
 			root.setOnClickListener { onExamClick(exam) }
 
-			if (exam.period.state == PeriodState.PROGRESS) {
+			if (exam.examState == ExamState.PROGRESS) {
 				root.setBackgroundColor(parent.context.colorFromAttr(R.attr.colorBackgroundStateTint))
 			} else {
 				root.setBackgroundColor(ContextCompat.getColor(parent.context, android.R.color.transparent))

@@ -7,15 +7,16 @@ import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.Exam
 fun ExamDto.toEntity() =
 	Exam(
 		id = id,
-		name = disciplineName,
-		mark = semesterRating + examRating,
-		period = Exam.Period(id = examPeriod.id, start = examPeriod.start, end = examPeriod.end, state = examPeriod.state),
-		allowed = allowed,
+		name = exam.name,
+		mark = semesterRating + questionRating + exerciseRating,
+		period = Exam.Period(start = exam.start, end = exam.end),
 		teacher = teacher.toEntity(),
 		regulationRating = Exam.RegulationRating(
-			maxQuestionRating = maxQuestionRating,
-			maxExerciseRating = maxExerciseRating
-		)
+			maxQuestionRating = examRule.singleQuestionDefaultRating,
+			maxExerciseRating = examRule.singleExerciseDefaultRating
+		),
+		examState = exam.state,
+		ratingState = studentRatingState
 	)
 
 fun ExamDto.Teacher.toEntity() =

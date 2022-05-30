@@ -1,9 +1,9 @@
 package ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity
 
-enum class PeriodState {
+enum class ExamState {
 	REDACTION,
-	ALLOWANCE,
 	READY,
+	TIME_SET,
 	PROGRESS,
 	FINISHED,
 	CLOSED
