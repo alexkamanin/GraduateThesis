@@ -12,6 +12,8 @@ import ru.kamanin.nstu.graduate.thesis.shared.chat.domain.entity.Message
 import ru.kamanin.nstu.graduate.thesis.shared.chat.domain.entity.MessageSummary
 import ru.kamanin.nstu.graduate.thesis.shared.ticket.data.api.TicketApi
 import ru.kamanin.nstu.graduate.thesis.shared.ticket.data.datasource.TaskDataSource
+import ru.kamanin.nstu.graduate.thesis.shared.ticket.data.dto.TaskStateModel
+import ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.entity.TaskState
 import ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.repository.TaskRepository
 import ru.kamanin.nstu.graduate.thesis.utils.coroutines.dispatcher.ioDispatcher
 import ru.kamanin.nstu.graduate.thesis.utils.paging.PagingDataSource
@@ -34,4 +36,10 @@ class TaskRepositoryImpl @Inject constructor(
 		withContext(ioDispatcher) {
 			api.sendMessage(answerId, message).toEntity()
 		}
+
+	override suspend fun setState(id: Long, state: TaskState) {
+		withContext(ioDispatcher) {
+			api.setState(TaskStateModel(id, state))
+		}
+	}
 }

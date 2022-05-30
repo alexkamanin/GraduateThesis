@@ -20,6 +20,7 @@ import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.Exam
 import ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.entity.Task
 import ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.usecase.GetMessagesByTaskUseCase
 import ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.usecase.SendMessageByTaskUseCase
+import ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.usecase.SetTaskStateUseCase
 import ru.kamanin.nstu.graduate.thesis.utils.coroutines.exception.launch
 import ru.kamanin.nstu.graduate.thesis.utils.coroutines.flow.*
 import ru.kamanin.nstu.graduate.thesis.utils.paging.mapPaging
@@ -35,6 +36,7 @@ class TaskViewModel @Inject constructor(
 	private val getPersonalAccountUseCase: GetPersonalAccountUseCase,
 	private val getMessagesByTaskUseCase: GetMessagesByTaskUseCase,
 	private val setClipDataUseCase: SetClipDataUseCase,
+	private val setTaskStateUseCase: SetTaskStateUseCase,
 	private val sentMessagesByTaskUseCase: SendMessageByTaskUseCase,
 	timeManager: TimeManager,
 	artefactViewModelDelegate: ArtefactViewModelDelegate,
@@ -75,6 +77,10 @@ class TaskViewModel @Inject constructor(
 
 	fun loadMessages() {
 		viewModelScope.launch {
+
+			if (task.state == ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.entity.TaskState.NO_ANSWER) {
+				setTaskStateUseCase(task.id, ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.entity.TaskState.IN_PROGRESS)
+			}
 
 			val personalAccount = getPersonalAccountUseCase()
 			val teacherAccount = exam.teacher.account

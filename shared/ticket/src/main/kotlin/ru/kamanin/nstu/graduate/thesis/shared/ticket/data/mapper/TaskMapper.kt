@@ -22,7 +22,7 @@ object TaskMapper {
 				description = task.text,
 				theme = task.themeName,
 				taskType = task.taskType,
-				status = status
+				state = state
 			)
 		}
 }

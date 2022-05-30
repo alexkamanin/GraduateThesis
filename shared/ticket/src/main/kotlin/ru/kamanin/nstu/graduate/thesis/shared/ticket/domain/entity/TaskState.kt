@@ -1,8 +1,10 @@
 package ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.entity
 
-enum class Status {
+enum class TaskState {
+	NO_ANSWER,
+	IN_PROGRESS,
+	SENT,
 	CHECKING,
-	REJECTED,
-	REVISION,
-	APPROVED
+	RATED,
+	NO_RATING
 }
