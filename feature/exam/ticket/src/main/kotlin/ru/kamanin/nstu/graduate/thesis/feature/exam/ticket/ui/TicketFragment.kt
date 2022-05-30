@@ -36,6 +36,12 @@ class TicketFragment : Fragment(R.layout.fragment_ticket), TicketViewModel.Event
 
 	private var adapter: TaskAdapter? = null
 
+	override fun onResume() {
+		super.onResume()
+
+		viewModel.refresh()
+	}
+
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 		viewBinding.setupBaseInsets()
