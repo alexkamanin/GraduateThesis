@@ -10,13 +10,16 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import ru.kamanin.nstu.graduate.thesis.shared.account.domain.usecase.GetPersonalAccountUseCase
 import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.delegate.ArtefactViewModelDelegate
+import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.entity.ArtefactMetaData
 import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.usecase.GetArtefactMetaDataUseCase
+import ru.kamanin.nstu.graduate.thesis.shared.artefact.domain.usecase.UploadArtefactUseCase
 import ru.kamanin.nstu.graduate.thesis.shared.chat.presentation.model.MessageItem
 import ru.kamanin.nstu.graduate.thesis.shared.clipdata.di.CopiedText
 import ru.kamanin.nstu.graduate.thesis.shared.clipdata.domain.usecase.SetClipDataUseCase
 import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.Exam
 import ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.entity.Task
 import ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.usecase.GetMessagesByTaskUseCase
+import ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.usecase.SendMessageByTaskUseCase
 import ru.kamanin.nstu.graduate.thesis.utils.coroutines.flow.*
 import ru.kamanin.nstu.graduate.thesis.utils.paging.mapPaging
 import ru.kamanin.nstu.graduate.thesis.utils.time.RemainingTime
@@ -26,11 +29,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TaskViewModel @Inject constructor(
+	private val uploadArtefactUseCase: UploadArtefactUseCase,
 	private val getArtefactMetaDataUseCase: GetArtefactMetaDataUseCase,
 	private val getPersonalAccountUseCase: GetPersonalAccountUseCase,
 	private val getMessagesByTaskUseCase: GetMessagesByTaskUseCase,
 	private val setClipDataUseCase: SetClipDataUseCase,
-	private val timeManager: TimeManager,
+	private val sentMessagesByTaskUseCase: SendMessageByTaskUseCase,
+	timeManager: TimeManager,
 	artefactViewModelDelegate: ArtefactViewModelDelegate,
 	savedStateHandle: SavedStateHandle,
 	@CopiedText private val copiedText: String
@@ -73,7 +78,7 @@ class TaskViewModel @Inject constructor(
 			val personalAccount = getPersonalAccountUseCase()
 			val teacherAccount = exam.teacher.account
 
-			getMessagesByTaskUseCase(exam.period.id)
+			getMessagesByTaskUseCase(task.id)
 				.cachedIn(viewModelScope)
 				.mapPaging { message ->
 					MessageItem.from(
@@ -90,7 +95,32 @@ class TaskViewModel @Inject constructor(
 	}
 
 	fun send() {
-		//TODO("Not yet implemented")
+		if (sendingAvailable()) {
+			viewModelScope.launch {
+				val artefact = getArtefact()
+				val message = getMessage()
+
+				sentMessagesByTaskUseCase(task.id, message, artefact?.id)
+
+				clearMessage()
+				clearAttachedFile()
+
+				_sendMessageEvent()
+			}
+		}
+	}
+
+	private fun sendingAvailable(): Boolean =
+		message.value.isNotEmpty() || attachedFile != null
+
+	private suspend fun getArtefact(): ArtefactMetaData? =
+		if (attachedFile != null) uploadArtefactUseCase(attachedFile) else null
+
+	private fun getMessage(): String? =
+		message.value.takeIf(String::isNotEmpty)
+
+	private fun clearMessage() {
+		message.value = EMPTY_TEXT
 	}
 
 	fun copyText(text: String) {
