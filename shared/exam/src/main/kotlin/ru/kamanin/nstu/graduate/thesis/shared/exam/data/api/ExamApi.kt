@@ -4,7 +4,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.PUT
 import ru.kamanin.nstu.graduate.thesis.shared.exam.data.dto.ExamDto
-import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.RatingState
+import ru.kamanin.nstu.graduate.thesis.shared.exam.data.dto.ExamStateModel
 
 interface ExamApi {
 
@@ -12,10 +12,5 @@ interface ExamApi {
 	suspend fun get(): List<ExamDto>
 
 	@PUT("/student-rating/state")
-	suspend fun setPassingStatus(@Body passing: Passing)
+	suspend fun setState(@Body state: ExamStateModel)
 }
-
-data class Passing(
-	val id: Long,
-	val studentRatingState: RatingState
-)

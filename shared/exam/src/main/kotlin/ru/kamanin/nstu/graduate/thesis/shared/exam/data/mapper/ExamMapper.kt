@@ -16,7 +16,7 @@ fun ExamDto.toEntity() =
 			maxExerciseRating = examRule.singleExerciseDefaultRating
 		),
 		examState = exam.state,
-		ratingState = studentRatingState
+		ratingState = studentRatingState,
 	)
 
 fun ExamDto.Teacher.toEntity() =

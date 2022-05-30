@@ -9,6 +9,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.Exam
+import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.RatingState
+import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.usecase.SetExamStateUseCase
 import ru.kamanin.nstu.graduate.thesis.shared.session.domain.scenario.LogoutScenario
 import ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.entity.Task
 import ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.usecase.GetTicketUseCase
@@ -28,6 +30,7 @@ import javax.inject.Inject
 @HiltViewModel
 class TicketViewModel @Inject constructor(
 	private val getTicketUseCase: GetTicketUseCase,
+	private val setExamStateUseCase: SetExamStateUseCase,
 	private val logoutScenario: LogoutScenario,
 	private val timeManager: TimeManager,
 	private val errorConverter: ErrorConverter,
@@ -71,6 +74,10 @@ class TicketViewModel @Inject constructor(
 			.launchIn(viewModelScope)
 
 		viewModelScope.launch(::handleError) {
+			if (exam.ratingState == RatingState.WAITING_TO_APPEAR) {
+				setExamStateUseCase(exam.id, RatingState.PASSING)
+			}
+
 			val tasks = getTicketUseCase(exam.id, exam.regulationRating)
 			_swipeRefreshEvent.invoke(false)
 			_state.value = TicketState.Content(tasks)
