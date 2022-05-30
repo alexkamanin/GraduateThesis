@@ -20,6 +20,7 @@ import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.Exam
 import ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.entity.Task
 import ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.usecase.GetMessagesByTaskUseCase
 import ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.usecase.SendMessageByTaskUseCase
+import ru.kamanin.nstu.graduate.thesis.utils.coroutines.exception.launch
 import ru.kamanin.nstu.graduate.thesis.utils.coroutines.flow.*
 import ru.kamanin.nstu.graduate.thesis.utils.paging.mapPaging
 import ru.kamanin.nstu.graduate.thesis.utils.time.RemainingTime
@@ -96,7 +97,7 @@ class TaskViewModel @Inject constructor(
 
 	fun send() {
 		if (sendingAvailable()) {
-			viewModelScope.launch {
+			viewModelScope.launch(::handleSentMessageError) {
 				val artefact = getArtefact()
 				val message = getMessage()
 
@@ -108,6 +109,10 @@ class TaskViewModel @Inject constructor(
 				_sendMessageEvent()
 			}
 		}
+	}
+
+	private fun handleSentMessageError(throwable: Throwable) {
+
 	}
 
 	private fun sendingAvailable(): Boolean =
