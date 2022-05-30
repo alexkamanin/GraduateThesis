@@ -1,7 +1,6 @@
 package ru.kamanin.nstu.graduate.thesis.feature.exam.ticket.ui
 
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -31,9 +30,6 @@ class TicketFragment : Fragment(R.layout.fragment_ticket), TicketViewModel.Event
 
 	private val viewBinding: FragmentTicketBinding by viewBinding()
 	private val viewModel: TicketViewModel by viewModels()
-
-	private val chatItem: MenuItem
-		get() = viewBinding.toolbar.menu.findItem(R.id.item_chat) ?: throw IllegalStateException("Unknown menu item")
 
 	@Inject
 	lateinit var navigationProvider: TicketNavigationProvider
@@ -70,10 +66,6 @@ class TicketFragment : Fragment(R.layout.fragment_ticket), TicketViewModel.Event
 		viewBinding.toolbar.setNavigationOnClickListener {
 			findNavController().popBackStack()
 		}
-		chatItem.setOnMenuItemClickListener {
-			viewModel.openChat()
-			true
-		}
 	}
 
 	private fun initObservers() {
@@ -99,7 +91,6 @@ class TicketFragment : Fragment(R.layout.fragment_ticket), TicketViewModel.Event
 		viewBinding.taskList.isVisible = false
 		viewBinding.swipeRefresh.isEnabled = false
 		viewBinding.errorView.isVisible = false
-		chatItem.isEnabled = true
 	}
 
 	private fun renderContentState(state: TicketState.Content) {
@@ -111,7 +102,6 @@ class TicketFragment : Fragment(R.layout.fragment_ticket), TicketViewModel.Event
 		viewBinding.taskList.isVisible = true
 		viewBinding.swipeRefresh.isEnabled = true
 		viewBinding.errorView.isVisible = false
-		chatItem.isEnabled = true
 	}
 
 	private fun showRemainingTime(time: RemainingTime) {
@@ -146,17 +136,12 @@ class TicketFragment : Fragment(R.layout.fragment_ticket), TicketViewModel.Event
 				viewBinding.timeContainer.isVisible = false
 				viewBinding.taskList.isVisible = false
 				viewBinding.swipeRefresh.isEnabled = false
-				chatItem.isEnabled = false
 
 				viewBinding.errorView.errorState = state.errorState
 				viewBinding.errorView.errorButtonListener = viewModel::refresh
 				viewBinding.errorView.isVisible = true
 			}
 		}
-	}
-
-	override fun navigateToChat(args: Bundle) {
-		navigate(navigationProvider.toChat(args))
 	}
 
 	override fun navigateToTask(args: Bundle) {

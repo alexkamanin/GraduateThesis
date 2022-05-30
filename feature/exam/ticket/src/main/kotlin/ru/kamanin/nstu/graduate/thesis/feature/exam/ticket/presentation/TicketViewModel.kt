@@ -49,8 +49,6 @@ class TicketViewModel @Inject constructor(
 
 	interface EventListener {
 
-		fun navigateToChat(args: Bundle)
-
 		fun navigateToTask(args: Bundle)
 
 		fun navigateToSignIn()
@@ -104,10 +102,5 @@ class TicketViewModel @Inject constructor(
 			Exam::class.java.name to exam
 		)
 		eventDispatcher.dispatchEvent { navigateToTask(args) }
-	}
-
-	fun openChat() {
-		val args = bundleOf(Exam::class.java.name to exam)
-		eventDispatcher.dispatchEvent { navigateToChat(args) }
 	}
 }

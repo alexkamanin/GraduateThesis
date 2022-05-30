@@ -12,7 +12,6 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:visibility="gone"
-		app:menu="@menu/menu_ticket"
 		app:navigationIcon="@drawable/ic_arrow_back"
 		app:subtitle="@string/toolbar_ticket_subtitle"
 		app:title="@string/toolbar_ticket_title"
