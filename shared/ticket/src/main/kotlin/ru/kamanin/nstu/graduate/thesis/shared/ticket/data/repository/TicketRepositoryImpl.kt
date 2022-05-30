@@ -4,7 +4,6 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.Exam
 import ru.kamanin.nstu.graduate.thesis.shared.ticket.data.api.TicketApi
-import ru.kamanin.nstu.graduate.thesis.shared.ticket.data.dto.TaskDto
 import ru.kamanin.nstu.graduate.thesis.shared.ticket.data.mapper.TaskMapper
 import ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.entity.Task
 import ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.repository.TicketRepository
@@ -19,7 +18,7 @@ class TicketRepositoryImpl @Inject constructor(
 	override suspend fun getTasks(examId: Long, regulationRating: Exam.RegulationRating): List<Task> =
 		withContext(ioDispatcher) {
 			api.getTasks(examId)
-				.sortedBy(TaskDto::id)
+				.sortedWith(compareBy({ it.task.taskType }, { it.number }))
 				.map { answerDto -> TaskMapper.convert(answerDto, regulationRating) }
 		}
 }

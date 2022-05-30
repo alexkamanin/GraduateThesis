@@ -8,17 +8,17 @@ import ru.kamanin.nstu.graduate.thesis.utils.paging.Paging
 
 interface TicketApi {
 
-	@GET("/ticket/{examId}/answer")
+	@GET("/student-rating/{examId}/answer")
 	suspend fun getTasks(@Path("examId") examId: Long): List<TaskDto>
 
-	@GET("/answer/{answerId}/message?sort=sendTime,DESC")
+	@GET("/answers/{answerId}/message?sort=sendTime,DESC")
 	suspend fun getMessages(
 		@Path("answerId") answerId: Long,
 		@Query("page") pageNumber: Int,
 		@Query("size") pageSize: Int,
 	): Paging<MessageDto>
 
-	@POST("/answer/{answerId}/message")
+	@POST("/answers/{answerId}/message")
 	suspend fun sendMessage(
 		@Path("answerId") answerId: Long,
 		@Body message: MessageSummary
