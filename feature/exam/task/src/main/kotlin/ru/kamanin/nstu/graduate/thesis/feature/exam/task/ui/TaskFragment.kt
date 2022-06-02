@@ -1,6 +1,7 @@
 package ru.kamanin.nstu.graduate.thesis.feature.exam.task.ui
 
 import android.Manifest
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -22,6 +23,7 @@ import ru.kamanin.nstu.graduate.thesis.component.ui.core.dialogs.bottom.ShareRes
 import ru.kamanin.nstu.graduate.thesis.component.ui.core.dialogs.bottom.setShareBottomSheetResultListener
 import ru.kamanin.nstu.graduate.thesis.component.ui.core.dialogs.bottom.showShareBottomSheetDialog
 import ru.kamanin.nstu.graduate.thesis.component.ui.core.dialogs.extensions.showFailedPermissionDialog
+import ru.kamanin.nstu.graduate.thesis.component.ui.core.dialogs.extensions.showInformationDialog
 import ru.kamanin.nstu.graduate.thesis.component.ui.core.dialogs.extensions.showSettingDialog
 import ru.kamanin.nstu.graduate.thesis.component.ui.core.icons.icon
 import ru.kamanin.nstu.graduate.thesis.component.ui.core.insets.setupKeyboardInsets
@@ -159,7 +161,14 @@ class TaskFragment : Fragment(R.layout.fragment_task) {
 			setDataAndType(openable.uri, openable.mimeType)
 		}
 
-		startActivity(intent)
+		try {
+			startActivity(intent)
+		} catch (openableException: ActivityNotFoundException) {
+			showInformationDialog(
+				titleId = R.string.error_title_not_found_file_application,
+				descriptionId = R.string.error_description_not_found_file_application,
+			)
+		}
 	}
 
 	private fun handleFileAttachedEvent(file: FileInfo?) {

@@ -72,6 +72,9 @@
 	<string name="error_title_exam_start_end">Экзамен не доступен!</string>
 	<string name="error_description_start_end">Экзамен еще не начался или уже закончился. Попробуйте зайти позже или проверьте результаты во вкладке \"Прошедшие\".</string>
 
+	<string name="error_title_not_found_file_application">Просмотр файла не возможен</string>
+	<string name="error_description_not_found_file_application">На Вашем устройстве отсутствует приложения для просмотра файла данного типа. Пожалуйста, перейдите в магазин приложений Google Play и установите необходимое приложение.</string>
+
 	<!-- Разрешения -->
 	<string name="permission_camera_title">Доступ к камере запрещен</string>
 	<string name="permission_camera_description">Приложению требуется разрешение на съемку фотографий.</string>
