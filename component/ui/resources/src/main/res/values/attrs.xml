@@ -20,4 +20,7 @@
 
 	<attr name="colorRippleSentArtefact" />
 	<attr name="colorRippleReceiveArtefact" />
+
+	<attr name="colorBackgroundBlueTint" />
+	<attr name="colorBackgroundPinkTint" />
 </resources>

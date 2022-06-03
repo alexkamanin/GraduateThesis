@@ -43,6 +43,9 @@
 
 		<item name="colorRippleSentArtefact">@color/blue_300_alpha_40</item>
 		<item name="colorRippleReceiveArtefact">@color/grey_300</item>
+
+		<item name="colorBackgroundBlueTint">@color/blue_light_100</item>
+		<item name="colorBackgroundPinkTint">@color/pink_300</item>
 	</style>
 
 </resources>

@@ -6,4 +6,6 @@
 	<attr name="colorBackgroundGreyTint" />
 	<attr name="colorBlueVariant" />
 	<attr name="colorSwipeIndicatorTint" />
+	<attr name="colorBackgroundBlueTint" />
+	<attr name="colorBackgroundPinkTint" />
 </resources>

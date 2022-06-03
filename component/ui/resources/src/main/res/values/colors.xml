@@ -16,6 +16,8 @@
 	<color name="blue_300_alpha_40">#66B6C2CD</color>
 	<color name="blue_400_alpha_40">#669EADBC</color>
 
+	<color name="blue_light_100">#FF91A3CF</color>
+
 	<!-- Grey -->
 	<color name="grey_50">#FFF4F4F4</color>
 	<color name="grey_70">#FFFEFEFE</color>
@@ -35,6 +37,9 @@
 	<color name="green_300">#FF9ED09E</color>
 
 	<color name="green_300_alpha_60">#999ED09E</color>
+
+	<!-- Pink -->
+	<color name="pink_300">#FFC4A3CE</color>
 
 	<!-- Red -->
 	<color name="red_300">#FFFFB2B2</color>
