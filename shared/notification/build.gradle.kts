@@ -11,6 +11,11 @@ dependencies {
 	implementation(libs.hilt.android)
 
 	implementation(libs.squareup.retrofit)
+	implementation(libs.squareup.moshi.kotlin)
+	kapt(libs.squareup.moshi.codegen)
+
+	implementation(projects.shared.exam)
+	implementation(projects.shared.ticket)
 
 	implementation(projects.utils.coroutines)
 }

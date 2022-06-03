@@ -5,6 +5,7 @@ import ru.kamanin.nstu.graduate.thesis.shared.chat.data.dto.MessageDto
 import ru.kamanin.nstu.graduate.thesis.shared.chat.domain.entity.MessageSummary
 import ru.kamanin.nstu.graduate.thesis.shared.ticket.data.dto.TaskDto
 import ru.kamanin.nstu.graduate.thesis.shared.ticket.data.dto.TaskStateModel
+import ru.kamanin.nstu.graduate.thesis.shared.ticket.data.dto.TaskSummary
 import ru.kamanin.nstu.graduate.thesis.utils.paging.Paging
 
 interface TicketApi {
@@ -27,4 +28,7 @@ interface TicketApi {
 
 	@PUT("/answers/state")
 	suspend fun setState(@Body state: TaskStateModel)
+
+	@GET("/task/{taskId}")
+	suspend fun getTask(@Path("taskId") taskId: Long): TaskSummary
 }

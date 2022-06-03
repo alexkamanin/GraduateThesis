@@ -13,6 +13,7 @@ import ru.kamanin.nstu.graduate.thesis.shared.chat.domain.entity.MessageSummary
 import ru.kamanin.nstu.graduate.thesis.shared.ticket.data.api.TicketApi
 import ru.kamanin.nstu.graduate.thesis.shared.ticket.data.datasource.TaskDataSource
 import ru.kamanin.nstu.graduate.thesis.shared.ticket.data.dto.TaskStateModel
+import ru.kamanin.nstu.graduate.thesis.shared.ticket.data.dto.TaskSummary
 import ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.entity.TaskState
 import ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.repository.TaskRepository
 import ru.kamanin.nstu.graduate.thesis.utils.coroutines.dispatcher.ioDispatcher
@@ -42,4 +43,9 @@ class TaskRepositoryImpl @Inject constructor(
 			api.setState(TaskStateModel(id, state))
 		}
 	}
+
+	override suspend fun getTask(id: Long): TaskSummary =
+		withContext(ioDispatcher) {
+			api.getTask(id)
+		}
 }

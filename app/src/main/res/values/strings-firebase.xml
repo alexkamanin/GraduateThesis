@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="default_notification_channel_id" translatable="false">defaultNotificationChannelId</string>
-	<string name="default_notification_channel_name">Уведомления</string>
+	<string name="message_notification_channel_id" translatable="false">messageNotificationChannelId</string>
+	<string name="message_notification_channel_name">Сообщения</string>
+
+	<string name="exam_notification_channel_id" translatable="false">examNotificationChannelId</string>
+	<string name="exam_notification_channel_name">Экзамены</string>
+
+	<string name="task_notification_channel_id" translatable="false">taskNotificationChannelId</string>
+	<string name="task_notification_channel_name">Задания</string>
 </resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="format_two_line_text">%1$s\n%2$s</string>
+	<string name="format_two_separated_text">%1$s %2$s</string>
+
+	<string name="push_exam_created">Назначен экзамен\nНачало: %1$s</string>
+	<string name="push_exam_started">Экзамен начался</string>
+	<string name="push_exam_finished">Экзамен закончился</string>
+	<string name="push_exam_closed">Экзамен завершен</string>
+
+	<string name="push_answer_rated">"%1$s\nОценка %2$d из %3$d</string>
+</resources>
