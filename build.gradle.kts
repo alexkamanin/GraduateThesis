@@ -10,6 +10,7 @@ buildscript {
 		classpath(libs.gradle.android)
 		classpath(libs.gradle.kotlin)
 		classpath(libs.gradle.hilt)
+		classpath(libs.gradle.gms)
 	}
 }
 

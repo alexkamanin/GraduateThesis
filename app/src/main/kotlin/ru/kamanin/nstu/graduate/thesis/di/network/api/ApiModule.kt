@@ -6,6 +6,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.create
+import ru.kamanin.graduate.thesis.shared.notification.data.api.FirebaseApi
 import ru.kamanin.nstu.graduate.thesis.di.network.Authorized
 import ru.kamanin.nstu.graduate.thesis.di.network.NotAuthorized
 import ru.kamanin.nstu.graduate.thesis.shared.artefact.data.api.ArtefactApi
@@ -33,6 +34,11 @@ object ApiModule {
 	@Provides
 	@Singleton
 	fun provideAuthorizedAccountApi(@Authorized retrofit: Retrofit): AuthorizedAccountApi =
+		retrofit.create()
+
+	@Provides
+	@Singleton
+	fun provideFirebaseApi(@Authorized retrofit: Retrofit): FirebaseApi =
 		retrofit.create()
 
 	@Provides

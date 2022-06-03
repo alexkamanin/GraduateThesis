@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import ru.kamanin.graduate.thesis.shared.notification.domain.usecase.SetFirebaseNotificationTokenUseCase
 import ru.kamanin.nstu.graduate.thesis.shared.session.domain.scenario.ExtendSessionScenario
 import ru.kamanin.nstu.graduate.thesis.shared.session.domain.scenario.LogoutScenario
 import ru.kamanin.nstu.graduate.thesis.utils.coroutines.event.EventDispatcher
@@ -18,6 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class NavigationViewModel @Inject constructor(
 	private val extendSessionScenario: ExtendSessionScenario,
+	private val setFirebaseNotificationTokenUseCase: SetFirebaseNotificationTokenUseCase,
 	private val logoutScenario: LogoutScenario,
 	private val errorConverter: ErrorConverter
 ) : ViewModel() {
@@ -45,6 +47,7 @@ class NavigationViewModel @Inject constructor(
 	private fun extendSession() {
 		viewModelScope.launch(::handleError) {
 			extendSessionScenario()
+			runCatching { setFirebaseNotificationTokenUseCase() }
 			eventDispatcher.dispatchEvent { navigateToExamsList() }
 		}
 	}

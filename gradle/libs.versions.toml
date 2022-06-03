@@ -14,6 +14,10 @@ moshi_version = '1.13.0'
 gradle-android = { group = 'com.android.tools.build', name = 'gradle', version.ref = 'gradle_version' }
 gradle-kotlin = { group = 'org.jetbrains.kotlin', name = 'kotlin-gradle-plugin', version.ref = 'kotlin_version' }
 gradle-hilt = { group = 'com.google.dagger', name = 'hilt-android-gradle-plugin', version.ref = 'hilt_version' }
+gradle-gms = { group = 'com.google.gms', name = 'google-services', version = '4.3.10' }
+
+firebase-messaging = { group = 'com.google.firebase', name = 'firebase-messaging-ktx', version = '23.0.5' }
+firebase-bom = { group = 'com.google.firebase', name = 'firebase-bom', version = '30.1.0' }
 
 android-core = { group = 'androidx.core', name = 'core-ktx', version = '1.7.0' }
 android-appcompat = { group = 'androidx.appcompat', name = 'appcompat', version = '1.4.1' }
@@ -60,3 +64,4 @@ android-application = { id = 'com.android.application', version = '7.1.2' }
 kotlin-android = { id = 'org.jetbrains.kotlin.android', version.ref = 'kotlin_version' }
 kotlin-kapt = { id = 'org.jetbrains.kotlin.kapt', version.ref = 'kotlin_version' }
 hilt-android = { id = 'dagger.hilt.android.plugin', version.ref = 'hilt_version' }
+google-gms = { id = 'com.google.gms.google-services', version = '4.3.10' }

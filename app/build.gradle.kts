@@ -4,9 +4,14 @@ plugins {
 	id(libs.plugins.kotlin.android.get().pluginId)
 	id(libs.plugins.hilt.android.get().pluginId)
 	id(libs.plugins.kotlin.kapt.get().pluginId)
+	id(libs.plugins.google.gms.get().pluginId)
 }
 
 dependencies {
+
+	implementation(platform(libs.firebase.bom))
+	implementation(libs.firebase.messaging)
+
 	implementation(libs.android.core)
 	implementation(libs.android.appcompat)
 	implementation(libs.android.material)
@@ -49,6 +54,7 @@ dependencies {
 	implementation(projects.shared.ticket)
 	implementation(projects.shared.exam)
 	implementation(projects.shared.chat)
+	implementation(projects.shared.notification)
 
 	// ------ Utils ------
 	implementation(projects.utils.coroutines)
