@@ -4,7 +4,7 @@ import io.github.alexkamanin.mockcept.handler.handlePath
 import io.github.alexkamanin.mockcept.response.StatusCode
 import ru.kamanin.nstu.graduate.thesis.R
 
-val TaskHandler = handlePath("/answer/[0-9]+/message") {
+val TaskHandler = handlePath("/answers/[0-9]+/message") {
 
 	get(
 		"page" to 0,

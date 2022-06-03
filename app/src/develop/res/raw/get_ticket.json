@@ -8,9 +8,8 @@
       "themeName": "Тип данных и переменная"
     },
     "number": 1,
-    "ticketId": 1375,
-    "status": "APPROVED",
-    "rating": 1
+    "state": "NO_ANSWER",
+    "rating": 0
   },
   {
     "id": 1377,
@@ -21,8 +20,8 @@
       "themeName": "Модульная организация программы"
     },
     "number": 2,
-    "ticketId": 1375,
-    "status": "REVISION"
+    "state": "NO_ANSWER",
+    "rating": 0
   },
   {
     "id": 1378,
@@ -33,9 +32,8 @@
       "themeName": "Модульное программирование"
     },
     "number": 3,
-    "ticketId": 1375,
-    "status": "APPROVED",
-    "rating": 2
+    "state": "NO_ANSWER",
+    "rating": 0
   },
   {
     "id": 1379,
@@ -46,9 +44,8 @@
       "themeName": "Указатели"
     },
     "number": 4,
-    "ticketId": 1375,
-    "status": "APPROVED",
-    "rating": 1
+    "state": "IN_PROGRESS",
+    "rating": 0
   },
   {
     "id": 1380,
@@ -59,9 +56,8 @@
       "themeName": "Адресная арифметика"
     },
     "number": 5,
-    "ticketId": 1375,
-    "status": "REJECTED",
-    "rating": -2
+    "state": "SENT",
+    "rating": 0
   },
   {
     "id": 1381,
@@ -72,8 +68,8 @@
       "themeName": "Динамическая память"
     },
     "number": 6,
-    "ticketId": 1375,
-    "status": null
+    "state": "CHECKING",
+    "rating": 0
   },
   {
     "id": 1382,
@@ -84,8 +80,8 @@
       "themeName": "Массивы указателей"
     },
     "number": 7,
-    "ticketId": 1375,
-    "status": null
+    "state": "RATED",
+    "rating": 1
   },
   {
     "id": 1383,
@@ -96,9 +92,8 @@
       "themeName": "Списки"
     },
     "number": 8,
-    "ticketId": 1375,
-    "status": "REJECTED",
-    "rating": -2
+    "state": "NO_RATING",
+    "rating": 0
   },
   {
     "id": 1384,
@@ -109,8 +104,8 @@
       "themeName": "Рекурсия"
     },
     "number": 9,
-    "ticketId": 1375,
-    "status": "CHECKING"
+    "state": "NO_ANSWER",
+    "rating": 0
   },
   {
     "id": 1385,
@@ -121,8 +116,8 @@
       "themeName": "Деревья"
     },
     "number": 10,
-    "ticketId": 1375,
-    "status": "CHECKING"
+    "state": "NO_ANSWER",
+    "rating": 0
   },
   {
     "id": 1386,
@@ -133,9 +128,8 @@
       "themeName": "Указатель на функцию"
     },
     "number": 11,
-    "ticketId": 1375,
-    "status": "REJECTED",
-    "rating": -2
+    "state": "NO_ANSWER",
+    "rating": 0
   },
   {
     "id": 1387,
@@ -146,9 +140,8 @@
       "themeName": "Файл"
     },
     "number": 12,
-    "ticketId": 1375,
-    "status": "REJECTED",
-    "rating": -2
+    "state": "NO_ANSWER",
+    "rating": 0
   },
   {
     "id": 1388,
@@ -159,9 +152,8 @@
       "themeName": "Последовательный двоичный файл"
     },
     "number": 13,
-    "ticketId": 1375,
-    "status": "REJECTED",
-    "rating": -2
+    "state": "NO_ANSWER",
+    "rating": 0
   },
   {
     "id": 1389,
@@ -172,8 +164,8 @@
       "themeName": "Сортировка и поиск"
     },
     "number": 14,
-    "ticketId": 1375,
-    "status": "REVISION"
+    "state": "NO_ANSWER",
+    "rating": 0
   },
   {
     "id": 1390,
@@ -184,8 +176,8 @@
       "themeName": "Деревья"
     },
     "number": 15,
-    "ticketId": 1375,
-    "status": "REVISION"
+    "state": "NO_ANSWER",
+    "rating": 0
   },
   {
     "id": 1391,
@@ -196,8 +188,8 @@
       "themeName": "Определение класса и объекта"
     },
     "number": 16,
-    "ticketId": 1375,
-    "status": "CHECKING"
+    "state": "NO_ANSWER",
+    "rating": 0
   },
   {
     "id": 1392,
@@ -208,8 +200,8 @@
       "themeName": "Наследование"
     },
     "number": 17,
-    "ticketId": 1375,
-    "status": "REVISION"
+    "state": "NO_ANSWER",
+    "rating": 0
   },
   {
     "id": 1393,
@@ -220,8 +212,8 @@
       "themeName": "Закрытая и общая части класса"
     },
     "number": 18,
-    "ticketId": 1375,
-    "status": null
+    "state": "NO_ANSWER",
+    "rating": 0
   },
   {
     "id": 1394,
@@ -232,8 +224,8 @@
       "themeName": "Внешний и внутренний полиморфизм"
     },
     "number": 19,
-    "ticketId": 1375,
-    "status": "CHECKING"
+    "state": "NO_ANSWER",
+    "rating": 0
   },
   {
     "id": 1395,
@@ -244,8 +236,8 @@
       "themeName": "Шаблон как макроопределение класса"
     },
     "number": 20,
-    "ticketId": 1375,
-    "status": "REVISION"
+    "state": "NO_ANSWER",
+    "rating": 0
   },
   {
     "id": 1396,
@@ -256,8 +248,7 @@
       "themeName": "Двусвязные списки"
     },
     "number": 1,
-    "ticketId": 1375,
-    "status": "APPROVED",
-    "rating": 17
+    "state": "NO_ANSWER",
+    "rating": 0
   }
 ]

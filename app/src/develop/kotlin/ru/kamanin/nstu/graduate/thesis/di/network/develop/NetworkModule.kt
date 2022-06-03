@@ -21,6 +21,7 @@ object NetworkModule {
 
 	private val handlers = listOf(
 		AccountHandler,
+		AnswerHandler,
 		ArtefactHandler,
 		ChangePasswordHandler,
 		ChatHandler,

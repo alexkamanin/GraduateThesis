@@ -4,7 +4,7 @@ import io.github.alexkamanin.mockcept.handler.handlePath
 import io.github.alexkamanin.mockcept.response.StatusCode
 import ru.kamanin.nstu.graduate.thesis.R
 
-val ExamHandler = handlePath("/student/tickets") {
+val ExamHandler = handlePath("/students/exam-infos") {
 
 	get {
 		status = StatusCode.OK

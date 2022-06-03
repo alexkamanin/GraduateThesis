@@ -1,44 +1,36 @@
 [
   {
-    "id": 10,
-    "disciplineName": "Программирование",
-    "semesterRating": 58,
-    "examRating": 0,
-    "allowed": false,
-    "examPeriod": {
-      "id": 883,
-      "start": 1647826200000,
-      "end": 1647831600000,
-      "examId": 882,
-      "state": "CLOSED"
-    },
-    "teacher": {
-      "id": 1,
-      "account": {
-        "id": 1,
-        "username": "romanov@corp.nstu.ru",
-        "name": "Евгений",
-        "surname": "Романов",
-        "roles": [
-          "ROLE_TEACHER"
-        ]
-      }
-    },
-    "maxQuestionRating": 2,
-    "maxExerciseRating": 20
-  },
-  {
     "id": 11,
-    "disciplineName": "Языки программирования",
-    "semesterRating": 40,
-    "examRating": 0,
-    "allowed": false,
-    "examPeriod": {
-      "id": 42,
+    "semesterRating": 58,
+    "questionRating": 0,
+    "exerciseRating": 0,
+    "groupRatingId": 142,
+    "studentRatingState": "PASSING",
+    "exam": {
+      "id": 11,
+      "name": "Языки программирования",
+      "disciplineId": 41,
+      "groupId": 61,
+      "oneGroup": true,
       "start": 1651287600000,
       "end": 1651293000000,
-      "examId": 883,
       "state": "PROGRESS"
+    },
+    "examRule": {
+      "id": 141,
+      "name": "testExamRule",
+      "duration": 200,
+      "minimalSemesterRating": 30,
+      "minimalExamRating": 20,
+      "maximumExamRating": 40,
+      "singleQuestionDefaultRating": 2,
+      "singleExerciseDefaultRating": 20,
+      "questionsRatingSum": 20,
+      "exercisesRatingSum": 20,
+      "disciplineId": 41,
+      "themeIds": [
+        81
+      ]
     },
     "teacher": {
       "id": 1,
@@ -51,22 +43,86 @@
           "ROLE_TEACHER"
         ]
       }
+    }
+  },
+  {
+    "id": 10,
+    "semesterRating": 58,
+    "questionRating": 0,
+    "exerciseRating": 0,
+    "groupRatingId": 142,
+    "studentRatingState": "PASSING",
+    "exam": {
+      "id": 882,
+      "name": "Программирование",
+      "disciplineId": 41,
+      "groupId": 61,
+      "oneGroup": true,
+      "start": 1647826200000,
+      "end": 1647831600000,
+      "state": "CLOSED"
     },
-    "maxQuestionRating": 2,
-    "maxExerciseRating": 20
+    "examRule": {
+      "id": 141,
+      "name": "testExamRule",
+      "duration": 200,
+      "minimalSemesterRating": 30,
+      "minimalExamRating": 20,
+      "maximumExamRating": 40,
+      "singleQuestionDefaultRating": 5,
+      "singleExerciseDefaultRating": 20,
+      "questionsRatingSum": 20,
+      "exercisesRatingSum": 20,
+      "disciplineId": 41,
+      "themeIds": [
+        81
+      ]
+    },
+    "teacher": {
+      "id": 1,
+      "account": {
+        "id": 1,
+        "username": "romanov@corp.nstu.ru",
+        "name": "Евгений",
+        "surname": "Романов",
+        "roles": [
+          "ROLE_TEACHER"
+        ]
+      }
+    }
   },
   {
     "id": 12,
-    "disciplineName": "УПП",
     "semesterRating": 31,
-    "examRating": 0,
-    "allowed": false,
-    "examPeriod": {
-      "id": 42,
+    "questionRating": 0,
+    "exerciseRating": 0,
+    "groupRatingId": 142,
+    "studentRatingState": "PASSING",
+    "exam": {
+      "id": 884,
+      "name": "УПП",
+      "disciplineId": 41,
+      "groupId": 61,
+      "oneGroup": true,
       "start": 1651129200000,
       "end": 1651134600000,
-      "examId": 884,
       "state": "CLOSED"
+    },
+    "examRule": {
+      "id": 141,
+      "name": "testExamRule",
+      "duration": 200,
+      "minimalSemesterRating": 30,
+      "minimalExamRating": 20,
+      "maximumExamRating": 40,
+      "singleQuestionDefaultRating": 5,
+      "singleExerciseDefaultRating": 20,
+      "questionsRatingSum": 20,
+      "exercisesRatingSum": 20,
+      "disciplineId": 41,
+      "themeIds": [
+        81
+      ]
     },
     "teacher": {
       "id": 1,
@@ -79,8 +135,6 @@
           "ROLE_TEACHER"
         ]
       }
-    },
-    "maxQuestionRating": 2,
-    "maxExerciseRating": 20
+    }
   }
 ]

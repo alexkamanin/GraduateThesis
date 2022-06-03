@@ -4,10 +4,13 @@ import io.github.alexkamanin.mockcept.handler.handlePath
 import io.github.alexkamanin.mockcept.response.StatusCode
 import ru.kamanin.nstu.graduate.thesis.R
 
-val AccountHandler = handlePath("/account/me") {
+val AccountHandler = handlePath("/account") {
 
-	get {
+	"/me".get {
 		status = StatusCode.OK
 		body = R.raw.get_my_account
+	}
+	"/firebase-token".post {
+		status = StatusCode.OK
 	}
 }

@@ -8,7 +8,7 @@ import ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.entity.TaskType
 data class TaskDto(
 	val id: Long,
 	val number: Int,
-	val rating: Int?,
+	val rating: Int,
 	val task: TaskDescription,
 	val state: TaskState
 ) {
