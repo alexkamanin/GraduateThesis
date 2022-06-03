@@ -56,7 +56,7 @@
 				android:layout_gravity="center_vertical"
 				android:importantForAccessibility="no"
 				android:paddingEnd="@dimen/margin_padding_3"
-				tools:src="@drawable/ic_new" />
+				tools:src="@drawable/ic_no_answer" />
 
 		</LinearLayout>
 

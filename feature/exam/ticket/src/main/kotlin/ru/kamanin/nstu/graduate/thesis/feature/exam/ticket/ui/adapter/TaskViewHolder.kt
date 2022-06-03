@@ -18,12 +18,12 @@ class TaskViewHolder(private val parent: ViewGroup) : RecyclerView.ViewHolder(pa
 
 	fun bind(task: Task, taskClicked: (Task) -> Unit) {
 		val (icon, background) = when (task.state) {
-			TaskState.NO_ANSWER   -> R.drawable.ic_new to R.attr.colorBackgroundGreyTint
-			TaskState.IN_PROGRESS -> R.drawable.ic_checking to R.attr.colorBackgroundGreyTint
-			TaskState.NO_RATING   -> R.drawable.ic_rejected to R.attr.colorBackgroundRedTint
+			TaskState.NO_ANSWER   -> R.drawable.ic_no_answer to R.attr.colorBackgroundGreyTint
+			TaskState.IN_PROGRESS -> R.drawable.ic_in_progress to R.attr.colorBackgroundGreyTint
+			TaskState.NO_RATING   -> R.drawable.ic_no_rating to R.attr.colorBackgroundRedTint
 			TaskState.CHECKING    -> R.drawable.ic_checking to R.attr.colorBlueVariant
-			TaskState.SENT        -> R.drawable.ic_checking to R.attr.colorBackgroundYellowTint
-			TaskState.RATED       -> R.drawable.ic_approved to R.attr.colorBackgroundGreenTint
+			TaskState.SENT        -> R.drawable.ic_sent to R.attr.colorBackgroundYellowTint
+			TaskState.RATED       -> R.drawable.ic_rated to R.attr.colorBackgroundGreenTint
 
 		}
 		val ratingText = if (task.rating == null) {
