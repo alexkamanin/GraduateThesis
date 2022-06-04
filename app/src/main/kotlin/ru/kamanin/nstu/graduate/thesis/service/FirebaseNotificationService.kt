@@ -13,6 +13,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
+import ru.kamanin.graduate.thesis.shared.notification.data.filter.NOTIFICATION_INTENT_ACTION
 import ru.kamanin.graduate.thesis.shared.notification.di.*
 import ru.kamanin.graduate.thesis.shared.notification.domain.entity.AnswerNotification
 import ru.kamanin.graduate.thesis.shared.notification.domain.entity.ExamNotification
@@ -133,6 +134,8 @@ class FirebaseNotificationService : FirebaseMessagingService(), CoroutineScope {
 
 		val messageTitle = intent.extras?.getString(NOTIFICATION_TITLE) ?: return
 		val messageBody = intent.extras?.getString(NOTIFICATION_BODY) ?: return
+
+		sendBroadcast(Intent(NOTIFICATION_INTENT_ACTION))
 
 		when (val notificationType = NotificationType.valueOf(messageTitle)) {
 

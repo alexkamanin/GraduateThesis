@@ -27,6 +27,7 @@ dependencies {
 	implementation(projects.shared.artefact)
 	implementation(projects.shared.chat)
 	implementation(projects.shared.exam)
+	implementation(projects.shared.notification)
 
 	implementation(projects.utils.coroutines)
 	implementation(projects.utils.paging)

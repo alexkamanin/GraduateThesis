@@ -2,9 +2,12 @@ package ru.kamanin.nstu.graduate.thesis.feature.exam.task.ui
 
 import android.Manifest
 import android.content.ActivityNotFoundException
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
@@ -19,6 +22,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.WithFragmentBindings
 import kotlinx.coroutines.launch
+import ru.kamanin.graduate.thesis.shared.notification.data.filter.NOTIFICATION_FILTER
 import ru.kamanin.nstu.graduate.thesis.component.ui.core.dialogs.bottom.ShareResult
 import ru.kamanin.nstu.graduate.thesis.component.ui.core.dialogs.bottom.setShareBottomSheetResultListener
 import ru.kamanin.nstu.graduate.thesis.component.ui.core.dialogs.bottom.showShareBottomSheetDialog
@@ -51,6 +55,14 @@ class TaskFragment : Fragment(R.layout.fragment_task) {
 
 	private val viewBinding: FragmentTaskBinding by viewBinding()
 	private val viewModel: TaskViewModel by viewModels()
+
+	private val notificationReceiver = object : BroadcastReceiver() {
+
+		override fun onReceive(context: Context?, intent: Intent?) {
+			Log.d("TEST_TECH", intent.toString())
+			messagesAdapter?.refresh()
+		}
+	}
 
 	private var concatAdapter: ConcatAdapter? = null
 	private var messagesAdapter: TaskMessageAdapter? = null
@@ -250,5 +262,15 @@ class TaskFragment : Fragment(R.layout.fragment_task) {
 		messagesAdapter = null
 		descriptionAdapter = null
 		super.onDestroyView()
+	}
+
+	override fun onResume() {
+		super.onResume()
+		requireActivity().registerReceiver(notificationReceiver, NOTIFICATION_FILTER)
+	}
+
+	override fun onPause() {
+		super.onPause()
+		requireActivity().unregisterReceiver(notificationReceiver)
 	}
 }

@@ -1,6 +1,10 @@
 package ru.kamanin.nstu.graduate.thesis.feature.exam.ticket.ui
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -9,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.WithFragmentBindings
+import ru.kamanin.graduate.thesis.shared.notification.data.filter.NOTIFICATION_FILTER
 import ru.kamanin.nstu.graduate.thesis.component.navigation.navigate
 import ru.kamanin.nstu.graduate.thesis.component.ui.core.colors.colorFromAttr
 import ru.kamanin.nstu.graduate.thesis.component.ui.core.dialogs.extensions.showInformationDialog
@@ -31,16 +36,18 @@ class TicketFragment : Fragment(R.layout.fragment_ticket), TicketViewModel.Event
 	private val viewBinding: FragmentTicketBinding by viewBinding()
 	private val viewModel: TicketViewModel by viewModels()
 
+	private val notificationReceiver = object : BroadcastReceiver() {
+
+		override fun onReceive(context: Context?, intent: Intent?) {
+			Log.d("TEST_TECH", intent.toString())
+			viewModel.refresh()
+		}
+	}
+
 	@Inject
 	lateinit var navigationProvider: TicketNavigationProvider
 
 	private var adapter: TaskAdapter? = null
-
-	override fun onResume() {
-		super.onResume()
-
-		viewModel.refresh()
-	}
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
@@ -162,5 +169,16 @@ class TicketFragment : Fragment(R.layout.fragment_ticket), TicketViewModel.Event
 		viewBinding.taskList.adapter = null
 		adapter = null
 		super.onDestroyView()
+	}
+
+	override fun onResume() {
+		super.onResume()
+		viewModel.refresh()
+		requireActivity().registerReceiver(notificationReceiver, NOTIFICATION_FILTER)
+	}
+
+	override fun onPause() {
+		super.onPause()
+		requireActivity().unregisterReceiver(notificationReceiver)
 	}
 }

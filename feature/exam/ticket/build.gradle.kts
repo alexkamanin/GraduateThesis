@@ -26,6 +26,7 @@ dependencies {
 	implementation(projects.shared.exam)
 	implementation(projects.shared.ticket)
 	implementation(projects.shared.session)
+	implementation(projects.shared.notification)
 
 	implementation(projects.utils.coroutines)
 	implementation(projects.utils.error)
