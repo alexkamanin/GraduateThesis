@@ -2,6 +2,7 @@ package ru.kamanin.graduate.thesis.shared.notification.domain.entity
 
 enum class NotificationType {
 	EXAM_CREATED,
+	EXAM_TIME_SET,
 	EXAM_READY,
 	EXAM_STARTED,
 	EXAM_FINISHED,

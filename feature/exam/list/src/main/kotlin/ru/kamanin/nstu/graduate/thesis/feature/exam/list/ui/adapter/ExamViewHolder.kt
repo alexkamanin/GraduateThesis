@@ -15,6 +15,11 @@ import ru.kamanin.nstu.graduate.thesis.utils.time.dateStringFormat
 
 class ExamViewHolder(private val parent: ViewGroup) : RecyclerView.ViewHolder(parent.inflate(R.layout.item_exam)) {
 
+	private companion object {
+
+		const val TIME_NOT_SET = 0L
+	}
+
 	private val viewBinding by viewBinding(ItemExamBinding::bind)
 
 	fun bind(exam: Exam, onExamClick: (Exam) -> Unit) {
@@ -22,7 +27,11 @@ class ExamViewHolder(private val parent: ViewGroup) : RecyclerView.ViewHolder(pa
 			examName.text = exam.name
 			examTeacher.text = exam.teacher.toSingleLine()
 			examMark.text = parent.context.getString(R.string.hint_exam_mark, exam.mark)
-			examDateTime.text = parent.context.getString(R.string.hint_exam_date_time, exam.period.start.dateStringFormat)
+			examDateTime.text = if (exam.period.start != TIME_NOT_SET) {
+				parent.context.getString(R.string.hint_exam_date_time, exam.period.start.dateStringFormat)
+			} else {
+				parent.context.getString(R.string.hint_exam_date_time_prepare)
+			}
 			root.setOnClickListener { onExamClick(exam) }
 
 			if (exam.examState == ExamState.PROGRESS) {

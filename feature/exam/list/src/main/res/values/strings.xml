@@ -7,5 +7,6 @@
 	<string name="hint_exam_list_empty" />
 	<string name="hint_exam_mark" />
 	<string name="hint_exam_date_time" />
+	<string name="hint_exam_date_time_prepare" />
 	<string name="hint_exam_teacher" />
 </resources>

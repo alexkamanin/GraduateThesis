@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import ru.kamanin.nstu.graduate.thesis.feature.exam.list.presentation.model.ExamFilter
 import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.Exam
+import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.ExamState
 import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.usecase.GetExamListUseCase
 import ru.kamanin.nstu.graduate.thesis.shared.session.domain.scenario.LogoutScenario
 import ru.kamanin.nstu.graduate.thesis.utils.coroutines.event.EventDispatcher
@@ -31,6 +32,11 @@ class ExamListViewModel @Inject constructor(
 	private val timeManager: TimeManager,
 	private val errorConverter: ErrorConverter
 ) : ViewModel() {
+
+	private companion object {
+
+		val EXAM_COMPLETED_STATUSES = listOf(ExamState.FINISHED, ExamState.CLOSED)
+	}
 
 	private var selectedFilter = ExamFilter.ACTIVE
 
@@ -104,13 +110,13 @@ class ExamListViewModel @Inject constructor(
 
 			ExamFilter.ACTIVE   -> {
 				examList
-					.filter { it.period.end >= timeManager.currentTime }
+					.filter { it.examState !in EXAM_COMPLETED_STATUSES }
 					.sortedBy { it.period.start }
 			}
 
 			ExamFilter.INACTIVE -> {
 				examList
-					.filter { it.period.end < timeManager.currentTime }
+					.filter { it.examState in EXAM_COMPLETED_STATUSES }
 					.sortedByDescending { it.period.start }
 			}
 		}

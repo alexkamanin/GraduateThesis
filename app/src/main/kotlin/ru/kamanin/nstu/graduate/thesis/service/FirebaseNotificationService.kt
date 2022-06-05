@@ -157,7 +157,7 @@ class FirebaseNotificationService : FirebaseMessagingService(), CoroutineScope {
 	private fun renderExamNotification(type: NotificationType, body: String) {
 		val exam = examAdapter.fromJson(body) as ExamNotification
 		val (title, description) = when (type) {
-			NotificationType.EXAM_CREATED  -> exam.name to getString(R.string.push_exam_created, exam.start.dateStringFormat)
+			NotificationType.EXAM_TIME_SET -> exam.name to getString(R.string.push_exam_created, exam.start.dateStringFormat)
 			NotificationType.EXAM_STARTED  -> exam.name to getString(R.string.push_exam_started)
 			NotificationType.EXAM_FINISHED -> exam.name to getString(R.string.push_exam_finished)
 			NotificationType.EXAM_CLOSED   -> exam.name to getString(R.string.push_exam_closed)

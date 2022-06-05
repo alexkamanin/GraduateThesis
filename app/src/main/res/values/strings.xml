@@ -22,6 +22,7 @@
 	<string name="hint_exam_list_empty">Список пуст</string>
 	<string name="hint_exam_mark">Баллы: %d</string>
 	<string name="hint_exam_date_time">Начало: %s</string>
+	<string name="hint_exam_date_time_prepare">Начало: уточняется</string>
 	<string name="hint_exam_teacher">Преподаватель: %1$s %2$s.</string>
 
 	<!-- Билет -->
