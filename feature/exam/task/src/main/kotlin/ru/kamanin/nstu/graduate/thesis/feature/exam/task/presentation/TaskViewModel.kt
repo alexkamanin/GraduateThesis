@@ -17,6 +17,7 @@ import ru.kamanin.nstu.graduate.thesis.shared.chat.presentation.model.MessageIte
 import ru.kamanin.nstu.graduate.thesis.shared.clipdata.di.CopiedText
 import ru.kamanin.nstu.graduate.thesis.shared.clipdata.domain.usecase.SetClipDataUseCase
 import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.Exam
+import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.ExamState
 import ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.entity.Task
 import ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.usecase.GetMessagesByTaskUseCase
 import ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.usecase.SendMessageByTaskUseCase
@@ -47,6 +48,7 @@ class TaskViewModel @Inject constructor(
 	private companion object {
 
 		const val EMPTY_TEXT = ""
+		val EXAM_COMPLETED_STATUSES = listOf(ExamState.FINISHED, ExamState.CLOSED)
 	}
 
 	val task: Task = requireNotNull(savedStateHandle[Task::class.java.name])
@@ -66,6 +68,9 @@ class TaskViewModel @Inject constructor(
 	private val _infoEvent = MutableLiveState<String>()
 	val infoEvent: LiveState<String> get() = _infoEvent
 
+	private val _sendingForbidden = MutableLiveState<Boolean>()
+	val sendingForbidden: LiveState<Boolean> get() = _sendingForbidden.asLiveState()
+
 	init {
 		getRemainingTime(exam.period.end, timeManager.currentTime)
 			.onEach(_remainingTimeEvent::emit)
@@ -76,6 +81,8 @@ class TaskViewModel @Inject constructor(
 		TaskState(task = task, messages = PagingData.empty())
 
 	fun loadMessages() {
+		isSendingAvailable()
+
 		viewModelScope.launch {
 
 			if (task.state == ru.kamanin.nstu.graduate.thesis.shared.ticket.domain.entity.TaskState.NO_ANSWER) {
@@ -98,6 +105,12 @@ class TaskViewModel @Inject constructor(
 				.collectLatest {
 					_state.value = _state.value.copy(messages = it)
 				}
+		}
+	}
+
+	private fun isSendingAvailable() {
+		if (exam.examState in EXAM_COMPLETED_STATUSES) {
+			_sendingForbidden(false)
 		}
 	}
 
@@ -138,5 +151,11 @@ class TaskViewModel @Inject constructor(
 		setClipDataUseCase(text)
 
 		_infoEvent.invoke(copiedText)
+	}
+
+	fun startInput() {
+		if (exam.examState in EXAM_COMPLETED_STATUSES) {
+			_sendingForbidden(true)
+		}
 	}
 }

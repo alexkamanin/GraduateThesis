@@ -11,4 +11,7 @@
 
 	<string name="error_title_not_found_file_application" />
 	<string name="error_description_not_found_file_application" />
+
+	<string name="sending_forbidden_title" />
+	<string name="sending_forbidden_description" />
 </resources>

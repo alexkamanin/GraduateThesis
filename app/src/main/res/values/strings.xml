@@ -46,6 +46,9 @@
 	<string name="hint_artefact_type_mb">%1$d МБ • %2$s</string>
 	<string name="hint_artefact_type_kb">%1$d КБ • %2$s</string>
 
+	<string name="sending_forbidden_title">Отправка сообщений запрещена</string>
+	<string name="sending_forbidden_description">Экзамен завершен, корректировки ответов не допускаются.</string>
+
 	<!-- Диалог поделиться -->
 	<string name="share_bottom_sheet_title">Поделиться…</string>
 	<string name="share_bottom_sheet_camera">Фотографией с камеры</string>

@@ -1,6 +1,7 @@
 package ru.kamanin.nstu.graduate.thesis.feature.exam.task.ui
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -8,6 +9,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
@@ -110,7 +112,14 @@ class TaskFragment : Fragment(R.layout.fragment_task) {
 		viewBinding.taskList.adapter = concatAdapter
 	}
 
+	@SuppressLint("ClickableViewAccessibility")
 	private fun initListeners() {
+		viewBinding.inputBottomPanel.messageEditText.setOnTouchListener { _, motionEvent ->
+			if (motionEvent.action == MotionEvent.ACTION_DOWN) {
+				viewModel.startInput()
+			}
+			false
+		}
 		viewBinding.toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
 		viewBinding.inputBottomPanel.sendButton.setOnClickListener { viewModel.send() }
 		viewBinding.inputBottomPanel.artefactCancel.setOnClickListener { viewModel.detachContent() }
@@ -122,6 +131,7 @@ class TaskFragment : Fragment(R.layout.fragment_task) {
 	}
 
 	private fun initObservers() {
+		viewModel.sendingForbidden.subscribe(viewLifecycleOwner, ::handleSendingForbiddenEvent)
 		viewModel.message.bind(viewLifecycleOwner, viewBinding.inputBottomPanel.messageEditText)
 		viewModel.state.subscribe(viewLifecycleOwner, ::renderState)
 		viewModel.sendMessageEvent.subscribe(viewLifecycleOwner, ::handleSendEvent)
@@ -132,6 +142,19 @@ class TaskFragment : Fragment(R.layout.fragment_task) {
 		viewModel.storagePermissionEvent.subscribe(viewLifecycleOwner, ::handleStoragePermissionEvent)
 		viewModel.selectDocumentTreeEvent.subscribe(viewLifecycleOwner, ::handleSelectDocumentEvent)
 		viewModel.remainingTimeEvent.subscribe(viewLifecycleOwner, ::showRemainingTime)
+	}
+
+	private fun handleSendingForbiddenEvent(forbidden: Boolean) {
+		viewBinding.inputBottomPanel.messageEditText.isFocusable = false
+		viewBinding.inputBottomPanel.shareButton.isEnabled = false
+		viewBinding.inputBottomPanel.sendButton.isEnabled = false
+
+		if (forbidden) {
+			showInformationDialog(
+				titleId = R.string.sending_forbidden_title,
+				descriptionId = R.string.sending_forbidden_description
+			)
+		}
 	}
 
 	private fun showRemainingTime(time: RemainingTime) {
