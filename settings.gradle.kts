@@ -30,6 +30,7 @@ include(":feature:sign")
 include(":component:navigation")
 include(":component:ui:resources")
 include(":component:ui:core")
+include(":component:test")
 // ----- Shared ------
 include(":shared:api:headers")
 include(":shared:session")

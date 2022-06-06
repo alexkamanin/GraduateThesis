@@ -10,6 +10,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 internal fun Project.setCompileOptions() {
 	tasks.withType<KotlinCompile> {
 		kotlinOptions.jvmTarget = JavaVersion.VERSION_11.toString()
+		kotlinOptions.freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
 	}
 }
 

@@ -51,6 +51,12 @@ squareup-moshi-codegen = { group = 'com.squareup.moshi', name = 'moshi-kotlin-co
 
 mockcept = { group = 'io.github.alexkamanin', name = 'mockcept', version = '1.0.4' }
 
+test-core = { group = 'androidx.arch.core', name = 'core-testing', version = '2.1.0' }
+test-junit = { group = 'junit', name = 'junit', version = '4.13.2' }
+test-mockito = { group = 'org.mockito.kotlin', name = 'mockito-kotlin', version = '4.0.0' }
+test-coroutines = { group = 'org.jetbrains.kotlinx', name = 'kotlinx-coroutines-test', version = '1.6.2' }
+test-coroutines-flow = { group = 'app.cash.turbine', name = 'turbine', version = '0.8.0' }
+
 # { group = '', name = '', version.ref = '' }
 
 [bundles]

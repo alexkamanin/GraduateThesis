@@ -29,4 +29,11 @@ dependencies {
 
 	implementation(projects.utils.coroutines)
 	implementation(projects.utils.error)
+
+	testImplementation(libs.test.core)
+	testImplementation(libs.test.coroutines)
+	testImplementation(libs.test.coroutines.flow)
+	testImplementation(libs.test.mockito)
+	testImplementation(libs.test.junit)
+	testImplementation(projects.component.test)
 }
