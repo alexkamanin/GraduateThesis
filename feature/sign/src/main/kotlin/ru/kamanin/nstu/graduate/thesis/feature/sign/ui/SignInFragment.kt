@@ -51,7 +51,6 @@ class SignInFragment : Fragment(R.layout.fragment_sign), SignInViewModel.EventLi
 		viewBinding.passwordLayout.endIconMode = TextInputLayout.END_ICON_PASSWORD_TOGGLE
 		viewBinding.emailLayout.isVisible = true
 		viewBinding.passwordLayout.isVisible = true
-		viewBinding.accountButton.isVisible = true
 		viewBinding.toolbar.title = getString(R.string.toolbar_sign_in_title)
 		viewBinding.signButton.text = getString(R.string.button_sign_in_text)
 	}
