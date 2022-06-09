@@ -12,3 +12,10 @@ inline fun CoroutineScope.launch(
 	val handler = CoroutineExceptionHandler { _, throwable -> error(throwable) }
 	launch(handler, CoroutineStart.DEFAULT, block)
 }
+
+inline fun CoroutineScope.launch(
+	noinline block: suspend CoroutineScope.() -> Unit
+) {
+	val handler = CoroutineExceptionHandler { _, _ -> Unit }
+	launch(handler, CoroutineStart.DEFAULT, block)
+}

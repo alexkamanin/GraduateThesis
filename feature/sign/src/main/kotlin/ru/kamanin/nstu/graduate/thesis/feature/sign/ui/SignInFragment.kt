@@ -110,6 +110,15 @@ class SignInFragment : Fragment(R.layout.fragment_sign), SignInViewModel.EventLi
 			viewBinding.signProcessIndicator.isVisible = false
 			viewBinding.signButton.text = getString(R.string.button_sign_in_text)
 		}
+		if (state.accountMetaData != null) {
+			viewBinding.emailText.setText(state.accountMetaData.username)
+			viewBinding.passwordText.setText(state.accountMetaData.password)
+
+			viewBinding.emailText.clearFocus()
+			viewBinding.emailLayout.clearFocus()
+			viewBinding.passwordText.clearFocus()
+			viewBinding.passwordLayout.clearFocus()
+		}
 	}
 
 	private fun handleError(errorState: ErrorState) {

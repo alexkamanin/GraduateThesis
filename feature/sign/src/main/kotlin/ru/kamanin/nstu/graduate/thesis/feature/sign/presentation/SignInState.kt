@@ -1,5 +1,6 @@
 package ru.kamanin.nstu.graduate.thesis.feature.sign.presentation
 
+import ru.kamanin.nstu.graduate.thesis.shared.account.domain.entity.AccountMetaData
 import ru.kamanin.nstu.graduate.thesis.shared.validation.ValidationResult
 
 data class SignInState(
@@ -7,4 +8,5 @@ data class SignInState(
 	val signProcessAvailable: Boolean = false,
 	val signAvailable: Boolean = false,
 	val registrationAvailable: Boolean = true,
+	val accountMetaData: AccountMetaData? = null
 )

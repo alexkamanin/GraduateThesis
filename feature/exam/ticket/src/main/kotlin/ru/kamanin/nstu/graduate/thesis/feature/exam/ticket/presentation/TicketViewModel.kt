@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
 import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.Exam
 import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.entity.RatingState
 import ru.kamanin.nstu.graduate.thesis.shared.exam.domain.usecase.SetExamStateUseCase

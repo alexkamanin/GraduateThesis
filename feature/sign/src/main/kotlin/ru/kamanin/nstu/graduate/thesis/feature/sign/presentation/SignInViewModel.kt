@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import ru.kamanin.nstu.graduate.thesis.feature.sign.domain.scenario.LoginScenario
+import ru.kamanin.nstu.graduate.thesis.shared.account.domain.usecase.GetAccountMetaDataUseCase
 import ru.kamanin.nstu.graduate.thesis.shared.validation.ValidationResult
 import ru.kamanin.nstu.graduate.thesis.shared.validation.email.EmailValidator
 import ru.kamanin.nstu.graduate.thesis.utils.coroutines.event.EventDispatcher
@@ -17,6 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SignInViewModel @Inject constructor(
 	private val loginScenario: LoginScenario,
+	private val getAccountMetaDataUseCase: GetAccountMetaDataUseCase,
 	private val emailValidator: EmailValidator,
 	private val errorConverter: ErrorConverter
 ) : ViewModel() {
@@ -45,6 +47,7 @@ class SignInViewModel @Inject constructor(
 
 	init {
 		initRegistrationAvailableObserver()
+		loadAccountMetaData()
 	}
 
 	private fun initRegistrationAvailableObserver() {
@@ -53,7 +56,15 @@ class SignInViewModel @Inject constructor(
 			.launchIn(viewModelScope)
 	}
 
+	private fun loadAccountMetaData() {
+		viewModelScope.launch {
+			val accountMetaData = getAccountMetaDataUseCase()
+			_state.value = _state.value.copy(accountMetaData = accountMetaData)
+		}
+	}
+
 	fun signIn() {
+		_state.value = _state.value.copy(accountMetaData = null) // TASK отображение предыдущих данных для авторизации
 		verifyAllFields(onSuccess = ::handleValidationSuccess, onError = ::handleValidationError)
 	}
 
