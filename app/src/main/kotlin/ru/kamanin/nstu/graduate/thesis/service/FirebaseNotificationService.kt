@@ -140,6 +140,7 @@ class FirebaseNotificationService : FirebaseMessagingService(), CoroutineScope {
 		when (val notificationType = NotificationType.valueOf(messageTitle)) {
 
 			NotificationType.EXAM_CREATED,
+			NotificationType.EXAM_TIME_SET,
 			NotificationType.EXAM_READY,
 			NotificationType.EXAM_STARTED,
 			NotificationType.EXAM_FINISHED,

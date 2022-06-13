@@ -19,7 +19,6 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
-          cache: gradle
 
       - name: Decode google-services.json
         env:
